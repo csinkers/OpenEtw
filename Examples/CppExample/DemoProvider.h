@@ -1,5 +1,5 @@
 #pragma once
-#include "../../Tools/EtwGen/etw.h"
+#include "../../etw.h"
 
 // TODO: Generation options, e.g. auto-gen task per event, auto-populate messages for various object types etc
 // TODO: Add checks to ensure various ids are unique, including the default tasks, opcodes, keywords and levels.
@@ -12,12 +12,12 @@ ETW_PROVIDER_BEGIN(DemoProvider, symbol="TPSYM")
 	ETW_LEVEL(16, CustLevel1, symbol="CUSTLEV1", message="A custom level")
 
 	// Only use start and stop if possible.
-	ETW_OPCODE(10, CustOp1, symbol="CUSTOP1", message="A custom opcode")
-	ETW_OPCODE(11, CustOp2, symbol="CUSTOP2", message="A second custom opcode")
+	ETW_OPCODE(11, CustOp1, symbol="CUSTOP1", message="A custom opcode")
+	ETW_OPCODE(12, CustOp2, symbol="CUSTOP2", message="A second custom opcode")
 
 	// Note: Only use keywords for verbose events
 	ETW_KEYWORD(0x080000000000, Keyword1, symbol="KEY1", message="A custom keyword")
-	ETW_KEYWORD(0x1, KeySmall, symbol="KEYSMALL", message="Another custom keyword with a value of 1")
+	ETW_KEYWORD(0x100, KeySmall, symbol="KEYSMALL", message="Another custom keyword with a value of 1")
 
 	ETW_BITMAP(BitMap1)
 		Odd = 1,

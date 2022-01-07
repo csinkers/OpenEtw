@@ -71,7 +71,7 @@ let buildFiles arguments provider =
     let headerName = System.IO.Path.GetFileName arguments.inputFile
     match arguments.strategy with
     | CppSelfDescribing -> 
-        let cppName = System.IO.Path.ChangeExtension(headerName, "cpp")
+        let cppName = System.IO.Path.ChangeExtension(headerName, "g.cpp")
         let implementationOptions = 
             { 
                 precompiledHeader = None

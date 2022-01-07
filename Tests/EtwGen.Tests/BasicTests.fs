@@ -1,5 +1,4 @@
 ﻿namespace OpenEtw.Tests
-open System.Text
 open Xunit
 open OpenEtw
 
@@ -38,8 +37,8 @@ open OpenEtw
 type BasicTests() =
     [<Fact>]
     member this.TestSingleEvent() =
+        let event = { EtwEvent.empty with id = Some 0us; name = "Test"; cppName = "Test"; symbol = "Test" }
         let name = "Provider"
-        let event = {EtwEvent.empty with id = Some 0us; name = "Test"; cppName = "Test"; symbol = "Test" }
         let provider = 
             {EtwProvider.empty with
                 className  = name; name = name; symbol = name
@@ -51,7 +50,6 @@ type BasicTests() =
 
     [<Fact>]
     member this.TestComplex() =
-        let name = "ComplexProvider"
         let named n i = {EtwEvent.empty with id = Some i; name = n; cppName = n; symbol = n}
         let events =
             [
@@ -70,6 +68,8 @@ type BasicTests() =
                     "p1", "Foo" :> obj
                 ] |> Map.ofList
             ]
+
+        let name = "Provider"
         let provider = 
             {EtwProvider.empty with
                 className  = name; name = name; symbol = name
@@ -80,7 +80,7 @@ type BasicTests() =
                         {EtwTask.empty with name = "T1"; id = 1us}
                     ]
             }
-        TraceRunner.runTest name provider events
+        TraceRunner.runTest "TestComplex" provider events
     // Task, level, channel, opcode, keyword not found
     // Too many bla
     // Bla id out of range

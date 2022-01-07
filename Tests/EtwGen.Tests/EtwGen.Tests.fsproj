@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="..\..\etw.h" Link="etw.h" />
     <Compile Include="GenerateHeader.fs" />
     <Compile Include="BuildProvider.fs" />
     <Compile Include="CppTestHarness.fs" />
@@ -15,6 +16,8 @@
     <Compile Include="BasicTests.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
+
+  <ItemGroup />
 
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />

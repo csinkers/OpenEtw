@@ -31,7 +31,7 @@ let generateHeader (provider : EtwProvider) (options : HeaderOptions) =
     [
         """#pragma once
 #include <windows.h>
-#include "EtwGenerator/etw.h"
+#include "etw.h"
 """
         (if (options.elideHashedProviderGuid && providerToGuid provider.name = provider.guid) then
             sprintf """ETW_PROVIDER_BEGIN(%s%s)""" 

@@ -20,6 +20,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{CFD67EFC-693B-4E29-BAFA-47D4D13B080C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppExample", "Examples\CppExample\CppExample.vcxproj", "{D5DA3750-D106-4755-832A-009AEBC88D37}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4ADDB966-BA50-4371-ABA2-BA4613934D55} = {4ADDB966-BA50-4371-ABA2-BA4613934D55}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsNet5Example", "Examples\CsExample\CsNet5Example.csproj", "{C5D5EFC6-431D-49E6-B4B3-E1848AD2C05A}"
 EndProject

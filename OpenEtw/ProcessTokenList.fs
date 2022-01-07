@@ -50,9 +50,15 @@ let processTokens results =
             failwithf "Duplicate %s detected: %s" entityName combinedIds
 
         let duplicateCheck entityName predicate formatter =
-            Seq.choose predicate
-            >> Seq.groupBy id
-            >> Seq.choose (fun (key, x) -> if Seq.length x > 1 then Some (formatter key) else None)
+            Seq.choose (fun x ->
+                match predicate x with
+                | Some i -> Some (i, x)
+                | None -> None)
+            >> Seq.groupBy fst
+            >> Seq.choose (fun (key, x) ->
+                if Seq.length x > 1 then 
+                    Some ((string key) + ": " + (x |> Seq.map (snd >> formatter) |> String.concat ", "))
+                else None)
             >> formatErrors entityName
 
         duplicateCheck "keyword id(s)"  (fun (k:EtwKeyword) -> Some k.id)   string state.keywords

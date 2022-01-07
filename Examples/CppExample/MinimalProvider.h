@@ -1,5 +1,5 @@
 #pragma once
-#include "../../Tools/EtwGen/etw.h"
+#include "../../etw.h"
 
 //ETW_PROVIDER_BEGIN(MinimalProvider, prefix="Min")
 

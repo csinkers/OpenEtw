@@ -8,7 +8,21 @@ open OpenEtw.Tests.GenerateHeader
 let ensureDir dir = if (Directory.Exists dir |> not) then Directory.CreateDirectory dir |> ignore
 let baseTestPath = @"C:\Tmp\EtwTests"
 
-let environmentSetupBatchFile = @"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
+let environmentSetupBatchFiles = [
+        @"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
+        @"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\Build\vcvars32.bat"
+        @"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars32.bat"
+        @"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars32.bat"
+        @"C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Auxiliary\Build\vcvars32.bat"
+        @"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars32.bat"
+        @"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvars32.bat"
+        @"C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvars32.bat"
+    ]
+
+let environmentSetupBatchFile = 
+    match List.tryFind System.IO.File.Exists environmentSetupBatchFiles with
+    | Some file -> file
+    | None -> failwithf "Could not find VS install"
 
 type ProcessOptions =
     {
@@ -56,14 +70,14 @@ let runExe options =
     proc.ExitCode, stdout, stderr
 
 let runTest testName provider events =
-    let stopwatch = new Stopwatch()
-    stopwatch.Start()
+    let stopwatch = Stopwatch.StartNew()
     let testPath = Path.Combine(baseTestPath, testName)
     let originalManifest = Path.Combine(testPath, "Test.man")
     let parsedManifestPath = Path.Combine(testPath, "Parsed.man")
     let headerPath = Path.Combine(testPath, "Provider.h")
     let testHarnessPath = Path.Combine(testPath, "Main.cpp")
     let makefilePath = Path.Combine(testPath, "Makefile")
+    let etwHeaderPath = Path.Combine(testPath, "etw.h")
     let etlPath = Path.Combine(testPath, "Test.etl")
     let buildBatchFilePath = Path.Combine(testPath, "build.bat")
     let logPath = Path.Combine(testPath, "Log.txt")
@@ -82,7 +96,7 @@ let runTest testName provider events =
             guidFormat = GuidFormat.HyphenatedDigitsWithBraces
         }
 
-    let headerName = (sprintf "%s.h" provider.className)
+    let headerName = (provider.className + ".h")
     let headerContent = generateHeader provider headerOptions
     File.WriteAllText(headerPath, headerContent)
 
@@ -106,9 +120,15 @@ let runTest testName provider events =
         let bitness = false // Placeholder
         let cppTestHarness = CppTestHarness.build provider events bitness
         File.WriteAllText(testHarnessPath, cppTestHarness)
+
+        use etwHeaderStream = System.Reflection.Assembly.GetExecutingAssembly().GetManifestResourceStream("EtwGen.Tests.etw.h")
+        use reader = new StreamReader(etwHeaderStream)
+        let etwHeader = reader.ReadToEnd()
+        File.WriteAllText(etwHeaderPath, etwHeader)
+
         let makefile = 
-            """
-CPPFLAGS=$(CPPFLAGS) /IC:\Depot\Libraries\include
+            $"""
+CPPFLAGS=$(CPPFLAGS)
 all: Test.exe
 Test.exe: Main.obj Provider.obj
 """         + "\t" + "link /OUT:Test.exe $** advapi32.lib"
@@ -116,11 +136,11 @@ Test.exe: Main.obj Provider.obj
         File.WriteAllText(makefilePath, makefile)
 
         let buildBatchFileContent =
-            sprintf """
+            $"""
 @echo off
-call "%s"
+call "{environmentSetupBatchFile}"
 nmake
-"""                 environmentSetupBatchFile
+"""                 
         File.WriteAllText(buildBatchFilePath, buildBatchFileContent)
 
         use fs = File.Open(logPath, FileMode.Create)
@@ -134,17 +154,17 @@ nmake
             }
 
         // Run make
-        let makeExitCode, makeStdOut, makeStdErr = runExe { options with name = @"cmd"; arguments = sprintf "/c \"%s\"" buildBatchFilePath }
+        let makeExitCode, makeStdOut, makeStdErr = runExe { options with name = @"cmd"; arguments = $"/c \"{buildBatchFilePath}\"" }
         if (makeExitCode <> 0) then
             failwithf "Make failed with code %d:\nSTDOUT:\n%s\nSTDERR:\n%s" makeExitCode makeStdOut makeStdErr
 
         // Check result, throw w/ output if errored.
 
         // Emit the events into a new session
-        runExe { options with name = "xperf"; arguments = sprintf "-start %s -on %A -f session.etl" testName provider.guid } |> ignore
+        runExe { options with name = "xperf"; arguments = $"-start {testName} -on {provider.guid} -f session.etl" } |> ignore
         runExe { options with name = exePath } |> ignore
-        runExe { options with name = "xperf"; arguments = sprintf "-stop %s" testName } |> ignore
-        runExe { options with name = "tracerpt"; arguments = sprintf "-of xml -o report.xml -y session.etl" } |> ignore
+        runExe { options with name = "xperf"; arguments = $"-stop {testName}" } |> ignore
+        runExe { options with name = "tracerpt"; arguments = "-of xml -o report.xml -y session.etl" } |> ignore
 
         // Load ETL file
         // Extract provider
