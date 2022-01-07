@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<instrumentationManifest xmlns="http://schemas.microsoft.com/win/2004/08/events">
+  <instrumentation xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:win="http://manifests.microsoft.com/win/2004/08/windows/events">
+    <events xmlns="http://schemas.microsoft.com/win/2004/08/events">
+      <provider name="DemoProvider" guid="{8FA35E30-953E-59E2-2569-A6B315EB8F36}" symbol="TPSYM" resourceFileName="DemoProvider" messageFileName="DemoProvider">
+        <events>
+          <event symbol="EBlank" value="1" version="0" message="$(string.DemoProvider.event.1.message)"/>
+          <event symbol="EAnsi" value="2" version="0" template="EAnsi" message="$(string.DemoProvider.event.2.message)"/>
+          <event symbol="EUnicode" value="3" version="0" template="EUnicode" message="$(string.DemoProvider.event.3.message)"/>
+          <event symbol="EFixedLength" value="5" version="0" template="EFixedLength" message="$(string.DemoProvider.event.5.message)"/>
+          <event symbol="ESByte" value="6" version="0" template="ESByte" message="$(string.DemoProvider.event.6.message)"/>
+          <event symbol="EUByte" value="7" version="0" template="EUByte" message="$(string.DemoProvider.event.7.message)"/>
+          <event symbol="EBitMap" value="30" version="0" template="EBitMap" message="$(string.DemoProvider.event.30.message)"/>
+          <event symbol="EValueMap" value="31" version="0" template="EValueMap" message="$(string.DemoProvider.event.31.message)"/>
+        </events>
+        <tasks>
+          <task name="EventSourceMessage" value="65534" message="$(string.DemoProvider.task.EventSourceMessage.message)"/>
+        </tasks>
+        <channels>
+          <importChannel name="TraceLogging" chid="TraceLogging"/>
+          <importChannel name="Security" chid="Security"/>
+          <importChannel name="Application" chid="Application"/>
+          <importChannel name="System" chid="System"/>
+          <importChannel name="TraceClassic" chid="TraceClassic"/>
+        </channels>
+        <keywords>
+          <keyword name="Session3" symbol="Session3" mask="0x100000000000" message="$(string.DemoProvider.Keyword.Session3.message)"/>
+          <keyword name="Session2" symbol="Session2" mask="0x200000000000" message="$(string.DemoProvider.Keyword.Session2.message)"/>
+          <keyword name="Session1" symbol="Session1" mask="0x400000000000" message="$(string.DemoProvider.Keyword.Session1.message)"/>
+          <keyword name="Session0" symbol="Session0" mask="0x800000000000" message="$(string.DemoProvider.Keyword.Session0.message)"/>
+        </keywords>
+        <maps>
+          <bitMap name="BitMap1">
+            <map value="0x1" message="$(string.DemoProvider.map.BitMap1.1.message)"/>
+            <map value="0x2" message="$(string.DemoProvider.map.BitMap1.2.message)"/>
+            <map value="0x4" message="$(string.DemoProvider.map.BitMap1.4.message)"/>
+            <map value="0x8" message="$(string.DemoProvider.map.BitMap1.8.message)"/>
+          </bitMap>
+          <valueMap name="ValMap1">
+            <map value="1" message="$(string.DemoProvider.map.ValMap1.1.message)"/>
+            <map value="2" message="$(string.DemoProvider.map.ValMap1.2.message)"/>
+            <map value="1048576" message="$(string.DemoProvider.map.ValMap1.1048576.message)"/>
+            <map value="2147483647" message="$(string.DemoProvider.map.ValMap1.2147483647.message)"/>
+          </valueMap>
+        </maps>
+        <templates>
+          <template tid="EAnsi">
+            <data name="Ansi" inType="win:AnsiString" outType="xs:string"/>
+          </template>
+          <template tid="EUnicode">
+            <data name="Unicode" inType="win:UnicodeString" outType="xs:string"/>
+          </template>
+          <template tid="EFixedLength">
+            <data name="FixedLen" inType="win:UnicodeString" outType="xs:string" length="32"/>
+          </template>
+          <template tid="ESByte">
+            <data name="Val" inType="win:Int8" outType="xs:byte"/>
+          </template>
+          <template tid="EUByte">
+            <data name="Val" inType="win:UInt8" outType="xs:unsignedByte"/>
+          </template>
+          <template tid="EBitMap">
+            <data name="map" inType="win:UInt32" map="BitMap1"/>
+          </template>
+          <template tid="EValueMap">
+            <data name="map" inType="win:UInt32" map="ValMap1"/>
+          </template>
+        </templates>
+      </provider>
+    </events>
+  </instrumentation>
+  <localization>
+    <resources culture="en-US">
+      <stringTable>
+        <string id="DemoProvider.task.EventSourceMessage.message" value="EventSourceMessage"/>
+        <string id="DemoProvider.map.BitMap1.1.message" value="Odd"/>
+        <string id="DemoProvider.map.BitMap1.2.message" value="Doubles"/>
+        <string id="DemoProvider.map.BitMap1.4.message" value="CatLegs"/>
+        <string id="DemoProvider.map.BitMap1.8.message" value="SpiderLegs"/>
+        <string id="DemoProvider.map.ValMap1.1.message" value="Val1"/>
+        <string id="DemoProvider.map.ValMap1.2.message" value="Val2"/>
+        <string id="DemoProvider.map.ValMap1.1048576.message" value="Meg"/>
+        <string id="DemoProvider.map.ValMap1.2147483647.message" value="Huge"/>
+        <string id="DemoProvider.event.1.message" value="EBlank"/>
+        <string id="DemoProvider.event.2.message" value="EAnsi"/>
+        <string id="DemoProvider.event.3.message" value="EUnicode"/>
+        <string id="DemoProvider.event.5.message" value="EFixedLength"/>
+        <string id="DemoProvider.event.6.message" value="ESByte"/>
+        <string id="DemoProvider.event.7.message" value="EUByte"/>
+        <string id="DemoProvider.event.30.message" value="EBitMap"/>
+        <string id="DemoProvider.event.31.message" value="EValueMap"/>
+        <string id="DemoProvider.Keyword.Session0.message" value="Session0"/>
+        <string id="DemoProvider.Keyword.Session1.message" value="Session1"/>
+        <string id="DemoProvider.Keyword.Session2.message" value="Session2"/>
+        <string id="DemoProvider.Keyword.Session3.message" value="Session3"/>
+      </stringTable>
+    </resources>
+  </localization>
+</instrumentationManifest>

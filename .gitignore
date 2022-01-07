@@ -1,0 +1,10 @@
+.vs/
+build/
+.filters
+.opendb
+.opensdf
+.sdf
+.suo
+.VC.db
+proj.user
+

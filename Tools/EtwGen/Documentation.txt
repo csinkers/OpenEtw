@@ -1,0 +1,143 @@
+﻿=== Reference ===
+
+== Directives: ==
+= ETW_PROVIDER_BEGIN =
+Syntax: ETW_PROVIDER(<className>[, name="..."][, symbol="..."][, guid="..."])
+Begins the definition an ETW provider. Only one provider may be defined per-header file.
+
+Parameters:
+	* className: The name of the C++ class that will expose the events
+	* name: The name of the corresponding ETW provider (manifest name etc)
+	* symbol: The symbol property of the provider in the manifest, not typically relevant.
+	* guid: The provider GUID. If no value is supplied, then a checksum based
+	        GUID will be generated based on the provider name using the same
+			algorithm as PerfView's "*ProviderName" syntax.
+
+= ETW_PROVIDER_END =
+Ends the definition of an ETW provider.
+
+= ETW_TASK_BEGIN =
+Declares a task. All events declared after an ETW_TASK_BEGIN directive
+will be associated with that task (unless an ETW_TASK_END directive has
+cleared the task context).
+
+Syntax: ETW_TASK_BEGIN(<id>, <name>[, guid="..."][, symbol="..."])
+Parameters:
+	* id: The id number of the task, all task ids in a provider must be
+		  unique but do not have to be consecutive. Valid range is
+		  from 0 to 65533. (TODO: Confirm)
+	* name: The name of the task in the ETW provider definition.
+	* guid: The task guid
+	* symbol: The symbol property of the task in the manifest, not typically relevant.
+
+= ETW_TASK_END =
+Resets the task context, events declared after an ETW_TASK_END directive will not be in a task.
+
+= ETW_EVENT =
+Declares a static event emission function on the provider class whose implementation
+will be automatically implemented.
+
+Syntax: ETW_EVENT(cppName[, parameters="values"])(<event template>)
+Parameters:
+	* cppName: The name of the static function on the C++ provider class.
+	* id: The id number of the event
+	* name: The name of the event in the ETW provider definition.
+	* symbol: The symbol property of the event in the manifest, not typically relevant.
+	* message: The format string to be shown when decoding the event.
+	* keywords: An optional comma separated list of keywords which can be used to select
+				which events will be collected in a session.
+	* level: The log level of the event, can be Verbose, Informational, Warning, Error,
+			 Critical, All or a custom level defined using an ETW_LEVEL directive.
+	* opcode: An optional opcode for the event. Can be a custom opcode or one of the built-in opcodes:
+		** win:Info
+		** win:Start
+		** win:Stop
+		** win:DcStart
+		** win:DcStop
+		** win:Extension
+		** win:Reply
+		** win:Resume
+		** win:Suspend
+		** win:Send
+		** win:Receive
+
+	* version: The event version. For self-describing providers this isn't typically necessary. Valid values are from 0 to 255.
+	* channel: The channel for the event. Not currently implemented.
+
+Event Template:
+	The event template consists of a list of C++ function parameters, potentially with ETW_ directives overriding
+	various properties. The parameter-specific ETW_ directive macros all evaluate to the empty string.
+
+	Parameter Directives:
+		= ETW_LEN =
+		Overrides the length of the parameter. Only applicable for the input types UnicodeString, AnsiString and Binary.
+		The parameter can be either a fixed integer or the name of another parameter. When no ETW_LEN directive is
+		specified then standard C-style null-termination will be used.
+		e.g. ETW_LEN(10) const char *name
+			This will result in an in-type of AnsiString being inferred and the length will be overriden to be
+			10 characters. If the string "A test string of 30 characters" were passed in, then only
+			"A test str" would be included in the event data.
+
+			Similarly, an event declared as:
+			ETW_EVENT(LogBuffer)(ETW_LEN(length) const void *data, uint32_t length);
+			and called like “LogBuffer("Something", 4);” will result in "Some" being recorded in the event data
+			with input type Binary and output type HexBinary.
+
+		= ETW_COUNT =
+		This directive transforms regular parameters into arrays. Not currently implemented.
+
+		= ETW_IN =
+		Overrides the input type of the parameter.
+		= ETW_OUT =
+		Overrides the output type of the parameter.
+
+		      InTypes
+OutType       UnicodeString AnsiString Sid I8 U8 I16 U16 I32 U32 H32 I64 U64 H64 Ptr Fl Dbl Bool Bin Guid FTime STime
+Xml           UnicodeString AnsiString
+ReducedString UnicodeString AnsiString
+String        UnicodeString AnsiString Sid 
+Byte                                       I8
+UnsignedByte                                  U8
+HexInt8                                       U8
+Short                                            I16
+UnsignedShort                                        U16
+Port                                                 U16
+HexInt16                                             U16
+Int                                                      I32
+HResult                                                  I32
+All map types                                            I32
+UnsignedInt                                                  U32
+Pid                                                          U32
+Tid                                                          U32
+IPv4                                                         U32
+EtwTime                                                      U32         U64 
+ErrorCode                                                    U32 H32 
+Win32Error                                                   U32 H32 
+NtStatus                                                     U32 H32 
+HexInt32                                                     U32 H32 
+Long                                                                 I64
+UnsignedLong                                                             U64
+HexInt64                                                                 U64 H64 Ptr 
+Float                                                                                Fl
+Double                                                                                  Dbl
+Bool                                                                                        Bool
+HexBinary                                                                                        Bin
+IPv6                                                                                             Bin
+SocketAddress                                                                                    Bin
+Guid                                                                                                 Guid
+DateTime                                                                                                  FTime STime 
+DateTimeCultureInsensitive                                                                                FTime STime 
+
+= ETW_CUSTOM =
+= ETW_KEYWORD =
+= ETW_OPCODE =
+= ETW_CHANNEL =
+= ETW_LEVEL =
+= ETW_BITMAP =
+= ETW_VALUEMAP =
+= ETW_MAP_END =
+
+== Parameter Directives: ==
+
+== In-types ==
+== Out-types ==

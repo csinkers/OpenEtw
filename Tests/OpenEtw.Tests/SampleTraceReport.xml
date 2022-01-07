@@ -1,0 +1,3477 @@
+<Events>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>2</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>0</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.799606500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="3808" ThreadID="7340" ProcessorID="0" KernelTime="15" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<EventData>
+		<Data Name="BufferSize">   65536</Data>
+		<Data Name="Version">83951626</Data>
+		<Data Name="ProviderVersion">   15063</Data>
+		<Data Name="NumberOfProcessors">       4</Data>
+		<Data Name="EndTime">131531840950918566</Data>
+		<Data Name="TimerResolution">  156250</Data>
+		<Data Name="MaxFileSize">     500</Data>
+		<Data Name="LogFileMode">0x10001</Data>
+		<Data Name="BuffersWritten">     483</Data>
+		<Data Name="StartBuffers">       1</Data>
+		<Data Name="PointerSize">       8</Data>
+		<Data Name="EventsLost">       0</Data>
+		<Data Name="CPUSpeed">    2208</Data>
+		<Data Name="LoggerName">0x0</Data>
+		<Data Name="LogFileName">0x0</Data>
+		<Data Name="BootTime">131530074264917079</Data>
+		<Data Name="PerfFreq">2156249</Data>
+		<Data Name="StartTime">131531840917996065</Data>
+		<Data Name="ReservedFlags">0x1</Data>
+		<Data Name="BuffersLost">       0</Data>
+		<Data Name="SessionNameString">Relogger</Data>
+		<Data Name="LogFileNameString">[multiple files]</Data>
+	</EventData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>Header</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">EventTrace</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{68fdd900-4a3e-11d1-84f4-0000f80464e3}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>2</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>5</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.799606500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="3808" ThreadID="7340" ProcessorID="0" KernelTime="15" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<EventData>
+		<Data Name="GroupMask1">0x0</Data>
+		<Data Name="GroupMask2">0x0</Data>
+		<Data Name="GroupMask3">0x0</Data>
+		<Data Name="GroupMask4">0x0</Data>
+		<Data Name="GroupMask5">0x0</Data>
+		<Data Name="GroupMask6">0x0</Data>
+		<Data Name="GroupMask7">0x0</Data>
+		<Data Name="GroupMask8">0x0</Data>
+		<Data Name="KernelEventVersion">0x41</Data>
+	</EventData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>Extension</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">EventTrace</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{68fdd900-4a3e-11d1-84f4-0000f80464e3}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider />
+		<EventID>0</EventID>
+		<Version>0</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>33</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.799606500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="0" ThreadID="0" ProcessorID="0" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<BinaryEventData>43003A005C00570049004E0044004F00570053005C00730079007300740065006D0033003200000043003A005C00570049004E0044004F00570053005C000000</BinaryEventData>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{9b79ee91-b5fd-41c0-a243-4248e266e9d0}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider />
+		<EventID>0</EventID>
+		<Version>0</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>34</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.799606500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="0" ThreadID="0" ProcessorID="0" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<BinaryEventData>5C004400650076006900630065005C0048006100720064006400690073006B0056006F006C0075006D00650034005C000000</BinaryEventData>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{9b79ee91-b5fd-41c0-a243-4248e266e9d0}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider />
+		<EventID>0</EventID>
+		<Version>0</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>35</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.799606500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="0" ThreadID="0" ProcessorID="0" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<BinaryEventData>5C003F003F005C0000000000</BinaryEventData>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{9b79ee91-b5fd-41c0-a243-4248e266e9d0}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider />
+		<EventID>0</EventID>
+		<Version>0</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>35</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.799606500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="0" ThreadID="0" ProcessorID="0" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<BinaryEventData>5C00530079007300740065006D0052006F006F0074005C00000043003A005C00570049004E0044004F00570053005C000000</BinaryEventData>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{9b79ee91-b5fd-41c0-a243-4248e266e9d0}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider />
+		<EventID>0</EventID>
+		<Version>0</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>35</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.799606500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="0" ThreadID="0" ProcessorID="0" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<BinaryEventData>5C004400650076006900630065005C0048006100720064006400690073006B0056006F006C0075006D00650033005C00000043003A005C000000</BinaryEventData>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{9b79ee91-b5fd-41c0-a243-4248e266e9d0}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider />
+		<EventID>0</EventID>
+		<Version>0</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>35</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.799606500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="0" ThreadID="0" ProcessorID="0" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<BinaryEventData>5C004400650076006900630065005C0048006100720064006400690073006B0056006F006C0075006D00650038005C00000044003A005C000000</BinaryEventData>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{9b79ee91-b5fd-41c0-a243-4248e266e9d0}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider />
+		<EventID>0</EventID>
+		<Version>0</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>35</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.799606500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="0" ThreadID="0" ProcessorID="0" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<BinaryEventData>5C004400650076006900630065005C004C0061006E006D0061006E00520065006400690072006500630074006F0072005C0000005C005C000000</BinaryEventData>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{9b79ee91-b5fd-41c0-a243-4248e266e9d0}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider />
+		<EventID>0</EventID>
+		<Version>0</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>35</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.799606500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="0" ThreadID="0" ProcessorID="0" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<BinaryEventData>5C004400650076006900630065005C004D00750070005C0000005C005C000000</BinaryEventData>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{9b79ee91-b5fd-41c0-a243-4248e266e9d0}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider />
+		<EventID>0</EventID>
+		<Version>0</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>35</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.799606500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="0" ThreadID="0" ProcessorID="0" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<BinaryEventData>5C004400650076006900630065005C0076006D0073006D0062005C0000005C005C003F005C0056004D0053004D0042005C000000</BinaryEventData>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{9b79ee91-b5fd-41c0-a243-4248e266e9d0}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider />
+		<EventID>0</EventID>
+		<Version>0</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>35</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.799606500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="0" ThreadID="0" ProcessorID="0" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<BinaryEventData>5C005C0000005C005C000000</BinaryEventData>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{9b79ee91-b5fd-41c0-a243-4248e266e9d0}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>2</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>32</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.806779600+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4294967295" ThreadID="4294967295" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<EventData>
+		<Data Name="GroupMask1">0x0</Data>
+		<Data Name="GroupMask2">0x0</Data>
+		<Data Name="GroupMask3">0x0</Data>
+		<Data Name="GroupMask4">0x0</Data>
+		<Data Name="GroupMask5">0x0</Data>
+		<Data Name="GroupMask6">0x0</Data>
+		<Data Name="GroupMask7">0x0</Data>
+		<Data Name="GroupMask8">0x0</Data>
+		<Data Name="KernelEventVersion">0x41</Data>
+	</EventData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>EndExtension</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">EventTrace</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{68fdd900-4a3e-11d1-84f4-0000f80464e3}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>2</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>17</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.806826900+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4294967295" ThreadID="4294967295" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<EventData>
+		<Data Name="TcbTablePartitions">      32</Data>
+		<Data Name="MaxHashTableSize">4294967295</Data>
+		<Data Name="MaxUserPort">   65536</Data>
+		<Data Name="TcpTimedWaitDelay">     120</Data>
+	</EventData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>Network</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">SystemConfig</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{01853a65-418f-4f36-aefc-dc0f1d2fd235}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>2</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>5</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.806986900+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4294967295" ThreadID="4294967295" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<EventData>
+		<Data Name="GroupMask1">0x1270F</Data>
+		<Data Name="GroupMask2">0x2</Data>
+		<Data Name="GroupMask3">0x0</Data>
+		<Data Name="GroupMask4">0x0</Data>
+		<Data Name="GroupMask5">0x0</Data>
+		<Data Name="GroupMask6">0x0</Data>
+		<Data Name="GroupMask7">0x0</Data>
+		<Data Name="GroupMask8">0x0</Data>
+		<Data Name="KernelEventVersion">0x41</Data>
+	</EventData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>Extension</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">EventTrace</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{68fdd900-4a3e-11d1-84f4-0000f80464e3}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>4</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807006300+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4294967295" ThreadID="4294967295" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<EventData>
+		<Data Name="UniqueProcessKey">0xFFFFF800AC08A9C0</Data>
+		<Data Name="ProcessId">0x0</Data>
+		<Data Name="ParentId">0x0</Data>
+		<Data Name="SessionId">4294967295</Data>
+		<Data Name="ExitStatus">0</Data>
+		<Data Name="DirectoryTableBase">0x1AB000</Data>
+		<Data Name="Flags">       0</Data>
+		<Data Name="UserSID">\\NT AUTHORITY\SYSTEM</Data>
+		<Data Name="ImageFileName">Idle</Data>
+		<Data Name="CommandLine"></Data>
+		<Data Name="PackageFullName"></Data>
+		<Data Name="ApplicationId"></Data>
+	</EventData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Process</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d0-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807007300+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="0" ThreadID="0" ProcessorID="3" KernelTime="33488100" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>000000000000000000B00AAD00F8FFFF00400AAD00F8FFFF000000000000000000000000000000000100000000000000D025E0AB00F8FFFF000000000000000000000000000500000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807007700+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="0" ThreadID="0" ProcessorID="3" KernelTime="34011420" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>000000000000000000E07B84809DFFFF00707B84809DFFFF000000000000000000000000000000000200000000000000D025E0AB00F8FFFF000000000000000000000000000000000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807008200+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="0" ThreadID="0" ProcessorID="3" KernelTime="32929200" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>000000000000000000809084809DFFFF00109084809DFFFF000000000000000000000000000000000400000000000000D025E0AB00F8FFFF000000000000000000000000000000000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807008700+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="0" ThreadID="0" ProcessorID="3" KernelTime="33808725" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>000000000000000000909B84809DFFFF00209B84809DFFFF000000000000000000000000000000000800000000000000D025E0AB00F8FFFF000000000000000000000000000000000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>4</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807010500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4294967295" ThreadID="4294967295" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<EventData>
+		<Data Name="UniqueProcessKey">0xFFFF8C8CD16AE040</Data>
+		<Data Name="ProcessId">0x4</Data>
+		<Data Name="ParentId">0x0</Data>
+		<Data Name="SessionId">4294967295</Data>
+		<Data Name="ExitStatus">259</Data>
+		<Data Name="DirectoryTableBase">0x1AB000</Data>
+		<Data Name="Flags">       4</Data>
+		<Data Name="UserSID">\\NT AUTHORITY\SYSTEM</Data>
+		<Data Name="ImageFileName">System</Data>
+		<Data Name="CommandLine"></Data>
+		<Data Name="PackageFullName"></Data>
+		<Data Name="ApplicationId"></Data>
+	</EventData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Process</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d0-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807011400+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="12" ProcessorID="3" KernelTime="45" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000000C00000000806084809DFFFF00106084809DFFFF000000000000000000000000000000000F000000000000000069DEAB00F8FFFF0000000000000000000000000D0502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807011400+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="16" ProcessorID="3" KernelTime="195" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000001000000000006184809DFFFF00906084809DFFFF000000000000000000000000000000000F000000000000005074DCAB00F8FFFF0000000000000000000000000D0502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807011900+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="20" ProcessorID="3" KernelTime="195" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000001400000000806184809DFFFF00106184809DFFFF000000000000000000000000000000000F000000000000005074DCAB00F8FFFF0000000000000000000000000D0502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807012400+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="24" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000001800000000006284809DFFFF00906184809DFFFF000000000000000000000000000000000F00000000000000F07EDEAB00F8FFFF000000000000000000000000100502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807012800+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="28" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000001C00000000906884809DFFFF00206884809DFFFF000000000000000000000000000000000F00000000000000108B24AC00F8FFFF0000000000000000000000000C0502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807012800+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="36" ProcessorID="3" KernelTime="105" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000002400000000806784809DFFFF00106784809DFFFF000000000000000000000000000000000F0000000000000040CBDDAB00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807013300+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="40" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000002800000000106984809DFFFF00A06884809DFFFF00000000000000000000000000000000010000000000000040CADDAB00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807013800+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="44" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000002C00000000906984809DFFFF00206984809DFFFF00000000000000000000000000000000020000000000000040CADDAB00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807029500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="48" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000003000000000106A84809DFFFF00A06984809DFFFF00000000000000000000000000000000040000000000000040CADDAB00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807030000+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="52" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000003400000000B06A84809DFFFF00406A84809DFFFF00000000000000000000000000000000080000000000000040CADDAB00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807030500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="60" ProcessorID="3" KernelTime="960" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000003C00000000B06D84809DFFFF00406D84809DFFFF000000000000000000000000000000000F0000000000000010D8DDAB00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807030900+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="64" ProcessorID="3" KernelTime="2415" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000004000000000306E84809DFFFF00C06D84809DFFFF000000000000000000000000000000000F000000000000004097DDAB00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807031400+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="68" ProcessorID="3" KernelTime="61560" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000004400000000B06E84809DFFFF00406E84809DFFFF000000000000000000000000000000000F000000000000007063DDAB00F8FFFF000000000000000000000000000502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807031800+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="84" ProcessorID="3" KernelTime="330" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000005400000000D07384809DFFFF00607384809DFFFF000000000000000000000000000000000F00000000000000C052DBAB00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807032300+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="88" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000005800000000807484809DFFFF00107484809DFFFF000000000000000000000000000000000F00000000000000C052DBAB00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807032800+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="92" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000005C00000000007584809DFFFF00907484809DFFFF000000000000000000000000000000000F00000000000000C052DBAB00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807032800+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="96" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000006000000000807584809DFFFF00107584809DFFFF000000000000000000000000000000000F0000000000000070DADDAB00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807033200+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="104" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000006800000000406F84809DFFFF00D06E84809DFFFF000000000000000000000000000000000F00000000000000E076DEAB00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807033700+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="108" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000006C00000000C06F84809DFFFF00506F84809DFFFF000000000000000000000000000000000F00000000000000E076DEAB00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807034200+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="120" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000007800000000A08D84809DFFFF00308D84809DFFFF000000000000000000000000000000000F00000000000000B0B90DAC00F8FFFF0000000000000000000000000F0502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807034600+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="124" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000007C0000000080BC84809DFFFF0010BC84809DFFFF000000000000000000000000000000000F00000000000000B0B90DAC00F8FFFF0000000000000000000000000F0502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807035100+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="128" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000008000000000208E84809DFFFF00B08D84809DFFFF000000000000000000000000000000000F00000000000000B0B90DAC00F8FFFF0000000000000000000000000F0502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807035100+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="132" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000840000000000BD84809DFFFF0090BC84809DFFFF000000000000000000000000000000000F00000000000000B0B90DAC00F8FFFF0000000000000000000000000F0502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807035600+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="136" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000008800000000A08E84809DFFFF00308E84809DFFFF000000000000000000000000000000000F00000000000000B0B90DAC00F8FFFF0000000000000000000000000F0502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807035600+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="140" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000008C0000000080BD84809DFFFF0010BD84809DFFFF000000000000000000000000000000000F00000000000000B0B90DAC00F8FFFF0000000000000000000000000F0502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807036000+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="144" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000009000000000208F84809DFFFF00B08E84809DFFFF000000000000000000000000000000000F00000000000000B0B90DAC00F8FFFF0000000000000000000000000F0502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807036500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="148" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000940000000000BE84809DFFFF0090BD84809DFFFF000000000000000000000000000000000F00000000000000B0B90DAC00F8FFFF0000000000000000000000000F0502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807036500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="152" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000009800000000B0BE84809DFFFF0040BE84809DFFFF000000000000000000000000000000000F00000000000000B0B90DAC00F8FFFF0000000000000000000000000F0502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807036900+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="156" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000009C0000000070DF83809DFFFF0000DF83809DFFFF000000000000000000000000000000000F00000000000000B0B90DAC00F8FFFF0000000000000000000000000F0502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807037400+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="160" ProcessorID="3" KernelTime="3405" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000A00000000030BF84809DFFFF00C0BE84809DFFFF000000000000000000000000000000000F00000000000000B0B90DAC00F8FFFF0000000000000000000000000F0502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807037900+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="168" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000A800000000B0BF84809DFFFF0040BF84809DFFFF000000000000000000000000000000000F00000000000000B0B90DAC00F8FFFF0000000000000000000000000F0502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807038300+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="172" ProcessorID="3" KernelTime="180" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000AC00000000C0F683809DFFFF0050F683809DFFFF000000000000000000000000000000000F00000000000000B0B90DAC00F8FFFF0000000000000000000000000F0502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807038800+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="176" ProcessorID="3" KernelTime="4485" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000B00000000040F783809DFFFF00D0F683809DFFFF000000000000000000000000000000000F00000000000000B0B90DAC00F8FFFF0000000000000000000000000F0502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807038800+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="184" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000B800000000C01E84809DFFFF00501E84809DFFFF000000000000000000000000000000000F000000000000006077DEAB00F8FFFF000000000000000000000000100502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807039300+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="188" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000BC00000000002084809DFFFF00901F84809DFFFF000000000000000000000000000000000F000000000000006077DEAB00F8FFFF000000000000000000000000100502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807039700+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="192" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000C000000000306B84809DFFFF00C06A84809DFFFF000000000000000000000000000000000F000000000000006077DEAB00F8FFFF000000000000000000000000100502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807040200+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="196" ProcessorID="3" KernelTime="1335" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000C400000000B06B84809DFFFF00406B84809DFFFF000000000000000000000000000000000F000000000000006077DEAB00F8FFFF000000000000000000000000100502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807040200+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="204" ProcessorID="3" KernelTime="3015" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000CC0000000080C484809DFFFF0010C484809DFFFF000000000000000000000000000000000F00000000000000B04FD1BD0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807040700+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="240" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000F00000000080E084809DFFFF0010E084809DFFFF000000000000000000000000000000000F00000000000000E032C4BD0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807041100+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="244" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000F40000000030DE84809DFFFF00C0DD84809DFFFF000000000000000000000000000000000F00000000000000F07EDEAB00F8FFFF000000000000000000000000100502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807041600+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="248" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000F800000000C07284809DFFFF00507284809DFFFF000000000000000000000000000000000F00000000000000309DDDBD0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807042000+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="252" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000FC00000000407684809DFFFF00D07584809DFFFF000000000000000000000000000000000F0000000000000050B0D1BD0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807042500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="256" ProcessorID="3" KernelTime="885" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000000001000000006884809DFFFF00906784809DFFFF000000000000000000000000000000000F000000000000002008E5BD0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807043000+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="272" ProcessorID="3" KernelTime="30450" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000001001000000D0F684809DFFFF0060F684809DFFFF000000000000000000000000000000000F00000000000000E0861DBE0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807043400+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="276" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000140100000040FD84809DFFFF00D0FC84809DFFFF000000000000000000000000000000000F00000000000000401848BE0AF8FFFF000000000000000000000000070502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807043900+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="280" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000001801000000C0FD84809DFFFF0050FD84809DFFFF000000000000000000000000000000000F00000000000000E0CE47BE0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807043900+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="284" ProcessorID="3" KernelTime="63435" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000001C0100000040FE84809DFFFF00D0FD84809DFFFF00000000000000000000000000000000010000000000000050CD47BE0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807044400+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="288" ProcessorID="3" KernelTime="2190" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000002001000000C0FE84809DFFFF0050FE84809DFFFF00000000000000000000000000000000020000000000000050CD47BE0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807044800+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="292" ProcessorID="3" KernelTime="75" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000240100000040FF84809DFFFF00D0FE84809DFFFF00000000000000000000000000000000040000000000000050CD47BE0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807044800+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="296" ProcessorID="3" KernelTime="90" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000002801000000C0FF84809DFFFF0050FF84809DFFFF00000000000000000000000000000000080000000000000050CD47BE0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807045300+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="312" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000003801000000801085809DFFFF00101085809DFFFF000000000000000000000000000000000F000000000000004040A4BF0AF8FFFF000000000000000000000000080503000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807045800+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="316" ProcessorID="3" KernelTime="120" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000003C01000000001185809DFFFF00901085809DFFFF000000000000000000000000000000000F000000000000004040A4BF0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807045800+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="320" ProcessorID="3" KernelTime="315" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000004001000000801185809DFFFF00101185809DFFFF000000000000000000000000000000000F000000000000004040A4BF0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807046200+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="324" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000004401000000001285809DFFFF00901185809DFFFF000000000000000000000000000000000F000000000000004040A4BF0AF8FFFF000000000000000000000000080503000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807046700+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="328" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000004801000000801285809DFFFF00101285809DFFFF000000000000000000000000000000000F000000000000004040A4BF0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807047100+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="332" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000004C01000000001385809DFFFF00901285809DFFFF000000000000000000000000000000000F000000000000004040A4BF0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807047600+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="336" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000005001000000801385809DFFFF00101385809DFFFF000000000000000000000000000000000F000000000000004040A4BF0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807048100+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="340" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000005401000000001485809DFFFF00901385809DFFFF000000000000000000000000000000000F000000000000004040A4BF0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807048100+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="344" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000005801000000801485809DFFFF00101485809DFFFF000000000000000000000000000000000F000000000000004040A4BF0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807048500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="352" ProcessorID="3" KernelTime="735" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000006001000000801E85809DFFFF00101E85809DFFFF000000000000000000000000000000000F00000000000000800DDEAB00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807048500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="356" ProcessorID="3" KernelTime="495" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000006401000000001F85809DFFFF00901E85809DFFFF000000000000000000000000000000000F0000000000000010CEDDAB00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807049000+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="396" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000008C01000000102A85809DFFFF00A02985809DFFFF000000000000000000000000000000000F00000000000000A019D3BE0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807049500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="400" ProcessorID="3" KernelTime="30" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000009001000000E08284809DFFFF00708284809DFFFF000000000000000000000000000000000F00000000000000D03B3CBF0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807049900+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="404" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000009401000000908C84809DFFFF00208C84809DFFFF000000000000000000000000000000000100000000000000509242BF0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807049900+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="408" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000009801000000002F85809DFFFF00902E85809DFFFF000000000000000000000000000000000100000000000000509242BF0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807050400+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="412" ProcessorID="3" KernelTime="55575" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000009C01000000603785809DFFFF00F03685809DFFFF000000000000000000000000000000000100000000000000509242BF0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807050900+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="416" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000A001000000E03785809DFFFF00703785809DFFFF000000000000000000000000000000000200000000000000509242BF0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807051300+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="420" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000A401000000804685809DFFFF00104685809DFFFF000000000000000000000000000000000200000000000000509242BF0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807051800+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="424" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000A801000000004785809DFFFF00904685809DFFFF000000000000000000000000000000000200000000000000509242BF0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807052300+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="428" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000AC01000000804785809DFFFF00104785809DFFFF000000000000000000000000000000000400000000000000509242BF0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807052300+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="432" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000B001000000004885809DFFFF00904785809DFFFF000000000000000000000000000000000400000000000000509242BF0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807052700+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="436" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000B401000000804885809DFFFF00104885809DFFFF000000000000000000000000000000000400000000000000509242BF0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807053200+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="440" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000B801000000004985809DFFFF00904885809DFFFF000000000000000000000000000000000800000000000000509242BF0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807053200+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="444" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000BC01000000804985809DFFFF00104985809DFFFF000000000000000000000000000000000800000000000000509242BF0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807053600+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="448" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000C001000000004A85809DFFFF00904985809DFFFF000000000000000000000000000000000800000000000000509242BF0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807054100+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="452" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000C401000000802E85809DFFFF00102E85809DFFFF000000000000000000000000000000000F0000000000000020E324AC00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807054600+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="504" ProcessorID="3" KernelTime="25350" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000F801000000004D85809DFFFF00904C85809DFFFF000000000000000000000000000000000F00000000000000F034DEAB00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807055000+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="508" ProcessorID="3" KernelTime="1350" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000FC01000000804D85809DFFFF00104D85809DFFFF000000000000000000000000000000000F00000000000000F034DEAB00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807055500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="512" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000000002000000804E85809DFFFF00104E85809DFFFF000000000000000000000000000000000F00000000000000802A96C10AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807056000+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="516" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000000402000000004E85809DFFFF00904D85809DFFFF000000000000000000000000000000000F00000000000000D057E6BE0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807056400+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="520" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000000802000000A00785809DFFFF00300785809DFFFF000000000000000000000000000000000F00000000000000A0ECFDC00AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807056400+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="524" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000000C02000000200685809DFFFF00B00585809DFFFF000000000000000000000000000000000F00000000000000E032C4BD0AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807056900+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="540" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000001C02000000200885809DFFFF00B00785809DFFFF000000000000000000000000000000000F00000000000000202B00C10AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807057400+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="552" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000002802000000806B85809DFFFF00106B85809DFFFF000000000000000000000000000000000F00000000000000082603C10AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807057800+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="568" ProcessorID="3" KernelTime="15" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000380200000040F683809DFFFF00D0F583809DFFFF000000000000000000000000000000000F0000000000000068A8FBAA00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807058300+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="572" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000003C02000000605E85809DFFFF00F05D85809DFFFF000000000000000000000000000000000F00000000000000809AFBAA00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807058300+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="576" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000004002000000E05E85809DFFFF00705E85809DFFFF000000000000000000000000000000000F00000000000000809AFBAA00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807058700+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="580" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000004402000000605F85809DFFFF00F05E85809DFFFF000000000000000000000000000000000F00000000000000809AFBAA00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807059200+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="584" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000004802000000E05F85809DFFFF00705F85809DFFFF000000000000000000000000000000000F00000000000000809AFBAA00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807059700+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="588" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000004C02000000A06585809DFFFF00306585809DFFFF000000000000000000000000000000000F000000000000006891F9AA00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807059700+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="592" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000005002000000806985809DFFFF00106985809DFFFF000000000000000000000000000000000F000000000000006891F9AA00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807060100+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="596" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000005402000000006A85809DFFFF00906985809DFFFF000000000000000000000000000000000F000000000000006891F9AA00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807060600+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="600" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000005802000000806A85809DFFFF00106A85809DFFFF000000000000000000000000000000000F000000000000006891F9AA00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807060600+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="604" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000005C02000000006B85809DFFFF00906A85809DFFFF000000000000000000000000000000000F000000000000006891F9AA00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807061100+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="608" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000006002000000207885809DFFFF00B07785809DFFFF000000000000000000000000000000000F000000000000006891F9AA00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807061500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="612" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000006402000000B07885809DFFFF00407885809DFFFF000000000000000000000000000000000F000000000000006891F9AA00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807062000+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="616" ProcessorID="3" KernelTime="0" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000006802000000A07985809DFFFF00307985809DFFFF000000000000000000000000000000000F0000000000000068A8FBAA00F8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807062500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="636" ProcessorID="3" KernelTime="2940" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>040000007C02000000801785809DFFFF00101785809DFFFF000000000000000000000000000000000F000000000000000025DEAB00F8FFFF000000000000000000000000120502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807062500+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="680" ProcessorID="3" KernelTime="1005" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000A802000000803485809DFFFF00103485809DFFFF000000000000000000000000000000000F00000000000000E04AA3C10AF8FFFF000000000000000000000000080502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+	<System>
+		<Provider Guid="{9e814aad-3204-11d2-9a82-006008a86939}" />
+		<EventID>0</EventID>
+		<Version>3</Version>
+		<Level>0</Level>
+		<Task>0</Task>
+		<Opcode>3</Opcode>
+		<Keywords>0x0</Keywords>
+		<TimeCreated SystemTime="2017-10-23T00:14:51.807062900+0159" />
+		<Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+		<Execution ProcessID="4" ThreadID="684" ProcessorID="3" KernelTime="391965" UserTime="0" />
+		<Channel />
+		<Computer />
+	</System>
+	<ProcessingErrorData>
+		<ErrorCode>15005</ErrorCode>
+		<DataItemName />
+		<EventPayload>04000000AC02000000A01885809DFFFF00301885809DFFFF000000000000000000000000000000000F00000000000000305D90AA00F8FFFF0000000000000000000000000F0502000000</EventPayload>
+	</ProcessingErrorData>
+	<RenderingInfo Culture="en-AU">
+		<Opcode>DCStart</Opcode>
+		<Provider>MSNT_SystemTrace</Provider>
+		<EventName xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">Thread</EventName>
+	</RenderingInfo>
+	<ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
+	</ExtendedTracingInfo>
+</Event>
+</Events>
