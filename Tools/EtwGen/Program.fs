@@ -1,11 +1,11 @@
 ﻿module OpenEtw.EtwGen.Program
 open FParsec
 open System.Text
-
 open OpenEtw
 
+let version = System.Reflection.Assembly.GetEntryAssembly().GetName().Version
 let showUsage() =
-    printf """EtwGen:
+    printf $"""== EtwGen v{version} ==
 
 Generates code to implement Event Tracing for Windows (ETW) providers.
 The input is in the form of a C++ header file using the macros defined in etw.h

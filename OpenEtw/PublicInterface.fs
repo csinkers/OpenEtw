@@ -20,3 +20,4 @@ module Public =
     let generateCppSelfDescribing = GenerateCppSelfDescribing.forProvider
     let generateCsLegacy          = GenerateCsLegacy.forProvider
     let generateNodeWrapper       = GenerateNodePlugin.forProvider
+
