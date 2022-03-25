@@ -57,7 +57,7 @@ let buildWrapperCpp (provider : EtwProvider) (options : NodeOptions) =
     let lookupTask name = provider.tasks |> List.find (fun t -> t.name = name)
     let groupedContexts = // ((contextId, keywordMask, level), eventId list) list
         provider.events
-        |> List.map (fun e -> ((e.keywords |> getMaskForKeywords, e.level |> Option.map getIdForLevel |?? 0uy), e.id))
+        |> List.map (fun e -> ((e.keywords |> getMaskForKeywords, e.level |> getIdForLevel), e.id))
         |> List.groupBy fst
         |> List.mapi (fun i ((k, l), members) -> ((i,k,l), members |> List.map snd))
 

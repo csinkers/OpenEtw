@@ -2,6 +2,7 @@
 #define _SHORTCUTS_ETL_H_
 
 #include "../../etw.h"
+#include <cstdint>
 #include "Windows.h"
 
 // ShortcutsEtl.h: This file defines the common API for ShortcutsETL.

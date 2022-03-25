@@ -55,7 +55,7 @@ type BasicTests() =
             [
                 {(named "E0" 0us) with 
                     task = Some "T1"
-                    level = Some "win:Warning"
+                    level = EtwLevel.warning.name
                     parameters = 
                      [
                         {name = "p1"

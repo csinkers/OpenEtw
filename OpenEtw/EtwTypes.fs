@@ -60,15 +60,24 @@ type EtwLevel =
         message  : string option
         implicit : bool
     }
-    static member defaultLevels =
-        let defaultLevel = {id = 0uy; name = ""; symbol = ""; message = None; implicit = true}
+
+[<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
+module EtwLevel =
+    let empty = {id = 0uy; name = ""; symbol = ""; message = None; implicit = true}
+    let always        = { empty with id = uint8 StandardLevel.LogAlways;     name = "win:LogAlways" }
+    let critical      = { empty with id = uint8 StandardLevel.Critical;      name = "win:Critical" }
+    let error         = { empty with id = uint8 StandardLevel.Error;         name = "win:Error" }
+    let warning       = { empty with id = uint8 StandardLevel.Warning;       name = "win:Warning" }
+    let informational = { empty with id = uint8 StandardLevel.Informational; name = "win:Informational" }
+    let verbose       = { empty with id = uint8 StandardLevel.Verbose;       name = "win:Verbose" }
+    let defaultLevels =
         [
-            { defaultLevel with id = uint8 StandardLevel.LogAlways;     name = "win:LogAlways" }
-            { defaultLevel with id = uint8 StandardLevel.Critical;      name = "win:Critical" }
-            { defaultLevel with id = uint8 StandardLevel.Error;         name = "win:Error" }
-            { defaultLevel with id = uint8 StandardLevel.Warning;       name = "win:Warning" }
-            { defaultLevel with id = uint8 StandardLevel.Informational; name = "win:Informational" }
-            { defaultLevel with id = uint8 StandardLevel.Verbose;       name = "win:Verbose" }
+            always
+            critical
+            error
+            warning
+            informational
+            verbose
         ]
 
 // TODO: Check these
@@ -93,21 +102,22 @@ type EtwOpcode =
         message  : string option
         implicit : bool
     }
-    static member defaultOpcodes =
-        let defaultOpcode = { id = 0uy; name = ""; symbol = ""; message = None; implicit = true }
-        [
-            { defaultOpcode with name = "win:Info";      id = uint8 StandardOpcode.Info}
-            { defaultOpcode with name = "win:Start";     id = uint8 StandardOpcode.Start}
-            { defaultOpcode with name = "win:Stop";      id = uint8 StandardOpcode.Stop}
-            { defaultOpcode with name = "win:DcStart";   id = uint8 StandardOpcode.DataCollectionStart}
-            { defaultOpcode with name = "win:DcStop";    id = uint8 StandardOpcode.DataCollectionStop}
-            { defaultOpcode with name = "win:Extension"; id = uint8 StandardOpcode.Extension}
-            { defaultOpcode with name = "win:Reply";     id = uint8 StandardOpcode.Reply}
-            { defaultOpcode with name = "win:Resume";    id = uint8 StandardOpcode.Resume}
-            { defaultOpcode with name = "win:Suspend";   id = uint8 StandardOpcode.Suspend}
-            { defaultOpcode with name = "win:Send";      id = uint8 StandardOpcode.Send}
-            { defaultOpcode with name = "win:Receive";   id = uint8 StandardOpcode.Receive}
-        ]
+
+[<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
+module EtwOpcode =
+    let empty = { id = 0uy; name = ""; symbol = ""; message = None; implicit = true }
+    let info      = { empty with name = "win:Info";      id = uint8 StandardOpcode.Info}
+    let start     = { empty with name = "win:Start";     id = uint8 StandardOpcode.Start}
+    let stop      = { empty with name = "win:Stop";      id = uint8 StandardOpcode.Stop}
+    let dcStart   = { empty with name = "win:DcStart";   id = uint8 StandardOpcode.DataCollectionStart}
+    let dcStop    = { empty with name = "win:DcStop";    id = uint8 StandardOpcode.DataCollectionStop}
+    let extension = { empty with name = "win:Extension"; id = uint8 StandardOpcode.Extension}
+    let reply     = { empty with name = "win:Reply";     id = uint8 StandardOpcode.Reply}
+    let resume    = { empty with name = "win:Resume";    id = uint8 StandardOpcode.Resume}
+    let suspend   = { empty with name = "win:Suspend";   id = uint8 StandardOpcode.Suspend}
+    let send      = { empty with name = "win:Send";      id = uint8 StandardOpcode.Send}
+    let receive   = { empty with name = "win:Receive";   id = uint8 StandardOpcode.Receive}
+    let defaultOpcodes = [ info; start; stop; dcStart; dcStop; extension; reply; resume; suspend; send; receive ]
 
 // TODO: Check these
 type StandardKeywords = // System.Diagnostics.Eventing.Reader.StandardEventKeywords
@@ -128,23 +138,41 @@ type EtwKeyword =
         message  : string option
         implicit : bool
     }
-    static member defaultKeywords =
-        let defaultKeyword = { id = 0UL; name = ""; symbol = ""; message = None; implicit = true }
+
+[<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
+module EtwKeyword =
+    let empty           = { id = 0UL; name = ""; symbol = ""; message = None; implicit = true }
+    let eventLogClassic = { empty with name = "win:EventLogClassic"; id = uint64 StandardKeywords.EventLogClassic}
+    let correlationHint = { empty with name = "win:CorrelationHint"; id = uint64 StandardKeywords.CorrelationHint2}
+    let auditSuccess    = { empty with name = "win:AuditSuccess";    id = uint64 StandardKeywords.AuditSuccess }
+    let auditFailure    = { empty with name = "win:AuditFailure";    id = uint64 StandardKeywords.AuditFailure}
+    let sqm             = { empty with name = "win:SQM";             id = uint64 StandardKeywords.Sqm}
+    let wdiDiag         = { empty with name = "win:WDIDiag";         id = uint64 StandardKeywords.WdiDiagnostic}
+    let wdiContext      = { empty with name = "win:WDIContext";      id = uint64 StandardKeywords.WdiContext}
+    let responseTime    = { empty with name = "win:ResponseTime";    id = uint64 StandardKeywords.ResponseTime}
+
+    // EventSource keywords
+    let session3 = { empty with name = "Session3"; symbol = "Session3"; message = Some "Session3"; id = 0x100000000000UL; implicit = false }
+    let session2 = { empty with name = "Session2"; symbol = "Session2"; message = Some "Session2"; id = 0x200000000000UL; implicit = false }
+    let session1 = { empty with name = "Session1"; symbol = "Session1"; message = Some "Session1"; id = 0x400000000000UL; implicit = false }
+    let session0 = { empty with name = "Session0"; symbol = "Session0"; message = Some "Session0"; id = 0x800000000000UL; implicit = false }
+
+    let defaultKeywords =
         [
-            { defaultKeyword with name = "win:EventLogClassic"; id = uint64 StandardKeywords.EventLogClassic}
-            { defaultKeyword with name = "win:CorrelationHint"; id = uint64 StandardKeywords.CorrelationHint2}
-            { defaultKeyword with name = "win:AuditSuccess";    id = uint64 StandardKeywords.AuditSuccess }
-            { defaultKeyword with name = "win:AuditFailure";    id = uint64 StandardKeywords.AuditFailure}
-            { defaultKeyword with name = "win:SQM";             id = uint64 StandardKeywords.Sqm}
-            { defaultKeyword with name = "win:WDIDiag";         id = uint64 StandardKeywords.WdiDiagnostic}
-            { defaultKeyword with name = "win:WDIContext";      id = uint64 StandardKeywords.WdiContext}
-            { defaultKeyword with name = "win:ResponseTime";    id = uint64 StandardKeywords.ResponseTime}
+            eventLogClassic 
+            correlationHint 
+            auditSuccess    
+            auditFailure    
+            sqm             
+            wdiDiag         
+            wdiContext      
+            responseTime    
 
             // EventSource keywords
-            {defaultKeyword with name = "Session3"; symbol = "Session3"; message = Some "Session3"; id = 0x100000000000UL; implicit = false }
-            {defaultKeyword with name = "Session2"; symbol = "Session2"; message = Some "Session2"; id = 0x200000000000UL; implicit = false }
-            {defaultKeyword with name = "Session1"; symbol = "Session1"; message = Some "Session1"; id = 0x400000000000UL; implicit = false }
-            {defaultKeyword with name = "Session0"; symbol = "Session0"; message = Some "Session0"; id = 0x800000000000UL; implicit = false }
+            session3 
+            session2 
+            session1 
+            session0 
         ]
 
 type EtwCount =
@@ -217,7 +245,7 @@ type EtwType =
         | HexInt64          -> "win:HexInt64"     , "const int64_t"     ,  "HexInt64"     , None
         | ActivityId        -> "ActivityId"       , "ETW_ACTIVITYID"    ,  "ActivityId"   , None
         | RelatedActivityId -> "RelatedActivityId", "ETW_RELATED_ACTIVITYID", "RelatedActivityId", None
-        | Unresolved typeName -> 
+        | Unresolved typeName ->
             failwithf "%s \"%s\""
                 ("This parameter's type could not be resolved. Either declare an " +
                 "appropriate type mapping or add an ETW_IN override on the parameter. " +
@@ -468,7 +496,7 @@ type EtwEvent = // A provider event
         message    : string option
         version    : uint8
         task       : string option
-        level      : string option
+        level      : string
         channel    : string option
         opcode     : string option
         keywords   : string list
@@ -483,7 +511,7 @@ type EtwEvent = // A provider event
             message    = None
             version    = 0uy
             task       = None
-            level      = None
+            level      = EtwLevel.verbose.name
             channel    = None
             opcode     = None
             keywords   = []
@@ -506,6 +534,7 @@ type EtwProvider =
         resourceFilename : string option
         messageFilename : string option
 
+        headers    : string list
         levels     : EtwLevel   list
         channels   : EtwChannel list
         opcodes    : EtwOpcode  list
@@ -523,6 +552,7 @@ type EtwProvider =
             resourceFilename = None
             messageFilename = None
 
+            headers    = []
             levels     = []
             opcodes    = []
             keywords   = []
@@ -534,14 +564,14 @@ type EtwProvider =
 
 type CppSelfDescribingOptions =
     {
-        precompiledHeader : string option
+        etwGenComment : string
         insertDebugLogging : bool
         cppFilename : string
         headerName : string
     }
-    static member defaults = 
+    static member defaults =
         {
-            precompiledHeader = None
+            etwGenComment = ""
             insertDebugLogging = false
             cppFilename = ""
             headerName = ""
@@ -561,7 +591,7 @@ type NodeOptions =
         cppFilename : string
         headerName : string
     }
-    static member defaults = 
+    static member defaults =
         {
             usePrecompiledHeader = true
             cppFilename = ""
