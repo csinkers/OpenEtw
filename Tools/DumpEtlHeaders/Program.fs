@@ -1,5 +1,6 @@
 ﻿open System.IO
 open OpenEtw
+open SerdesNet
 
 [<EntryPoint>]
 let main argv = 
@@ -7,10 +8,13 @@ let main argv =
     | 1 ->
         use stream = File.OpenRead(argv.[0])
         use br = new BinaryReader(stream)
-        let reader = new Util.GenericBinaryReader(br)
+        use reader = Util.buildReader(br)
         let trace = EtlTrace.Deserialize reader
 
-        let writer = new Util.AnnotatedFormatWriter(System.Console.Out)
+        use ms = new MemoryStream()
+        use bw = new BinaryWriter(ms)
+        use innerWriter = Util.buildWriter(bw)
+        use writer = new AnnotationProxySerializer(innerWriter, System.Console.Out, fun s -> System.Text.Encoding.UTF8.GetBytes(s))
 
         try
             trace.Serialize writer

@@ -1,4 +1,5 @@
 ﻿namespace OpenEtw
+open SerdesNet
 
 type EtlHeaderType =
     // System header
@@ -21,26 +22,6 @@ type EtlHeaderType =
 
 [<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
 module EtlHeaderType =
-    let fromUInt16 = LanguagePrimitives.EnumOfValue
-    let info x =
-        let str =
-            match x with 
-            | EtlHeaderType.System32      -> "System32"
-            | EtlHeaderType.System64      -> "System64"
-            | EtlHeaderType.Compact32     -> "Compact32"
-            | EtlHeaderType.Compact64     -> "Compact64"
-            | EtlHeaderType.PerfInfo32    -> "PerfInfo32"
-            | EtlHeaderType.PerfInfo64    -> "PerfInfo64"
-            | EtlHeaderType.Instance32    -> "Instance32"
-            | EtlHeaderType.Instance64    -> "Instance64"
-            | EtlHeaderType.EventHeader32 -> "EventHeader32"
-            | EtlHeaderType.EventHeader64 -> "EventHeader64"
-            | EtlHeaderType.FullHeader32  -> "FullHeader32"
-            | EtlHeaderType.FullHeader64  -> "FullHeader64"
-            | EtlHeaderType.Error         -> "Error"
-            | x -> sprintf "Unknown (%d)" (uint16 x)
-        (uint16 x, str)
-
     let size =
         function
         | EtlHeaderType.PerfInfo32
@@ -65,7 +46,7 @@ type EtlSystemEvent() =
     member x.Size with get() = EtlHeaderType.size x.headerType + x.payload.Length
     member x.Clone() = x.MemberwiseClone() :?> EtlSystemEvent
 
-    member private x.Common (w:Util.ISerializer) size =
+    member private x.Serdes (s:ISerializer) size =
         let hasContext, hasTiming =
             match x.headerType with
             | EtlHeaderType.System32   | EtlHeaderType.System64   -> true, true
@@ -73,28 +54,28 @@ type EtlSystemEvent() =
             | EtlHeaderType.PerfInfo32 | EtlHeaderType.PerfInfo64 -> false, true
             | _ -> failwith "Unexpected header type"
 
-        w.UInt16 "hookId" x.get_hookId x.set_hookId            // 6
+        x.hookId <- s.UInt16("hookId", x.hookId) // 6
         if hasContext then
-            w.UInt32 "tid" x.get_threadId x.set_threadId       // 8
-            w.UInt32 "pid" x.get_processId x.set_processId     // C
+            x.threadId <- s.UInt32("tid", x.threadId)       // 8
+            x.processId <- s.UInt32("pid", x.processId)     // C
 
-        w.Int64 "timestamp" x.get_timestamp x.set_timestamp    // 8/10
+        x.timestamp <- s.Int64("timestamp", x.timestamp)    // 8/10
 
         if hasTiming then
-            w.UInt32 "kTime" x.get_kernelTime x.set_kernelTime // 18
-            w.UInt32 "uTime" x.get_userTime   x.set_userTime   // 1C
+            x.kernelTime <- s.UInt32("kTime", x.kernelTime) // 18
+            x.userTime   <- s.UInt32("uTime", x.userTime)   // 1C
 
         let payloadSize = (int size) - EtlHeaderType.size x.headerType
         if (payloadSize < 0) then failwith "Negative event payload size"
         if (payloadSize > 0) then
-            w.ByteArrayHex "payload" x.get_payload x.set_payload payloadSize // 10/18/20
+            x.payload <- s.Bytes("payload", x.payload, payloadSize) // 10/18/20
 
         let paddingBytes = Util.paddingBytes x.Size
         if (paddingBytes > 0) then
-            w.RepeatU8 "padding" 0uy paddingBytes
+            s.RepeatU8("padding", 0uy, paddingBytes)
 
-    member x.Serialize (w:Util.ISerializer) =
-        w.Comment "System Event"
+    member x.Serialize (s:ISerializer) =
+        s.Comment "System Event"
 
         match x.headerType with // Sanity checks
         | EtlHeaderType.System32
@@ -107,17 +88,17 @@ type EtlSystemEvent() =
             if (x.threadId <> 0u || x.processId <> 0u) then failwith "PerfInfo events cannot have thread and process ids"
         | _ -> failwith "System event with invalid header type found"
 
-        Util.writeValue w.UInt16 "version" x.version // 0
-        Util.writeValue w.EnumU16 "headerType" x.headerType EtlHeaderType.info // 2
-        Util.writeValue w.UInt16 "size" (uint16 x.Size) // 4
-        x.Common w x.Size
+        x.version <- s.UInt16("version", x.version) // 0
+        x.headerType <- s.EnumU16("headerType", x.headerType) // 2
+        s.UInt16("size", (uint16 x.Size)) |> ignore // 4
+        x.Serdes s x.Size
 
-    static member Deserialize (w : Util.ISerializer) version headerType =
+    static member Deserialize (s : ISerializer) version headerType =
         let x = EtlSystemEvent()
 
         x.version <- version
         x.headerType <- headerType
-        let size = int (Util.readValue w.UInt16 "size" 0us)
+        let size = int (s.UInt16("size", 0us))
 
-        x.Common w size
+        x.Serdes s size
         x

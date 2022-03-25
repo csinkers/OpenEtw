@@ -30,7 +30,7 @@ let forProvider (provider : EtwProvider) =
                     mandatoryParam "value" <| string e.id.Value
                     mandatoryParam "version" <| string e.version
                     optionalParam "channel" <| e.channel
-                    optionalParam "level" <| e.level
+                    mandatoryParam "level" <| e.level
                     optionalParam "task" e.task
                     optionalParam "opcode" <| e.opcode
                     optionalParam "template" (if (e.parameters.IsEmpty) then None else Some e.name)
