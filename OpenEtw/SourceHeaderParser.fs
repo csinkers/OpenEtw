@@ -39,6 +39,8 @@ type SourceFileToken =
     | EventCode of string
     | MapDefinition of EtwMap
     | Header of string
+    | PushKeywords of string list
+    | PopKeywords
 
 let (|>>?) p f =
     p >>= 
@@ -203,6 +205,12 @@ pDirectiveTokenImpl :=
         many1Chars (noneOf "()[]{},\"") |>> Text
      ]
 
+let pBaseDirective name = 
+    (skipString name) >>. spaces 
+    >>. skipChar '(' 
+    >>. (sepBy (many1 pDirectiveToken) (skipChar ',')) 
+    .>> skipChar ')'
+
 let pDirective name implicitParameterNames =
     let directiveTokensToMap (implicitParameterNames : string[]) =
         List.mapi (fun i (s:string) ->
@@ -213,11 +221,12 @@ let pDirective name implicitParameterNames =
                 match m.Success with
                 | true -> (m.Groups.[1].Value, m.Groups.[2].Value)
                 | false -> failwithf "Incorrect parameter format \"%s\"" s
-        )
-        >> Map.ofList
+        ) >> Map.ofList
 
-    (skipString name) >>. spaces >>. skipChar '(' >>. (sepBy (many1 pDirectiveToken) (skipChar ',')) .>> skipChar ')'
+    pBaseDirective name
     |>> (List.map (List.map (fun dt -> dt.ToString()) >> String.concat "") >> directiveTokensToMap implicitParameterNames)
+
+let pListDirective name = pBaseDirective name |>> List.concat
 
 let pProvider = 
     pDirective "ETW_PROVIDER_BEGIN" [| "className" |] |>>
@@ -314,6 +323,8 @@ let pTaskBegin =
 
 let pTaskEnd = skipString "ETW_TASK_END" >>% TaskEnd
 let pCHeader = pDirective "ETW_HEADER" [| "name" |] |>> (fun m -> Header (Map.find "name" m))
+let pPushKeywords = pListDirective "ETW_PUSH_KEYWORDS" |>> (fun l -> List.map (fun dt -> dt.ToString()) l |> PushKeywords)
+let pPopKeywords = skipString "ETW_POP_KEYWORDS" >>% PopKeywords
 
 //let pDeclareType = 
 //    pipe4
@@ -340,6 +351,8 @@ let pEtwDirective =
 //        pDeclareType
         pTaskBegin
         pTaskEnd
+        pPushKeywords
+        pPopKeywords
         pCHeader
      ]
 

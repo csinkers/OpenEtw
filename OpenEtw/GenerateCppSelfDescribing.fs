@@ -107,6 +107,7 @@ let buildCpp (provider : EtwProvider) (options : CppSelfDescribingOptions) =
         (perHeader (fun h -> if h.StartsWith "<" then sprintf "#include %s" h else sprintf "#include \"%s\"" h))
         (sprintf """// -----------------------------------------------------
 //  %s
+//  DO NOT EDIT BY HAND
 // -----------------------------------------------------""" options.etwGenComment)
 
         (sprintf """
@@ -131,9 +132,10 @@ let buildCpp (provider : EtwProvider) (options : CppSelfDescribingOptions) =
             (arg##n != NULL) ? (arg##n##Len > 64000 ? 64000 : arg##n##Len) : (ULONG)sizeof("NULL"));
 
 #define ETW_UNICODE_PARAM(n, p) const wchar_t *arg##n = (p);\
+    ULONG arg##n##Len = (ULONG)(wcslen(arg##n) + 1) * sizeof(wchar_t);\
     EventDataDescCreate(&eventData[n],\
             (arg##n != NULL) ? arg##n : L"NULL",\
-            (arg##n != NULL) ? (ULONG)((wcslen(arg##n) + 1) * sizeof(wchar_t)) : (ULONG)sizeof(L"NULL"));
+            (arg##n != NULL) ? (arg##n##Len > 64000 ? 64000 : arg##n##Len) : (ULONG)sizeof("NULL"));
 
 #define ETW_LITERAL_PARAM(type, n, p) type arg##n = (p);\
     EventDataDescCreate(&eventData[n], &arg##n, sizeof(arg##n));
@@ -157,7 +159,8 @@ let buildCpp (provider : EtwProvider) (options : CppSelfDescribingOptions) =
 };
 """         (escapeForCpp (snd manifest) |> String.concat ("," + System.Environment.NewLine)))
 
-        (sprintf "const GUID ProviderGuid = %s; // %s" (provider.guid.ToString("X")) (provider.guid.ToString()))
+        (sprintf "// %s = %s%s" (provider.guid.ToString()) (if Util.providerToGuid provider.symbol = provider.guid then "*" else "") provider.symbol)
+        (sprintf "const GUID ProviderGuid = %s;" (provider.guid.ToString("X")))
 
         (sprintf """
 static const int EnableBitsCount = %d;
@@ -187,7 +190,7 @@ static void EmitManifest()
     unsigned char magicNumber   = 0x5b;
     unsigned short totalChunks  = (unsigned short)_countof(etwManifest);
 
-    for(unsigned short i = 0; i < totalChunks; i++)
+    for (unsigned short i = 0; i < totalChunks; i++)
     {
         EVENT_DATA_DESCRIPTOR eventData[7];
         EventDataDescCreate(&eventData[0], &format,        sizeof(format));

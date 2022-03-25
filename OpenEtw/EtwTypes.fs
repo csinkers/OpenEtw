@@ -43,14 +43,13 @@ type EtwChannel =
             { defaultChannel with id = Some 0xbuy; name = "TraceLogging"; chid = "TraceLogging" } // TODO: Determine actual TraceLogging id
         ]
 
-// TODO: Check these
 type StandardLevel = // System.Diagnostics.Eventing.Reader.StandardEventLevel
-    | LogAlways = 1uy
-    | Critical = 2uy
-    | Error = 3uy
-    | Warning = 4uy
-    | Informational = 5uy
-    | Verbose = 6uy
+    | LogAlways = 0uy
+    | Critical = 1uy
+    | Error = 2uy
+    | Warning = 3uy
+    | Informational = 4uy
+    | Verbose = 5uy
 
 type EtwLevel =
     {

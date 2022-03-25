@@ -7,6 +7,7 @@ type TokenProcessorState =
         provider : ProviderDeclaration option
         activeTask : string option
         activeVersion : uint8
+        activeKeywordStack : string list list
         nextChannelId : uint8
 
         headers  : string list
@@ -24,6 +25,7 @@ type TokenProcessorState =
             provider = None
             activeVersion = 0uy
             activeTask    = None
+            activeKeywordStack = []
             nextChannelId = 0x10uy
 
             headers  = []
@@ -151,11 +153,14 @@ let processTokens results =
                     symbol     = e.symbol
                     version    = state.activeVersion
                     task       = state.activeTask
+                    keywords   = List.distinct <| List.concat [ (List.concat state.activeKeywordStack); e.keywords ]
                     parameters = e.parameters |> List.map (resolveCustomTypes state.types)
                 }
 
             { state with events = newEvent::state.events }
         | Header header -> {state with headers = header::state.headers}
+        | PushKeywords keywords -> {state with activeKeywordStack = keywords::state.activeKeywordStack}
+        | PopKeywords -> {state with activeKeywordStack = List.tail state.activeKeywordStack}
         | _ -> state
 
     let autogenerateOpcodes (state:TokenProcessorState) =
