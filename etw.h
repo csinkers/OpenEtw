@@ -60,10 +60,14 @@ public:\
 #define ETW_TASK_BEGIN(name, ...) // ETW_TASK_BEGIN(name, [id=], [guid=], [symbol=])
 #define ETW_TASK_END
 
+#define ETW_PUSH_KEYWORDS(...)
+#define ETW_POP_KEYWORDS
+
 // Maps
 #define ETW_BITMAP(name, ...)   enum name { // ETW_BITMAP(name, [prefixToIgnore=])
 #define ETW_VALUEMAP(name, ...) enum name { // ETW_VALUEMAP(name, [prefixToIgnore=])
 #define ETW_MAP_END };
+#define ETW_VALUEMAP_FROM_FILE(name, filename) enum name { };
 
 // Parameters and implementation details
 #define ETW_CUSTOM static void __cdecl
@@ -78,5 +82,10 @@ public:\
 // ETW_EVENT(cppName, [id=], [name=], [symbol=], [message=], [keywords=], [level=], [opcode=], [channel=])
 // Default levels: "win:LogAlways" "win:Critical" "win:Error" "win:Warning" "win:Informational" "win:Verbose" 
 #define ETW_EVENT(cppName, ...) static void __cdecl cppName 
+#define ETW_EVENT_V(cppName, ...) static void __cdecl cppName // level="win:Verbose"
+#define ETW_EVENT_I(cppName, ...) static void __cdecl cppName // level="win:Informational"
+#define ETW_EVENT_W(cppName, ...) static void __cdecl cppName // level="win:Warning"
+#define ETW_EVENT_E(cppName, ...) static void __cdecl cppName // level="win:Error"
+#define ETW_EVENT_C(cppName, ...) static void __cdecl cppName // level="win:Critical"
 
 #define ETW_USE_STDAFX(...) // If this appears in the header, then the implementation will include the given filename, defaulting to "stdafx.h" if none is supplied.

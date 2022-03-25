@@ -2,6 +2,7 @@
 open System
 open System.Security.Cryptography
 open System.Text
+open SerdesNet
 
 [<System.Runtime.InteropServices.DllImport("kernel32.dll")>]
 extern uint32 GetCurrentThreadId();
@@ -34,6 +35,9 @@ let (|??) a = // Like the C# ?? operator, but for option types.
 let (|Prefix|_|) (p:string) (s:string) =
     if (s.StartsWith p) then Some (s.Substring <| p.Length)
     else None
+
+let buildReader br = new GenericBinaryReader(br, br.BaseStream.Length, fun b -> System.Text.Encoding.UTF8.GetString(b))
+let buildWriter bw = new GenericBinaryWriter(bw, fun s -> System.Text.Encoding.UTF8.GetBytes(s))
 
 (*
 module Seq =
@@ -104,13 +108,13 @@ type SerializerMode =
     | Reading
     | Writing of bool // true if annotations are being written
 
-let readValue f name defValue =
-    let mutable temp = defValue
-    f name (fun () -> defValue) (fun v -> temp <- v)
-    temp
-
-let writeValue f name value = f name (fun () -> value) ignore
-
+//let readValue f name defValue =
+//    let mutable temp = defValue
+//    f name (fun () -> defValue) (fun v -> temp <- v)
+//    temp
+//
+// let writeValue f name value = f name (fun () -> value) ignore
+(*
 type ISerializer =
     abstract member Mode         : SerializerMode with get
     abstract member Offset       : int64 with get // For recording offsets to be overwritten later
@@ -449,3 +453,4 @@ type GenericBinaryReader(br : System.IO.BinaryReader) =
             offset <- offset + (int64 length)
 
         member x.Meta name serializer deserializer = deserializer x
+*)

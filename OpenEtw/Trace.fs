@@ -1,5 +1,6 @@
 ﻿namespace OpenEtw
 open System
+open SerdesNet
 
 [<Flags>]
 type LogFileMode =
@@ -169,94 +170,91 @@ type EtlTrace() =
 
     member x.Clone() = x.MemberwiseClone() :?> EtlTrace
 
-    member private x.Common (w:Util.ISerializer) =
+    member private x.Common (s : ISerializer) =
         let systemHeaderSize = 0x4c
-        let startOffset = w.Offset
+        let startOffset = s.Offset
 
-        w.Int16 "unk00s" x.get_unk00s x.set_unk00s // 0
-        w.Int16 "unk02s" x.get_unk02s x.set_unk02s // 2
-        w.Int32 "unk04i" x.get_unk04i x.set_unk04i // 4
-        w.Int32 "unk08i" x.get_unk08i x.set_unk08i // 8
-        w.Int32 "unk0ci" x.get_unk0ci x.set_unk0ci // c
-        w.Int64 "unk10l" x.get_unk10l x.set_unk10l // 10
-        w.Int64 "unk18l" x.get_unk18l x.set_unk18l // 18
-        w.Int64 "unk20l" x.get_unk20l x.set_unk20l // 20
-        w.Int32 "memoryBufferSize" x.get_memoryBufferSize x.set_memoryBufferSize // 28
+        x.unk00s <- s.Int16("unk00s", x.unk00s) // 0
+        x.unk02s <- s.Int16("unk02s", x.unk02s) // 2
+        x.unk04i <- s.Int32("unk04i", x.unk04i) // 4
+        x.unk08i <- s.Int32("unk08i", x.unk08i) // 8
+        x.unk0ci <- s.Int32("unk0ci", x.unk0ci) // c
+        x.unk10l <- s.Int64("unk10l", x.unk10l) // 10
+        x.unk18l <- s.Int64("unk18l", x.unk18l) // 18
+        x.unk20l <- s.Int64("unk20l", x.unk20l) // 20
+        x.memoryBufferSize <- s.Int32("memoryBufferSize", x.memoryBufferSize) // 28
 
-        let eventBuffersOffset = w.Offset // Save the offset so we can overwrite it once we know how many buffers were written
-        let eventBuffers = Util.readValue w.Int32 "eventBuffers" 0            // 2c
+        let eventBuffersOffset = s.Offset // Save the offset so we can overwrite it once we know how many buffers were written
+        let eventBuffers = s.Int32("eventBuffers", 0) // 2c
 
-        w.Int32 "unk30i" x.get_unk30i x.set_unk30i                            // 30
-        w.Int16 "unk34s" x.get_unk34s x.set_unk34s                            // 34
-        w.Int16 "logicalCpuCount" x.get_logicalCpuCount x.set_logicalCpuCount // 36
-        w.Int64 "unk38l" x.get_unk38l x.set_unk38l                            // 38
-        w.Int64 "unk40l" x.get_unk40l x.set_unk40l                            // 40
+        x.unk30i <- s.Int32("unk30i", x.unk30i)                            // 30
+        x.unk34s <- s.Int16("unk34s", x.unk34s)                            // 34
+        x.logicalCpuCount <- s.Int16("logicalCpuCount", x.logicalCpuCount) // 36
+        x.unk38l <- s.Int64("unk38l", x.unk38l)                            // 38
+        x.unk40l <- s.Int64("unk40l", x.unk40l)                            // 40
 
         // <SYSTEM_TRACE_HEADER>
-        w.Int16 "etlVersion" x.get_etlVersion x.set_etlVersion // 48
-        w.EnumU8 "headerType" x.get_headerType (HeaderType.fromUInt8 >> x.set_headerType) HeaderType.info // 4a
-        w.UInt8 "flags" x.get_flags x.set_flags // 4b
+        x.etlVersion <- s.Int16("etlVersion", x.etlVersion) // 48
+        x.headerType <- s.EnumU8("headerType", x.headerType) // 4a
+        x.flags <- s.UInt8("flags", x.flags) // 4b
 
-        let mutable headerSize = 0
-        w.Int32 "eventDataHeaderSize" // 4c
-            (fun () -> 
-                let sessionNameLength = x.sessionName.Length
-                let fileNameLength    = x.fileName.Length
-                headerSize <- 0x13c + sessionNameLength + fileNameLength
-                headerSize)
-            (fun v -> headerSize <- v) // TODO: Assert this after reading the header
+        let sessionNameLength = x.sessionName.Length
+        let fileNameLength    = x.fileName.Length
+        let headerSize = s.Int32("eventDataHeaderSize", 0x13c + sessionNameLength + fileNameLength) // 4c
 
-        w.UInt32 "threadId"     x.get_threadId     x.set_threadId     // 50
-        w.UInt32 "processId"    x.get_processId    x.set_processId    // 54
-        w.Int64  "userSpacePtr" x.get_userSpacePtr x.set_userSpacePtr // 58
-        w.Int32  "kernelTime"   x.get_kernelTime   x.set_kernelTime   // 60
-        w.Int32  "userTime"     x.get_userTime     x.set_userTime     // 64
+        x.threadId     <- s.UInt32("threadId",     x.threadId)     // 50
+        x.processId    <- s.UInt32("processId",    x.processId)    // 54
+        x.userSpacePtr <- s.Int64 ("userSpacePtr", x.userSpacePtr) // 58
+        x.kernelTime   <- s.Int32 ("kernelTime",   x.kernelTime)   // 60
+        x.userTime     <- s.Int32 ("userTime",     x.userTime)     // 64
 
         // </SYSTEM_TRACE_HEADER>
         // <_TRACE_LOGFILE_HEADER> https://msdn.microsoft.com/en-us/library/windows/desktop/aa364145(v=vs.85).aspx
         // Also KernelTraceEventParser.mof -> Event Trace Event (type 0)
-        w.Int32 "bufferSize" x.get_bufferSize x.set_bufferSize                    // 68
-        w.Int32 "version" x.get_version x.set_version // major.minor.sub.subminor // 6c
-        w.Int32 "providerVersion" x.get_providerVersion x.set_providerVersion     // 70
-        w.Int32 "physicalCpuCount" x.get_physicalCpuCount x.set_physicalCpuCount  // 74
+        x.bufferSize <- s.Int32("bufferSize", x.bufferSize)                    // 68
+        x.version <- s.Int32("version", x.version) // major.minor.sub.subminor // 6c
+        x.providerVersion <- s.Int32("providerVersion", x.providerVersion)     // 70
+        x.physicalCpuCount <- s.Int32("physicalCpuCount", x.physicalCpuCount)  // 74
 
-        w.Int64 "endTime" // 78
-            (fun () -> match x.endTime with
-                       | Some time -> (Util.toEtlAbsoluteTicks time)
-                       | None -> 0L)
-            (fun v -> x.endTime <- match v with
-                                   | 0L -> None
-                                   | x -> Some (Util.fromEtlAbsoluteTicks x))
+        x.endTime <-  // 78
+            match s.Int64("endTime",
+                          match x.endTime with
+                          | Some time -> (Util.toEtlAbsoluteTicks time)
+                          | None -> 0L) with
+            | 0L -> None
+            | x -> Some (Util.fromEtlAbsoluteTicks x)
 
-        w.Int32 "timerResolution" x.get_timerResolution x.set_timerResolution // 80
-        w.Int32 "maxFileSizeMB" x.get_maxFileSizeMB x.set_maxFileSizeMB       // 84
-        w.EnumU32 "logFileMode" x.get_logFileMode (LogFileMode.fromUInt32 >> x.set_logFileMode) LogFileMode.info // 88
+        x.timerResolution <- s.Int32("timerResolution", x.timerResolution) // 80
+        x.maxFileSizeMB <- s.Int32("maxFileSizeMB", x.maxFileSizeMB)       // 84
+        x.logFileMode <- s.EnumU32("logFileMode", x.logFileMode)  // 88
 
-        let totalBuffersOffset = w.Offset // Save the offset so we can overwrite it once we know how many buffers were written
-        let totalBuffers = Util.readValue w.Int32 "totalBuffers" 0 // 8c
+        let totalBuffersOffset = s.Offset // Save the offset so we can overwrite it once we know how many buffers were written
+        let totalBuffers = s.Int32("totalBuffers", 0) // 8c
 
-        w.Int32 "startBuffers"  x.get_startBuffers  x.set_startBuffers  // 90
-        w.Int32 "pointerSize"   x.get_pointerSize   x.set_pointerSize   // 94
-        w.Int32 "eventsLost"    x.get_eventsLost    x.set_eventsLost    // 98
-        w.Int32 "cpuSpeed"      x.get_cpuSpeed      x.set_cpuSpeed      // 9c
-        w.Int64 "loggerNameId"  x.get_loggerNameId  x.set_loggerNameId  // a0
-        w.Int64 "logFileNameId" x.get_logFileNameId x.set_logFileNameId // a8
-        w.Int32 "unkb0i"        x.get_unkb0i        x.set_unkb0i        // b0 (something timezone related, have seen value of -60 i.e. 0xffffffc4)
+        x.startBuffers  <- s.Int32("startBuffers",  x.startBuffers)  // 90
+        x.pointerSize   <- s.Int32("pointerSize",   x.pointerSize)   // 94
+        x.eventsLost    <- s.Int32("eventsLost",    x.eventsLost)    // 98
+        x.cpuSpeed      <- s.Int32("cpuSpeed",      x.cpuSpeed)      // 9c
+        x.loggerNameId  <- s.Int64("loggerNameId",  x.loggerNameId)  // a0
+        x.logFileNameId <- s.Int64("logFileNameId", x.logFileNameId) // a8
+        x.unkb0i        <- s.Int32("unkb0i",        x.unkb0i)        // b0 (something timezone related, have seen value of -60 i.e. 0xffffffc4)
+
+        let serdesTime name (serializer:ISerializer) v = Util.fromEtlAbsoluteTicks <| serializer.Int64(name, (v |> Util.toEtlAbsoluteTicks))
 
         // TIME_ZONE_INFORMATION
-        w.FixedLengthString "timezone1" x.get_timezone1 x.set_timezone1 EtlTrace.timeZoneLength // b4
-        w.FixedLengthString "timezone2" x.get_timezone2 x.set_timezone2 EtlTrace.timeZoneLength // 108
-        w.RepeatU8 "padding" 0uy 4 // 15c
-        w.Int64 "bootTime" (x.get_bootTime >> Util.toEtlAbsoluteTicks) (Util.fromEtlAbsoluteTicks >> x.set_bootTime)    // 160
-        w.UInt64 "perfCounterFreq" x.get_perfCounterFreq x.set_perfCounterFreq                                          // 168
-        w.Int64 "startTime" (x.get_startTime >> Util.toEtlAbsoluteTicks) (Util.fromEtlAbsoluteTicks >> x.set_startTime) // 170
-        w.UInt32 "reservedFlags"             x.get_reservedFlags x.set_reservedFlags                                    // 178
-        w.UInt32 "buffersLost"               x.get_buffersLost   x.set_buffersLost                                      // 17c
-        w.NullTerminatedString "sessionName" x.get_sessionName   x.set_sessionName                                      // 180
-        w.NullTerminatedString "fileName"    x.get_fileName      x.set_fileName                                         // ??
+        x.timezone1 <- s.FixedLengthString("timezone1", x.timezone1, EtlTrace.timeZoneLength) // b4
+        x.timezone2 <- s.FixedLengthString("timezone2", x.timezone2, EtlTrace.timeZoneLength) // 108
+        s.RepeatU8("padding", 0uy, 4) // 15c
+        x.bootTime        <- serdesTime "bootTime" s x.bootTime                   // 160
+        x.perfCounterFreq <- s.UInt64("perfCounterFreq", x.perfCounterFreq)       // 168
+        x.startTime       <- serdesTime "startTime" s x.startTime                 // 170
+        x.reservedFlags   <- s.UInt32("reservedFlags",             x.reservedFlags) // 178
+        x.buffersLost     <- s.UInt32("buffersLost",               x.buffersLost)   // 17c
+        x.sessionName     <- s.NullTerminatedString("sessionName", x.sessionName)   // 180
+        x.fileName        <- s.NullTerminatedString("fileName",    x.fileName)      // ??
         // </_TRACE_LOGFILE_HEADER>
 
-        let headerLength = int (w.Offset - startOffset)
+        let headerLength = int (s.Offset - startOffset)
         let paddingBytes = x.bufferSize - headerLength // (EtlTrace.headerSize + sessionNameBytes.Length + fileNameBytes.Length + 4) // 4 = 2*null terminators
 
         match paddingBytes with
@@ -264,39 +262,48 @@ type EtlTrace() =
         | x when x > 0 ->
             let alignmentBytes = x % 8
             if (alignmentBytes > 0) then
-                w.RepeatU8 "alignment" 0uy alignmentBytes
+                s.RepeatU8("alignment", 0uy, alignmentBytes)
 
-            w.RepeatU8 "padding" 0xFFuy ((x/8)*8)
+            s.RepeatU8("padding", 0xFFuy, ((x/8)*8))
         | _ -> ()
 
-        w.Meta "buffers"
-            (fun w ->
-                let mutable numBuffers = 0
-                x.buffers |> Seq.iteri (fun i b ->
-                    w.NewLine()
-                    w.Comment (sprintf "Buffer %d" i)
-                    b.Serialize w
-                    numBuffers <- numBuffers + 1
-                )
+        let meta (s:ISerializer) name reader writer = 
+            s.Object(
+                name,
+                (fun s1 ->
+                    if s1.IsReading() 
+                    then reader s1 
+                    else writer s1
+                ))
 
-                w.Seek eventBuffersOffset
-                Util.writeValue w.Int32 "eventBuffers" numBuffers
-
-                w.Seek totalBuffersOffset
-                Util.writeValue  w.Int32 "totalBuffers" (numBuffers + 1)
-            )
-            
-            (fun w ->
-                let startOffset = w.Offset
+        meta s "buffers"
+            (fun s -> // Read
+                let startOffset = s.Offset
                 let buffers = seq {
-                    w.Seek startOffset
+                    s.Seek startOffset
                     for i in [1..totalBuffers-1] do
-                        yield EtlBuffer.Deserialize w
+                        yield EtlBuffer.Deserialize s
                 }
                 x.buffers <- buffers)
 
-    member x.Serialize (w:Util.ISerializer) = x.Common w
-    static member Deserialize (w:Util.ISerializer) =
+            (fun s -> // Write
+                let mutable numBuffers = 0
+                x.buffers |> Seq.iteri (fun i b ->
+                    s.NewLine()
+                    s.Comment (sprintf "Buffer %d" i)
+                    b.Serialize s
+                    numBuffers <- numBuffers + 1
+                )
+
+                s.Seek eventBuffersOffset
+                s.Int32("eventBuffers", numBuffers) |> ignore
+
+                s.Seek totalBuffersOffset
+                s.Int32("totalBuffers", (numBuffers + 1)) |> ignore
+            )
+
+    member x.Serialize (s : ISerializer) = x.Common s
+    static member Deserialize (s : ISerializer) =
         let x = EtlTrace()
-        x.Common w
+        x.Common s
         x

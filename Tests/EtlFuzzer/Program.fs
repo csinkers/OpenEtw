@@ -105,7 +105,7 @@ let main argv =
         (
             use fs = File.OpenWrite(outputEtl)
             use bw = new BinaryWriter(fs)
-            let gw = new Util.GenericBinaryWriter(bw)
+            use gw = Util.buildWriter bw
             t.Serialize gw
         )
 

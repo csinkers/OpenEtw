@@ -171,6 +171,7 @@ $(ProjectDir)..\..\build\EtwGen\bin\$(Configuration)\net5.0\EtwGen.exe -cpp_sd "
   <ItemGroup>
     <ClInclude Include="DemoProvider.h" />
     <ClInclude Include="MinimalProvider.h" />
+    <ClInclude Include="ShortcutsEtl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

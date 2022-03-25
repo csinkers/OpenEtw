@@ -4,6 +4,7 @@ open System.IO
 open System.Diagnostics
 open FSharp.Data
 open FsUnit
+open SerdesNet
 open Xunit
 open OpenEtw
 
@@ -12,19 +13,38 @@ let providerGuid = System.Guid.Parse("e6467579-e015-4d5a-be75-ddaac9c1a96e")
 
 let writeEtl (trace : EtlTrace) (stream : Stream) =
     use binaryWriter = new BinaryWriter(stream)
-    let writer = Util.GenericBinaryWriter(binaryWriter)
-    trace.Serialize writer
+    use writer = Util.buildWriter binaryWriter
+
+    use ms = new MemoryStream()
+    use tw = new StreamWriter(ms)
+    use annotated = new AnnotationProxySerializer(writer, tw, fun s -> System.Text.Encoding.UTF8.GetBytes(s))
+    trace.Serialize annotated
+
+    tw.Flush()
+    ms.Position <- 0L
+    use tr = new StreamReader(ms)
+    tr.ReadToEnd()
 
 let readEtl (stream : Stream) =
     use binaryReader = new BinaryReader(stream)
-    let reader = Util.GenericBinaryReader(binaryReader)
-    EtlTrace.Deserialize reader
+    use reader = Util.buildReader binaryReader
+
+    use ms = new MemoryStream()
+    use tw = new StreamWriter(ms)
+    use annotated = new AnnotationProxySerializer(reader, tw, fun s -> System.Text.Encoding.UTF8.GetBytes(s))
+    let trace = EtlTrace.Deserialize annotated
+
+    tw.Flush()
+    ms.Position <- 0L
+    use tr = new StreamReader(ms)
+    (trace, tr.ReadToEnd())
 
 let roundTripTrace (trace : EtlTrace) =
     use ms = new MemoryStream()
-    writeEtl trace ms
+    let writeNotes = writeEtl trace ms
     ms.Seek(0L, SeekOrigin.Begin) |> ignore
-    readEtl ms
+    let (trace, readNotes) = readEtl ms
+    (trace, writeNotes, readNotes)
 
 type ExeResult =
     | NormalExit of int
@@ -65,16 +85,19 @@ let generateTraceReport filename =
 
 let saveAndGenerateTraceReport trace =
     let etlFilename = Path.GetTempFileName()
-    (
+    let writeToFile() =
         use stream = File.Open(etlFilename, FileMode.Create)
         writeEtl trace stream
-    )
+
+    let writeNotes = writeToFile()
     let report = generateTraceReport etlFilename
     File.Delete etlFilename
-    report
+    (report, writeNotes)
 
 //[<FsCheck.Property>]
-let ``ETW data can be roundtripped through an ETL file`` (trace : EtlTrace) = trace = roundTripTrace trace
+let ``ETW data can be roundtripped through an ETL file`` (trace : EtlTrace) = 
+    let (result, writeNotes, readNotes) = roundTripTrace trace
+    trace = result
     
 //[<FsCheck.Property>]
 let ``ETL files can be parsed by tracerpt`` = ()
@@ -124,13 +147,13 @@ type TraceReportTests() =
         let eventDefinition = (providerGuid, 6us, EventLevel.Informational, 4us, 19uy, 0x8UL)
         let event = buildEvent false eventDefinition time
         let trace = buildTrace false (time.AddHours(-1.0)) time [Event event]
-        let traceReport = saveAndGenerateTraceReport trace
+        let (traceReport, writeNotes) = saveAndGenerateTraceReport trace
 
         traceReport.Events |> should haveLength 2
         let s = traceReport.Events.[1].System
         s.Provider.Guid.Value |> should equal providerGuid
         s.EventId |> should equal 6
-        s.Level |> should equal (EventLevel.Informational |> EventLevel.info |> fst)
+        s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
         s.Task |> should equal 4
         s.Opcode |> should equal 19
         s.Keywords |> should equal "0x8"
@@ -141,13 +164,13 @@ type TraceReportTests() =
         let eventDefinition = (providerGuid, 6us, EventLevel.Informational, 4us, 19uy, 0x8UL)
         let event = buildEvent true eventDefinition time
         let trace = buildTrace true (time.AddHours(-1.0)) time [Event event]
-        let traceReport = saveAndGenerateTraceReport trace
+        let (traceReport, writeNotes) = saveAndGenerateTraceReport trace
 
         traceReport.Events |> should haveLength 2
         let s = traceReport.Events.[1].System
         s.Provider.Guid.Value |> should equal providerGuid
         s.EventId |> should equal 6
-        s.Level |> should equal (EventLevel.Informational |> EventLevel.info |> fst)
+        s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
         s.Task |> should equal 4
         s.Opcode |> should equal 19
         s.Keywords |> should equal "0x8"
@@ -161,14 +184,14 @@ type TraceReportTests() =
         event.timestamp <- Util.toEtlAbsoluteTicks time
         event.payload <- [||]
         let trace = buildTrace false (time.AddHours(-1.0)) time [System event]
-        let traceReport = saveAndGenerateTraceReport trace
+        let (traceReport, writeNotes) = saveAndGenerateTraceReport trace
         printf "TraceReport: %A" traceReport
 
         traceReport.Events |> should haveLength 2
         let s = traceReport.Events.[1].System
         s.Provider.Guid.Value |> should equal providerGuid
         s.EventId |> should equal 6
-        s.Level |> should equal (EventLevel.Informational |> EventLevel.info |> fst)
+        s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
         s.Task |> should equal 4
         s.Opcode |> should equal 19
         s.Keywords |> should equal "0x8"
@@ -182,14 +205,14 @@ type TraceReportTests() =
         event.timestamp <- Util.toEtlAbsoluteTicks time
         event.payload <- [||]
         let trace = buildTrace true (time.AddHours(-1.0)) time [System event]
-        let traceReport = saveAndGenerateTraceReport trace
+        let (traceReport, writeNotes) = saveAndGenerateTraceReport trace
         printf "TraceReport: %A" traceReport
 
         traceReport.Events |> should haveLength 2
         let s = traceReport.Events.[1].System
         s.Provider.Guid.Value |> should equal providerGuid
         s.EventId |> should equal 6
-        s.Level |> should equal (EventLevel.Informational |> EventLevel.info |> fst)
+        s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
         s.Task |> should equal 4
         s.Opcode |> should equal 19
         s.Keywords |> should equal "0x8"
@@ -203,13 +226,13 @@ type TraceReportTests() =
         event.timestamp <- Util.toEtlAbsoluteTicks time
         event.payload <- [||]
         let trace = buildTrace false (time.AddHours(-1.0)) time [System event]
-        let traceReport = saveAndGenerateTraceReport trace
+        let (traceReport, writeNotes) = saveAndGenerateTraceReport trace
         printf "TraceReport: %A" traceReport
 
         traceReport.Events |> should haveLength 2
         let s = traceReport.Events.[1].System
         s.EventId |> should equal 6
-        s.Level |> should equal (EventLevel.Informational |> EventLevel.info |> fst)
+        s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
         s.Task |> should equal 4
         s.Opcode |> should equal 19
         s.Keywords |> should equal "0x8"
@@ -223,14 +246,14 @@ type TraceReportTests() =
         event.timestamp <- Util.toEtlAbsoluteTicks time
         event.payload <- [||]
         let trace = buildTrace true (time.AddHours(-1.0)) time [System event]
-        let traceReport = saveAndGenerateTraceReport trace
+        let (traceReport, writeNotes) = saveAndGenerateTraceReport trace
         printf "TraceReport: %A" traceReport
 
         traceReport.Events |> should haveLength 2
         let s = traceReport.Events.[1].System
         s.Provider.Guid.Value |> should equal providerGuid
         s.EventId |> should equal 6
-        s.Level |> should equal (EventLevel.Informational |> EventLevel.info |> fst)
+        s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
         s.Task |> should equal 4
         s.Opcode |> should equal 19
         s.Keywords |> should equal "0x8"
@@ -244,14 +267,14 @@ type TraceReportTests() =
         event.timestamp <- Util.toEtlAbsoluteTicks time
         event.payload <- [||]
         let trace = buildTrace false (time.AddHours(-1.0)) time [System event]
-        let traceReport = saveAndGenerateTraceReport trace
+        let (traceReport, writeNotes) = saveAndGenerateTraceReport trace
         printf "TraceReport: %A" traceReport
 
         traceReport.Events |> should haveLength 2
         let s = traceReport.Events.[1].System
         s.Provider.Guid.Value |> should equal providerGuid
         s.EventId |> should equal 6
-        s.Level |> should equal (EventLevel.Informational |> EventLevel.info |> fst)
+        s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
         s.Task |> should equal 4
         s.Opcode |> should equal 19
         s.Keywords |> should equal "0x8"
@@ -265,14 +288,14 @@ type TraceReportTests() =
         event.timestamp <- Util.toEtlAbsoluteTicks time
         event.payload <- [||]
         let trace = buildTrace true (time.AddHours(-1.0)) time [System event]
-        let traceReport = saveAndGenerateTraceReport trace
+        let (traceReport, writeNotes) = saveAndGenerateTraceReport trace
         printf "TraceReport: %A" traceReport
 
         traceReport.Events |> should haveLength 2
         let s = traceReport.Events.[1].System
         s.Provider.Guid.Value |> should equal providerGuid
         s.EventId |> should equal 6
-        s.Level |> should equal (EventLevel.Informational |> EventLevel.info |> fst)
+        s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
         s.Task |> should equal 4
         s.Opcode |> should equal 19
         s.Keywords |> should equal "0x8"
@@ -289,14 +312,14 @@ type TraceReportTests() =
         event.timestamp <- Util.toEtlAbsoluteTicks time
         event.payload <- [||]
         let trace = buildTrace false (time.AddHours(-1.0)) time [InstanceGuid event]
-        let traceReport = saveAndGenerateTraceReport trace
+        let (traceReport, writeNotes) = saveAndGenerateTraceReport trace
         printf "TraceReport: %A" traceReport
 
         traceReport.Events |> should haveLength 2
         let s = traceReport.Events.[1].System
         s.Provider.Guid.Value |> should equal providerGuid
         s.EventId |> should equal 6
-        s.Level |> should equal (EventLevel.Informational |> EventLevel.info |> fst)
+        s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
         s.Task |> should equal 4
         s.Opcode |> should equal 19
         s.Keywords |> should equal "0x8"
@@ -313,14 +336,14 @@ type TraceReportTests() =
         event.timestamp <- Util.toEtlAbsoluteTicks time
         event.payload <- [||]
         let trace = buildTrace true (time.AddHours(-1.0)) time [InstanceGuid event]
-        let traceReport = saveAndGenerateTraceReport trace
+        let (traceReport, writeNotes) = saveAndGenerateTraceReport trace
         printf "TraceReport: %A" traceReport
 
         traceReport.Events |> should haveLength 2
         let s = traceReport.Events.[1].System
         s.Provider.Guid.Value |> should equal providerGuid
         s.EventId |> should equal 6
-        s.Level |> should equal (EventLevel.Informational |> EventLevel.info |> fst)
+        s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
         s.Task |> should equal 4
         s.Opcode |> should equal 19
         s.Keywords |> should equal "0x8"
@@ -342,14 +365,14 @@ type TraceReportTests() =
         }
 
         let trace = buildTrace false (time.AddHours(-1.0)) time allEvents
-        let traceReport = saveAndGenerateTraceReport trace
+        let (traceReport, writeNotes) = saveAndGenerateTraceReport trace
         printf "TraceReport: %A" traceReport
 
         traceReport.Events |> should haveLength 101
         let s = traceReport.Events.[1].System
         s.Provider.Guid.Value |> should equal providerGuid
         s.EventId |> should equal 6
-        s.Level |> should equal (EventLevel.Informational |> EventLevel.info |> fst)
+        s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
         s.Task |> should equal 4
         s.Opcode |> should equal 19
         s.Keywords |> should equal "0x8"
