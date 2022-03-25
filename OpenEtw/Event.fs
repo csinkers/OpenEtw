@@ -1,5 +1,6 @@
 ﻿namespace OpenEtw
 open System
+open SerdesNet
 
 [<Measure>] type AbsoluteEtwTicks
 [<Measure>] type EtwTicksAfterBoot
@@ -19,58 +20,58 @@ type ExtendedData =
     | ProvTraits        of byte array
     | ProcessStartKey   of byte array
 
-    static member Deserialize (w:Util.ISerializer) =
-        let fullSize  = Util.readValue w.UInt16 "fullSize"  0us
-        let dataType  = Util.readValue w.UInt16 "dataType"  0us
-        let reserved2 = Util.readValue w.UInt16 "reserved2" 0us // Does this indicate if there's another extended data item following this one?
-        let size = int (Util.readValue w.UInt16 "size"      0us)
+    static member Deserialize (s : ISerializer) =
+        let fullSize  = s.UInt16("fullSize",  0us)
+        let dataType  = s.UInt16("dataType",  0us)
+        let reserved2 = s.UInt16("reserved2", 0us) // Does this indicate if there's another extended data item following this one?
+        let size = int (s.UInt16("size",      0us))
 
         if (int fullSize <> size + 8) then 
             failwith "Reserved1 was expected to be size + 8 when decoding extended event data"
 
-        let mutable value = RelatedActivityId [||]
-        let blank = (fun () -> [||])
-        let setter x = (fun v -> value <- x v)
-        let arrayField typeConstructor = w.ByteArray "" (fun () -> [||]) (fun v -> value <- typeConstructor v) size
+        let arrayField (typeConstructor : byte array -> 'a) =
+            let bytes = s.Bytes("", [||], size)
+            typeConstructor bytes
 
-        match dataType with
-        | 0x1us -> arrayField RelatedActivityId
-        | 0x2us -> arrayField Sid
-        | 0x3us -> arrayField TsId
-        | 0x4us -> arrayField InstanceInfo
-        | 0x5us -> 
-            let matchId = Util.readValue w.UInt64 "matchId" 0UL
-            let addresses = 
-                List.ofSeq <| seq { 
-                    for _ in [8..4..size-1] do 
-                        yield (Util.readValue w.UInt32 "address" 0u) 
-                }
-            value <- StackTrace32 (matchId, addresses)
+        let value =
+            match dataType with
+            | 0x1us -> arrayField RelatedActivityId
+            | 0x2us -> arrayField Sid
+            | 0x3us -> arrayField TsId
+            | 0x4us -> arrayField InstanceInfo
+            | 0x5us -> 
+                let matchId = s.UInt64("matchId", 0UL)
+                let addresses = 
+                    List.ofSeq <| seq { 
+                        for _ in [8..4..size-1] do 
+                            yield (s.UInt32("address", 0u))
+                    }
+                StackTrace32 (matchId, addresses)
 
-        | 0x6us -> 
-            let matchId = Util.readValue w.UInt64 "matchId" 0UL
-            let addresses = 
-                List.ofSeq <| seq { 
-                    for _ in [8..8..size-1] do 
-                        yield (Util.readValue w.UInt64 "address" 0UL) 
-                }
-            value <- StackTrace64 (matchId, addresses)
+            | 0x6us -> 
+                let matchId = s.UInt64("matchId", 0UL)
+                let addresses = 
+                    List.ofSeq <| seq { 
+                        for _ in [8..8..size-1] do 
+                            yield (s.UInt64("address", 0UL))
+                    }
+                StackTrace64 (matchId, addresses)
 
-        | 0x7us -> arrayField PebsIndex
-        | 0x8us -> arrayField PmcCounter
-        | 0x9us -> arrayField PsmKey
-        | 0xaus -> arrayField EventKey
-        | 0xbus -> arrayField EventSchemaTl
-        | 0xcus -> arrayField ProvTraits
-        | 0xdus -> arrayField ProcessStartKey
-        | _ -> failwith "Unknown extended data type encountered"
+            | 0x7us -> arrayField PebsIndex
+            | 0x8us -> arrayField PmcCounter
+            | 0x9us -> arrayField PsmKey
+            | 0xaus -> arrayField EventKey
+            | 0xbus -> arrayField EventSchemaTl
+            | 0xcus -> arrayField ProvTraits
+            | 0xdus -> arrayField ProcessStartKey
+            | _ -> failwith "Unknown extended data type encountered"
 
         if(size % 8 <> 0) then
-            w.RepeatU8 "" 0uy (Util.paddingBytes size)
+            s.RepeatU8("", 0uy, (Util.paddingBytes size))
 
         [value] // TODO: Multiple extended data items
 
-    member x.Serialize (w:Util.ISerializer) =
+    member x.Serialize (s : ISerializer) =
         let constant x = (fun () -> x)
 
         let enumValue, name, size =
@@ -91,13 +92,13 @@ type ExtendedData =
 
         if(size > (int System.UInt16.MaxValue) || size < 8) then failwith "Invalid extended data size"
 
-        w.Comment name
-        Util.writeValue w.UInt16 "reserved1" (uint16 size + 8us)
-        Util.writeValue w.UInt16 "type"      enumValue
-        Util.writeValue w.UInt16 "size"      (uint16 size)
-        Util.writeValue w.UInt16 "reserved2" 0us
+        s.Comment name
+        s.UInt16("reserved1", (uint16 size + 8us)) |> ignore
+        s.UInt16("type",      enumValue) |> ignore
+        s.UInt16("size",      (uint16 size)) |> ignore
+        s.UInt16("reserved2", 0us) |> ignore
 
-        let arrayField payload = w.ByteArray "" (fun () -> payload) ignore size
+        let arrayField payload = s.Bytes("", payload, size) |> ignore
 
         match x with
         | RelatedActivityId p -> arrayField p
@@ -105,11 +106,11 @@ type ExtendedData =
         | TsId p              -> arrayField p
         | InstanceInfo p      -> arrayField p
         | StackTrace32 (batchId, addresses) ->
-            Util.writeValue w.UInt64 "batchId" batchId
-            for address in addresses do Util.writeValue w.UInt32 "address" address
+            s.UInt64("batchId", batchId) |> ignore
+            for address in addresses do s.UInt32("address", address) |> ignore
         | StackTrace64 (batchId, addresses) ->
-            Util.writeValue w.UInt64 "batchId" batchId
-            for address in addresses do Util.writeValue w.UInt64 "address" address
+            s.UInt64("batchId", batchId) |> ignore
+            for address in addresses do s.UInt64("address", address) |> ignore
         | PebsIndex p         -> arrayField p
         | PmcCounter p        -> arrayField p
         | PsmKey p            -> arrayField p
@@ -120,7 +121,7 @@ type ExtendedData =
 
         let paddingBytes = Util.paddingBytes size
         if (paddingBytes > 0) then
-            w.RepeatU8 "padding" 0uy paddingBytes
+            s.RepeatU8("padding", 0uy, paddingBytes)
 
 [<Flags>]
 type EventFlag =
@@ -174,26 +175,48 @@ type EventLevel =
     | Verbose
     | Custom of byte * string
 
+type EventLevelConverter() =
+    interface IConverter<byte, EventLevel> with
+        member x.FromNumeric v =
+            match v with
+            | 1uy -> Critical      
+            | 2uy -> Error         
+            | 3uy -> Warning       
+            | 4uy -> Informational 
+            | 5uy -> Verbose       
+            | n   -> Custom (n, "Unknown")
+
+        member x.ToNumeric v =
+            match v with
+            | Always        -> 0uy
+            | Critical      -> 1uy
+            | Error         -> 2uy
+            | Warning       -> 3uy
+            | Informational -> 4uy
+            | Verbose       -> 5uy
+            | Custom (n, _) -> n
+
+        member x.FromSymbolic name = Custom (0xffuy, name)  
+        member x.ToSymbolic v = 
+            match v with
+            | Always        -> "Always"
+            | Critical      -> "Critical"
+            | Error         -> "Error"
+            | Warning       -> "Warning"
+            | Informational -> "Informational"
+            | Verbose       -> "Verbose"
+            | Custom (_, s) -> s
+
 [<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
 module EventLevel =
-    let info = 
-        function
-        | Always        -> 0uy, "Always"
-        | Critical      -> 1uy, "Critical"
-        | Error         -> 2uy, "Error"
-        | Warning       -> 3uy, "Warning"
-        | Informational -> 4uy, "Informational"
-        | Verbose       -> 5uy, "Verbose"
-        | Custom (n, s) -> n, s
-
-    let fromUInt8 = 
-        function
-        | 1uy -> Critical      
-        | 2uy -> Error         
-        | 3uy -> Warning       
-        | 4uy -> Informational 
-        | 5uy -> Verbose       
-        | n   -> Custom (n, "Unknown")
+    let converter = EventLevelConverter() :> IConverter<byte, EventLevel>
+    let toInt v = converter.ToNumeric v |> int
+    let serdes name value (s : ISerializer) = 
+        s.Transform(
+            name,
+            value,
+            (fun n1 v1 (s1 : ISerializer) -> s1.UInt8(n1, v1)),
+            converter)
 
 [<Flags>]
 type EventProperty =
@@ -261,63 +284,71 @@ type EtlEvent() =
     member x.Size with get() = x.HeaderSize + x.payload.Length // TODO: Add in extended data size
     member x.Clone() = x.MemberwiseClone() :?> EtlEvent
 
-    member private x.Common (w:Util.ISerializer) size =
-        let startOffset = w.Offset - 4L
+    member private x.Common (s : ISerializer) size =
+        let startOffset = s.Offset - 4L
         let endOffset = startOffset + (int64 size)
 
-        w.EnumU16 "flags"      x.get_flags (EventFlag.fromUInt16 >> x.set_flags) EventFlag.info // 4
-        w.EnumU16 "evtProp"    x.get_eventProperty (EventProperty.fromUInt16 >> x.set_eventProperty) EventProperty.info // 6
-        w.UInt32  "tid"        x.get_threadId   x.set_threadId   // 8
-        w.UInt32  "pid"        x.get_processId  x.set_processId  // c
-        w.Int64   "timestamp"  x.get_timestamp  x.set_timestamp  // 10
-        w.Guid    "provider"   x.get_provider   x.set_provider   // 18
-        w.UInt16  "event"      x.get_eventId    x.set_eventId    // 28
-        w.UInt8   "version"    x.get_version    x.set_version    // 2a
-        w.UInt8   "channel"    x.get_channel    x.set_channel    // 2b
-        w.EnumU8  "level"      x.get_level (EventLevel.fromUInt8 >> x.set_level) EventLevel.info // 2c
-        w.UInt8   "opcode"     x.get_opcode     x.set_opcode     // 2d
-        w.UInt16  "task"       x.get_taskId     x.set_taskId     // 2e
-        w.UInt64  "keywords"   x.get_keywords   x.set_keywords   // 30
-        w.Int32   "kTime"      x.get_kernelTime x.set_kernelTime // 38
-        w.Int32   "uTime"      x.get_userTime   x.set_userTime   // 3c
-        w.Guid    "activityId" x.get_activityId x.set_activityId // 40
+        x.flags         <- s.EnumU16("flags",   x.flags) // 4
+        x.eventProperty <- s.EnumU16("evtProp", x.eventProperty) // 6
+        x.threadId   <- s.UInt32 ("tid",        x.threadId)   // 8
+        x.processId  <- s.UInt32 ("pid",        x.processId)  // c
+        x.timestamp  <- s.Int64  ("timestamp",  x.timestamp)  // 10
+        x.provider   <- s.Guid   ("provider",   x.provider)   // 18
+        x.eventId    <- s.UInt16 ("event",      x.eventId)    // 28
+        x.version    <- s.UInt8  ("version",    x.version)    // 2a
+        x.channel    <- s.UInt8  ("channel",    x.channel)    // 2b
+        x.level      <- EventLevel.serdes "level" x.level s   // 2c
+        x.opcode     <- s.UInt8  ("opcode",     x.opcode)     // 2d
+        x.taskId     <- s.UInt16 ("task",       x.taskId)     // 2e
+        x.keywords   <- s.UInt64 ("keywords",   x.keywords)   // 30
+        x.kernelTime <- s.Int32  ("kTime",      x.kernelTime) // 38
+        x.userTime   <- s.Int32  ("uTime",      x.userTime)   // 3c
+        x.activityId <- s.Guid   ("activityId", x.activityId) // 40
 
-        w.Meta "extendedData"
-            (fun w -> x.extendedData |> Seq.iter (fun d -> d.Serialize w))
-            (fun w ->
-                if ((x.flags &&& EventFlag.ExtendedInfo) <> EventFlag.None) then
-                    x.extendedData <- ExtendedData.Deserialize w) // TODO: Handle multiple
+        let extendedDataSerdes (_:int) (existing:ExtendedData list) (s1 : ISerializer) =
+            let hasExtended = ((x.flags &&& EventFlag.ExtendedInfo) <> EventFlag.None)
+            let result =
+                match (s1.IsReading(), hasExtended) with
+                | true, true -> ExtendedData.Deserialize s1 // TODO: Handle multiple
+                | true, false -> []
+                | false, _ ->
+                    for ed in existing do
+                        ed.Serialize s1
+                    existing
+            result
 
-        let payloadSize = int <| (endOffset - w.Offset)
+        x.extendedData <- s.Object("extendedData", x.extendedData, (fun a b c -> extendedDataSerdes a b c))
+
+        let payloadSize = int <| (endOffset - s.Offset)
         if (payloadSize < 0) then failwith "Negative event payload size"
         if (payloadSize > 0) then 
-            w.ByteArrayHex "payload" x.get_payload x.set_payload payloadSize // 50
+            x.payload <- s.Bytes("payload", x.payload, payloadSize) // 50
 
         let paddingBytes = Util.paddingBytes x.Size
         if (paddingBytes > 0) then
-            w.RepeatU8 "padding" 0uy paddingBytes
+            s.RepeatU8("padding", 0uy, paddingBytes)
 
-    member x.Serialize (w:Util.ISerializer) =
+    member x.Serialize (s : ISerializer) =
         let headerType = if x.is64bit then EtlHeaderType.EventHeader64 else EtlHeaderType.EventHeader64
         if (x.Size > int UInt16.MaxValue) then failwith "Payload too large"
         if (((x.flags &&& EventFlag.ExtendedInfo) = EventFlag.None) <> (x.extendedData.Length = 0)) then
             failwith "The ExtendedInfo event flag must be set if (and only if) there is extended data"
 
-        w.Comment "Event"
-        Util.writeValue w.UInt16 "size" (uint16 x.Size) // 0
-        Util.writeValue w.EnumU16 "headerType" headerType EtlHeaderType.info // 2
-        x.Common w x.Size
+        s.Comment "Event"
+        s.UInt16("size", (uint16 x.Size)) |> ignore // 0
+        s.EnumU16("headerType", headerType) |> ignore // 2
+        x.Common s x.Size
 
-    static member Deserialize (w : Util.ISerializer) size headerType =
+    static member Deserialize (s : ISerializer) size headerType =
         let x = EtlEvent()
 
         x.is64bit <- 
             match headerType with 
             | EtlHeaderType.EventHeader32 -> false
             | EtlHeaderType.EventHeader64 -> true
-            | headerType -> failwithf "Unexpected header type parsing event: %s" (EtlHeaderType.info headerType |> snd)
+            | headerType -> failwithf "Unexpected header type parsing event: %s" (string headerType)
 
-        x.Common w (int size)
+        x.Common s (int size)
         x
 
 type BufferEvent =
@@ -345,17 +376,17 @@ type BufferEvent =
             | InstanceGuid y -> y.timestamp
             | Error          -> failwith "Error"
 
-    member x.Serialize (w : Util.ISerializer) =
+    member x.Serialize (s : ISerializer) =
         match x with
-        | System y       -> y.Serialize w
-        | Event y        -> y.Serialize w
-        | TraceEvent y   -> y.Serialize w
-        | InstanceGuid y -> y.Serialize w
+        | System y       -> y.Serialize s
+        | Event y        -> y.Serialize s
+        | TraceEvent y   -> y.Serialize s
+        | InstanceGuid y -> y.Serialize s
         | Error          -> failwith "Error"
 
-    static member Deserialize (w : Util.ISerializer) =
-        let firstWord = Util.readValue w.UInt16 "size" 0us
-        let headerType = EtlHeaderType.fromUInt16 (Util.readValue w.UInt16 "headerType" 0us)
+    static member Deserialize (s : ISerializer) =
+        let firstWord = s.UInt16("size", 0us)
+        let headerType = s.EnumU16("headerType", EtlHeaderType.Error)
 
         match headerType with
         | EtlHeaderType.System32
@@ -363,16 +394,16 @@ type BufferEvent =
         | EtlHeaderType.Compact32
         | EtlHeaderType.Compact64
         | EtlHeaderType.PerfInfo32
-        | EtlHeaderType.PerfInfo64    -> System (EtlSystemEvent.Deserialize w firstWord headerType)
+        | EtlHeaderType.PerfInfo64    -> System (EtlSystemEvent.Deserialize s firstWord headerType)
 
         | EtlHeaderType.EventHeader32
-        | EtlHeaderType.EventHeader64 -> Event (EtlEvent.Deserialize w firstWord headerType)
+        | EtlHeaderType.EventHeader64 -> Event (EtlEvent.Deserialize s firstWord headerType)
 
         | EtlHeaderType.FullHeader32
-        | EtlHeaderType.FullHeader64  -> TraceEvent (EtlTraceEvent.Deserialize w firstWord headerType)
+        | EtlHeaderType.FullHeader64  -> TraceEvent (EtlTraceEvent.Deserialize s firstWord headerType)
 
         | EtlHeaderType.Instance32
-        | EtlHeaderType.Instance64    -> InstanceGuid (EtlInstanceGuidEvent.Deserialize w firstWord headerType)
+        | EtlHeaderType.Instance64    -> InstanceGuid (EtlInstanceGuidEvent.Deserialize s firstWord headerType)
 
         | EtlHeaderType.Error         -> Error
         | _ -> failwith "Unrecognised header type"

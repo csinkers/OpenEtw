@@ -4,12 +4,18 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <WarnOn>3390;$(WarnOn)</WarnOn>
-    <Version>0.1.0.1</Version>
+    <Version>0.1.1.1</Version>
+    <RunPostBuildEvent>1</RunPostBuildEvent>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\etw.h" Link="etw.h">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Compile Include="Program.fs" />
   </ItemGroup>
+
+  <ItemGroup />
 
   <ItemGroup>
     <PackageReference Include="FParsec" Version="1.1.1" />

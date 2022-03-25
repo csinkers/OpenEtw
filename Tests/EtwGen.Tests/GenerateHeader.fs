@@ -130,8 +130,7 @@ let generateHeader (provider : EtwProvider) (options : HeaderOptions) =
                             yield "opcode", e.opcode.Value
                         if (List.isEmpty e.keywords |> not) then
                             yield "keywords", (e.keywords |> String.concat ", ")
-                        if (e.level.IsSome) then
-                            yield "level", e.level.Value
+                        yield "level", e.level
                     ] |> List.map (fun (name, value) -> sprintf "%s=\"%s\"" name value) |> String.concat ", ")
                     (e.parameters |> List.map formatParam |> String.concat ", ")
 

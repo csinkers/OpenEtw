@@ -9,6 +9,7 @@ type TokenProcessorState =
         activeVersion : uint8
         nextChannelId : uint8
 
+        headers  : string list
         events   : EtwEvent list
         tasks    : EtwTask list
         maps     : EtwMap list
@@ -25,6 +26,7 @@ type TokenProcessorState =
             activeTask    = None
             nextChannelId = 0x10uy
 
+            headers  = []
             events   = []
             tasks    = EtwTask.defaultTasks
             maps     = []
@@ -95,6 +97,7 @@ let processTokens results =
             resourceFilename = providerDeclaration.resourceFilename
             messageFilename  = providerDeclaration.messageFilename
 
+            headers    = List.rev state.headers
             levels     = List.rev state.levels
             opcodes    = List.rev state.opcodes
             keywords   = List.rev state.keywords
@@ -152,6 +155,7 @@ let processTokens results =
                 }
 
             { state with events = newEvent::state.events }
+        | Header header -> {state with headers = header::state.headers}
         | _ -> state
 
     let autogenerateOpcodes (state:TokenProcessorState) =

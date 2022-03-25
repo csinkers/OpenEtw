@@ -1,5 +1,6 @@
 ﻿namespace OpenEtw
 open System
+open SerdesNet
 
 [<Flags>]
 type BufferFlag =
@@ -108,50 +109,50 @@ type EtlBuffer() =
     member val lowPointer     = 0UL with get, set
     member val events         = new System.Collections.Generic.List<BufferEvent>() with get
 
-    member private x.Common (w:Util.ISerializer) =
-        w.Int32 "bufferSize"     x.get_bufferSize     x.set_bufferSize      // 0
-        w.Int32 "savedOffset"    x.get_savedOffset    x.set_savedOffset     // 4
-        w.Int32 "currentOffset"  x.get_currentOffset  x.set_currentOffset   // 8
-        w.Int32 "refCount"       x.get_refCount       x.set_refCount        // c
-        w.Int64 "timestamp"      x.get_timestamp      x.set_timestamp       // 10
-        w.Int64 "sequenceNumber" x.get_sequenceNumber x.set_sequenceNumber  // 18
-        w.Int64 "unk20l"         x.get_unk20l         x.set_unk20l          // 20
-        w.UInt8 "cpuId"          x.get_cpuId          x.set_cpuId           // 28
-        Util.writeValue w.UInt8 "alignment" 0uy                             // 29
-        w.Int16 "loggerId"       x.get_loggerId       x.set_loggerId        // 2a
-        w.EnumU32 "bufferState" x.get_bufferState (BufferState.fromUInt32 >> x.set_bufferState) BufferState.info // 2c
-        w.Int32 "offset" x.get_offset x.set_offset // 30
-        w.EnumU16 "bufferFlag" x.get_bufferFlag (BufferFlag.fromUInt16 >> x.set_bufferFlag) BufferFlag.info  // 34
-        w.EnumU16 "bufferType" x.get_bufferType (BufferType.fromUInt16 >> x.set_bufferType) BufferType.info  // 36
-        w.UInt64 "highPtr" x.get_highPointer x.set_highPointer // 38
-        w.UInt64 "lowPtr"  x.get_lowPointer  x.set_lowPointer  // 40
+    member private x.Common (s : ISerializer) =
+        x.bufferSize     <- s.Int32("bufferSize",     x.bufferSize)     // 0
+        x.savedOffset    <- s.Int32("savedOffset",    x.savedOffset)    // 4
+        x.currentOffset  <- s.Int32("currentOffset",  x.currentOffset)  // 8
+        x.refCount       <- s.Int32("refCount",       x.refCount)       // c
+        x.timestamp      <- s.Int64("timestamp",      x.timestamp)      // 10
+        x.sequenceNumber <- s.Int64("sequenceNumber", x.sequenceNumber) // 18
+        x.unk20l         <- s.Int64("unk20l",         x.unk20l)         // 20
+        x.cpuId          <- s.UInt8("cpuId",          x.cpuId)          // 28
+        s.UInt8("alignment", 0uy) |> ignore                             // 29
+        x.loggerId       <- s.Int16("loggerId",       x.loggerId)       // 2a
+        x.bufferState    <- s.EnumU32("bufferState", x.bufferState)     // 2c
+        x.offset         <- s.Int32("offset", x.offset)                 // 30
+        x.bufferFlag     <- s.EnumU16("bufferFlag", x.bufferFlag)       // 34
+        x.bufferType     <- s.EnumU16("bufferType", x.bufferType)       // 36
+        x.highPointer    <- s.UInt64("highPtr", x.highPointer)          // 38
+        x.lowPointer     <- s.UInt64("lowPtr",  x.lowPointer)           // 40
 
     member x.Clone() = x.MemberwiseClone() :?> EtlBuffer
-    member x.Serialize (w:Util.ISerializer) =
-        x.Common w
-        w.Indent()
+    member x.Serialize (s : ISerializer) =
+        x.Common s
+        s.Begin()
         x.events |> Seq.iteri (fun i e -> // 48
-            w.NewLine()
-            e.Serialize w
+            s.NewLine()
+            e.Serialize s
         )
-        w.Unindent()
+        s.End()
 
         let paddingBytes = x.bufferSize - x.savedOffset
         if (paddingBytes > 0) then
-            w.RepeatU8 "padding" 0xFFuy paddingBytes
+            s.RepeatU8("padding", 0xFFuy, paddingBytes)
 
-    static member Deserialize (w : Util.ISerializer) =
+    static member Deserialize (s : ISerializer) =
         let x = EtlBuffer()
-        let startOffset = w.Offset
-        x.Common w
+        let startOffset = s.Offset
+        x.Common s
         let endOffset = startOffset + (int64 x.savedOffset)
 
-        while(w.Offset < endOffset) do
-            x.events.Add (BufferEvent.Deserialize w)
+        while(s.Offset < endOffset) do
+            x.events.Add (BufferEvent.Deserialize s)
 
         let paddingBytes = x.bufferSize - x.savedOffset
         if (paddingBytes > 0) then
-            w.RepeatU8 "padding" 0xFFuy paddingBytes
+            s.RepeatU8("padding", 0xFFuy, paddingBytes)
         x
 
     static member BuildBuffers bufferSize events = seq {

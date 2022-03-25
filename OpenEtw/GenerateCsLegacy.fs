@@ -101,7 +101,7 @@ namespace %s
                 (e.id.Value)
                 (e.version)
                 ((e.channel |> Option.map getIdForChannel |?? Some 0uy).Value)
-                (e.level    |> Option.map getIdForLevel   |?? 0uy)
+                (e.level    |> getIdForLevel)
                 (e.opcode   |> Option.map getIdForOpcode  |?? 0uy)
                 (e.task     |> Option.map getIdForTask    |?? 0us)
                 (getMaskForKeywords e.keywords)

@@ -1,6 +1,7 @@
 ﻿open System
 open System.IO
 open OpenEtw
+open SerdesNet
 
 let printUsage() =
     printfn """Usage: FilterEtl
@@ -30,7 +31,7 @@ let main argv =
 
     use stream = File.OpenRead(inputFilename)
     use binaryReader = new BinaryReader(stream)
-    let reader = new Util.GenericBinaryReader(binaryReader)
+    use reader = Util.buildReader binaryReader
     let trace = EtlTrace.Deserialize reader
 
     let events = 
@@ -73,7 +74,7 @@ let main argv =
 
     use fs = File.Open(outputFilename, FileMode.Create)
     use binaryWriter = new BinaryWriter(fs)
-    let writer = Util.GenericBinaryWriter(binaryWriter)
+    use writer = Util.buildWriter binaryWriter
     filteredTrace.Serialize writer
 
     0

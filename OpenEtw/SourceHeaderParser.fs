@@ -38,6 +38,7 @@ type SourceFileToken =
     | EventTemplate of EtwEventParam list
     | EventCode of string
     | MapDefinition of EtwMap
+    | Header of string
 
 let (|>>?) p f =
     p >>= 
@@ -148,8 +149,8 @@ let trimPrefix (prefix : string) (str : string) =
     | true -> str.Substring(prefix.Length)
     | false -> str
 
-let pInType = manyChars (noneOf "),") |>> (trimPrefix "EtwInType::" >> EtwType.parse)
-let pOutType = manyChars (noneOf "),") |>> (trimPrefix "EtwOutType::" >> EtwOutType.parse)
+let pInType = manyChars (noneOf "),") |>> (trimPrefix "EtwIn::" >> EtwType.parse)
+let pOutType = manyChars (noneOf "),") |>> (trimPrefix "EtwOut::" >> EtwOutType.parse)
 
 type ParenToken =
     | Parens of (ParenToken list)
@@ -312,6 +313,7 @@ let pTaskBegin =
             } |> TaskBegin)
 
 let pTaskEnd = skipString "ETW_TASK_END" >>% TaskEnd
+let pCHeader = pDirective "ETW_HEADER" [| "name" |] |>> (fun m -> Header (Map.find "name" m))
 
 //let pDeclareType = 
 //    pipe4
@@ -338,6 +340,7 @@ let pEtwDirective =
 //        pDeclareType
         pTaskBegin
         pTaskEnd
+        pCHeader
      ]
 
 let pEtwValueMap = 
@@ -505,7 +508,7 @@ module internal ParseEvent = // Put all the event and parameter subparsers and t
             }
         )
 
-    let pEtwEvent = 
+    let pEtwEvent directive defaultLevel = 
         //let pTemplatePragma =
         //    skipString "ETW_TEMPLATE(" >>. spaces 
         //    >>. sepBy pParameter (skipChar ',' .>> spaces)
@@ -525,7 +528,7 @@ module internal ParseEvent = // Put all the event and parameter subparsers and t
         //     ] .>> spaces
 
         pipe2
-            (pDirective "ETW_EVENT" [| "cppName" |] .>> spaces)
+            (pDirective directive [| "cppName" |] .>> spaces)
             // (many (pPragmaToken .>> spaces))
             (skipChar '(' >>. spaces 
                 >>. sepBy pParameter (skipChar ',' .>> spaces) 
@@ -543,7 +546,7 @@ module internal ParseEvent = // Put all the event and parameter subparsers and t
                     id       = p "id"      |> Option.map System.UInt16.Parse
                     version  = p "version" |> Option.map System.Byte.Parse |?? 0uy
                     task     = None // Filled by post-processing
-                    level    = p "level"
+                    level    = p "level" |?? defaultLevel
                     channel  = p "channel"
                     opcode   = p "opcode"
                     keywords = p "keywords" 
@@ -565,7 +568,12 @@ let pToken =
         pPreprocessorDirective >>% None
         pLineComment >>% None
         pBlockComment >>% None
-        ParseEvent.pEtwEvent |>> (Event >> Some)
+        ParseEvent.pEtwEvent "ETW_EVENT_V" "win:Verbose"       |>> (Event >> Some)
+        ParseEvent.pEtwEvent "ETW_EVENT_I" "win:Informational" |>> (Event >> Some)
+        ParseEvent.pEtwEvent "ETW_EVENT_W" "win:Warning"       |>> (Event >> Some)
+        ParseEvent.pEtwEvent "ETW_EVENT_E" "win:Error"         |>> (Event >> Some)
+        ParseEvent.pEtwEvent "ETW_EVENT_C" "win:Critical"      |>> (Event >> Some)
+        ParseEvent.pEtwEvent "ETW_EVENT"   "win:Verbose"       |>> (Event >> Some)
         pEtwValueMap |>> (MapDefinition >> Some)
         pEtwBitMap |>> (MapDefinition >> Some)
         pEtwDirective |>> Some

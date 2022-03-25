@@ -111,7 +111,14 @@ let runTest testName provider events =
             printfn "Provider parsed from header does not match test provider." // Warn
 
         let cppFilename = System.IO.Path.ChangeExtension(headerName, "cpp")
-        let implementationOptions = { precompiledHeader = None; insertDebugLogging = true; cppFilename = cppFilename; headerName = headerName }
+        let implementationOptions = 
+            {
+                insertDebugLogging = true
+                cppFilename = cppFilename
+                headerName = headerName 
+                etwGenComment = Util.buildEtwGenComment headerPath
+            }
+
         let implementation = Public.generateCppSelfDescribing parsedProvider implementationOptions
         implementation |> Seq.iter (fun (filename, content) ->
             let path = Path.Combine(testPath, filename)
