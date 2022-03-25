@@ -20,7 +20,7 @@ typedef VOID(__cdecl *tPipeClose)(void *, void *, HANDLE);
 class CCsNamedPipe
 {
 public:
-    CCsNamedPipe() 
+    CCsNamedPipe()
 		: m_version(0), m_correlationId(0)
     {
 	    // Try and find the dll

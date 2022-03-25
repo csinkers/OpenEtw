@@ -7,7 +7,7 @@
 ETW_HEADER(<cstdint>)
 ETW_HEADER(<windows.h>)
 
-ETW_PROVIDER_BEGIN(DemoProvider, symbol="TPSYM")
+ETW_PROVIDER_BEGIN(DemoProvider)
 	// TODO: Generate per-event task names? Allow overloading so we can handle start/stop pairs
 
 	// Level CustLevel1 CUSTLEV1 16
