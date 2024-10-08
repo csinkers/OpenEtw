@@ -125,6 +125,9 @@ type Parens =
         | Leaf s -> s
         | Node xs -> "(" + (xs |> List.map (fun x -> x.ToString()) |> String.concat "") + ")"
 
+let pLineComment = skipString "//" >>. restOfLine true |>> fun s -> s + "\n"
+let pBlockComment = skipString "/*" >>. manyCharsTill anyChar (skipString "*/")
+
 //let pParens, pParensImpl = createParserForwardedToRef()
 //pParensImpl := 
 //    choice
@@ -194,7 +197,7 @@ type DirectiveToken =
         | Text str     -> str
 
 let pDirectiveToken, pDirectiveTokenImpl = createParserForwardedToRef()
-let directiveKvpRegex = System.Text.RegularExpressions.Regex("^\s*([^= \t]*)\s*=\s*\"([^\"]*)\"\s*$")
+let directiveKvpRegex = System.Text.RegularExpressions.Regex("^\s*([^= \t]*)\s*=\s*\"([^\"]*)\"\s*$") // e.g. opcode="Foo"
 pDirectiveTokenImpl :=
     choice
      [
@@ -356,11 +359,21 @@ let pEtwDirective =
         pCHeader
      ]
 
+let pMapSeparator =
+    skipChar ',' .>>
+    (many <| choice
+         [
+             attempt pLineComment >>% ()
+             attempt pBlockComment >>% ()
+             spaces1
+         ])
+
 let pEtwValueMap = 
     let pEnumElement = pIdentifier .>>. (spaces >>. skipChar '=' >>. spaces >>. pint32 .>> spaces)
+
     pipe2
         (pDirective "ETW_VALUEMAP" [| "name" |] .>> spaces)
-        (sepBy1 pEnumElement (skipChar ',' .>> spaces))
+        (sepBy1 pEnumElement pMapSeparator)
         (fun paramMap elements -> 
             let p key = paramMap |> Map.tryFind key
             let name = paramMap |> Map.find "name"
@@ -370,7 +383,7 @@ let pEtwBitMap =
     let pEnumElement = pIdentifier .>>. (spaces >>. skipChar '=' >>. spaces >>. pint32 .>> spaces)
     pipe2
         (pDirective "ETW_BITMAP" [| "name" |] .>> spaces)
-        (sepBy1 pEnumElement (skipChar ',' .>> spaces))
+        (sepBy1 pEnumElement pMapSeparator)
         (fun paramMap elements -> 
             let p key = paramMap |> Map.tryFind key
             let name = paramMap |> Map.find "name"
@@ -574,8 +587,6 @@ module internal ParseEvent = // Put all the event and parameter subparsers and t
 
 let pToken =
     let pPreprocessorDirective = newline >>? ws >>? skipChar '#' >>. skipRestOfLine false
-    let pLineComment = skipString "//" >>. restOfLine true |>> fun s -> s + "\n"
-    let pBlockComment = skipString "/*" >>. manyCharsTill anyChar (skipString "*/")
     choice
      [  
         pPreprocessorDirective >>% None

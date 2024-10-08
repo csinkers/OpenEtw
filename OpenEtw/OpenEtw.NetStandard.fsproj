@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <WarnOn>3390;$(WarnOn)</WarnOn>
+    <Version>0.1.1.2</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Util.fs" />
+    <Compile Include="SystemEvent.fs" />
+    <Compile Include="TraceEvent.fs" />
+    <Compile Include="InstanceEvent.fs" />
+    <Compile Include="Event.fs" />
+    <Compile Include="Buffer.fs" />
+    <Compile Include="Trace.fs" />
+    <Compile Include="EtwTypes.fs" />
+    <Compile Include="SourceHeaderParser.fs" />
+    <Compile Include="ProcessTokenList.fs" />
+    <Compile Include="GenerateManifest.fs" />
+    <Compile Include="GenerateCppSelfDescribing.fs" />
+    <Compile Include="GenerateCsLegacy.fs" />
+    <Compile Include="GenerateNodePlugin.fs" />
+    <Compile Include="PublicInterface.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FParsec" Version="1.1.1" />
+    <PackageReference Include="SerdesNet" Version="2.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="8.0.400" />
+  </ItemGroup>
+
+</Project>

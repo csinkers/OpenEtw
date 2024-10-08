@@ -123,13 +123,13 @@ let forProvider (provider : EtwProvider) =
         let buildMap map = 
             let buildMapElement (name, num) =
                 match map.mapType with
-                | BitMap _ -> 
+                | BitMap -> 
                     sprintf """
             <map value="0x%x" message="$(string.%s.map.%s.%d.message)" />"""     num provider.name map.name num
 //                    sprintf """
 //            <map value="0x%x" message="$(string.%s.map.%s.%d.message)">
 //            </map>"""     num provider.name map.name num
-                | ValueMap _ -> 
+                | ValueMap -> 
                     sprintf """
             <map value="%d" message="$(string.%s.map.%s.%d.message)" />"""     num provider.name map.name num
 //                    sprintf """
@@ -138,8 +138,8 @@ let forProvider (provider : EtwProvider) =
             
             let mapTypeName = 
                 match map.mapType with
-                | BitMap _ -> "bitMap"
-                | ValueMap _ -> "valueMap"
+                | BitMap -> "bitMap"
+                | ValueMap -> "valueMap"
 
             sprintf """
           <%s name="%s">%s

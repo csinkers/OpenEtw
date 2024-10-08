@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31613.86
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "EtwGen", "Tools\EtwGen\EtwGen.fsproj", "{4ADDB966-BA50-4371-ABA2-BA4613934D55}"
-EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "OpenEtw", "OpenEtw\OpenEtw.fsproj", "{CC26F300-C8D7-4606-94AC-F4B33802F409}"
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "OpenEtw.Tests", "Tests\OpenEtw.Tests\OpenEtw.Tests.fsproj", "{B59CC993-DDED-4869-AE13-4BC73BDAFE4E}"
 EndProject
@@ -24,13 +22,20 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppExample", "Examples\CppE
 		{4ADDB966-BA50-4371-ABA2-BA4613934D55} = {4ADDB966-BA50-4371-ABA2-BA4613934D55}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsNet5Example", "Examples\CsExample\CsNet5Example.csproj", "{C5D5EFC6-431D-49E6-B4B3-E1848AD2C05A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsNetExample", "Examples\CsExample\CsNetExample.csproj", "{C5D5EFC6-431D-49E6-B4B3-E1848AD2C05A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsFrameworkExample", "Examples\CsFrameworkExample\CsFrameworkExample.csproj", "{3FC6E5C2-4D8D-4607-AE6A-36DEAAD4D188}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4ADDB966-BA50-4371-ABA2-BA4613934D55} = {4ADDB966-BA50-4371-ABA2-BA4613934D55}
+	EndProjectSection
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "EtlFuzzer", "Tests\EtlFuzzer\EtlFuzzer.fsproj", "{1A678732-6191-47A3-B451-D979DF3416ED}"
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "EtwGen.Tests", "Tests\EtwGen.Tests\EtwGen.Tests.fsproj", "{4DEE9B69-8D18-47FF-88BE-58C31BDFF14B}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "OpenEtw.NetFramework", "OpenEtw\OpenEtw.NetFramework.fsproj", "{30E1A447-33C8-47B8-98C8-3CBB2EDF62A9}"
+EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "OpenEtw.NetStandard", "OpenEtw\OpenEtw.NetStandard.fsproj", "{D74787B3-C828-4C9D-994D-4383B553C65C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,18 +59,6 @@ Global
 		{4ADDB966-BA50-4371-ABA2-BA4613934D55}.Release|x64.Build.0 = Release|Any CPU
 		{4ADDB966-BA50-4371-ABA2-BA4613934D55}.Release|x86.ActiveCfg = Release|Any CPU
 		{4ADDB966-BA50-4371-ABA2-BA4613934D55}.Release|x86.Build.0 = Release|Any CPU
-		{CC26F300-C8D7-4606-94AC-F4B33802F409}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC26F300-C8D7-4606-94AC-F4B33802F409}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC26F300-C8D7-4606-94AC-F4B33802F409}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{CC26F300-C8D7-4606-94AC-F4B33802F409}.Debug|x64.Build.0 = Debug|Any CPU
-		{CC26F300-C8D7-4606-94AC-F4B33802F409}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{CC26F300-C8D7-4606-94AC-F4B33802F409}.Debug|x86.Build.0 = Debug|Any CPU
-		{CC26F300-C8D7-4606-94AC-F4B33802F409}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC26F300-C8D7-4606-94AC-F4B33802F409}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CC26F300-C8D7-4606-94AC-F4B33802F409}.Release|x64.ActiveCfg = Release|Any CPU
-		{CC26F300-C8D7-4606-94AC-F4B33802F409}.Release|x64.Build.0 = Release|Any CPU
-		{CC26F300-C8D7-4606-94AC-F4B33802F409}.Release|x86.ActiveCfg = Release|Any CPU
-		{CC26F300-C8D7-4606-94AC-F4B33802F409}.Release|x86.Build.0 = Release|Any CPU
 		{B59CC993-DDED-4869-AE13-4BC73BDAFE4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B59CC993-DDED-4869-AE13-4BC73BDAFE4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B59CC993-DDED-4869-AE13-4BC73BDAFE4E}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -161,6 +154,30 @@ Global
 		{4DEE9B69-8D18-47FF-88BE-58C31BDFF14B}.Release|x64.Build.0 = Release|Any CPU
 		{4DEE9B69-8D18-47FF-88BE-58C31BDFF14B}.Release|x86.ActiveCfg = Release|Any CPU
 		{4DEE9B69-8D18-47FF-88BE-58C31BDFF14B}.Release|x86.Build.0 = Release|Any CPU
+		{30E1A447-33C8-47B8-98C8-3CBB2EDF62A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30E1A447-33C8-47B8-98C8-3CBB2EDF62A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30E1A447-33C8-47B8-98C8-3CBB2EDF62A9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{30E1A447-33C8-47B8-98C8-3CBB2EDF62A9}.Debug|x64.Build.0 = Debug|Any CPU
+		{30E1A447-33C8-47B8-98C8-3CBB2EDF62A9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{30E1A447-33C8-47B8-98C8-3CBB2EDF62A9}.Debug|x86.Build.0 = Debug|Any CPU
+		{30E1A447-33C8-47B8-98C8-3CBB2EDF62A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30E1A447-33C8-47B8-98C8-3CBB2EDF62A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30E1A447-33C8-47B8-98C8-3CBB2EDF62A9}.Release|x64.ActiveCfg = Release|Any CPU
+		{30E1A447-33C8-47B8-98C8-3CBB2EDF62A9}.Release|x64.Build.0 = Release|Any CPU
+		{30E1A447-33C8-47B8-98C8-3CBB2EDF62A9}.Release|x86.ActiveCfg = Release|Any CPU
+		{30E1A447-33C8-47B8-98C8-3CBB2EDF62A9}.Release|x86.Build.0 = Release|Any CPU
+		{D74787B3-C828-4C9D-994D-4383B553C65C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D74787B3-C828-4C9D-994D-4383B553C65C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D74787B3-C828-4C9D-994D-4383B553C65C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D74787B3-C828-4C9D-994D-4383B553C65C}.Debug|x64.Build.0 = Debug|Any CPU
+		{D74787B3-C828-4C9D-994D-4383B553C65C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D74787B3-C828-4C9D-994D-4383B553C65C}.Debug|x86.Build.0 = Debug|Any CPU
+		{D74787B3-C828-4C9D-994D-4383B553C65C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D74787B3-C828-4C9D-994D-4383B553C65C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D74787B3-C828-4C9D-994D-4383B553C65C}.Release|x64.ActiveCfg = Release|Any CPU
+		{D74787B3-C828-4C9D-994D-4383B553C65C}.Release|x64.Build.0 = Release|Any CPU
+		{D74787B3-C828-4C9D-994D-4383B553C65C}.Release|x86.ActiveCfg = Release|Any CPU
+		{D74787B3-C828-4C9D-994D-4383B553C65C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

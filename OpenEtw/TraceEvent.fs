@@ -33,7 +33,7 @@ type EtlTraceEvent() =
 
         let paddingBytes = Util.paddingBytes x.Size
         if (paddingBytes > 0) then
-            s.RepeatU8("padding", 0uy, paddingBytes)
+            s.Pad("padding", paddingBytes, 0uy)
 
     member x.Serialize (s : ISerializer) =
         let headerType = if x.is64bit then EtlHeaderType.FullHeader64 else EtlHeaderType.FullHeader32

@@ -36,7 +36,7 @@ SHORTCUTSETL_API ETW_PROVIDER_BEGIN(ScEtl, name="ShortcutsETL")
 
 	void RegisterMessageHook();
 
-    // This needs to be kept in sync with shared/Dependencies/DomainTrace.h and backward + forward compatability kept in mind.
+    // This needs to be kept in sync with shared/Dependencies/DomainTrace.h and backward + forward compatibility kept in mind.
     enum ScEtlDomainTraceEventType {
         DomainWarning         = 0,
         DomainError           = 1,

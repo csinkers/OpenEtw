@@ -111,6 +111,9 @@ let buildCpp (provider : EtwProvider) (options : CppSelfDescribingOptions) =
 // -----------------------------------------------------""" options.etwGenComment)
 
         (sprintf """
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#include <stdlib.h> // for _countof
 #include <wmistr.h>
 #include <evntrace.h>
 #include <evntprov.h>

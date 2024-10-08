@@ -56,9 +56,23 @@ let runExe options =
     let stopwatch = new Stopwatch()
     stopwatch.Start()
     use proc = Process.Start(startInfo)
+
+    let readAsync (sr:StreamReader) =
+        async {
+            let! raw = sr.ReadToEndAsync() |> Async.AwaitTask
+            return raw.Trim()
+        }
+
+    let (stdout, stderr) = 
+        [
+            readAsync proc.StandardOutput
+            readAsync proc.StandardError
+        ] 
+        |> Async.Parallel 
+        |> Async.RunSynchronously
+        |> (fun x -> match x with | [|a; b|] -> (a,b) | _ -> failwith "Unexpected array result when reading output")
+
     proc.WaitForExit()
-    let stdout = proc.StandardOutput.ReadToEnd().Trim()
-    let stderr = proc.StandardError.ReadToEnd().Trim()
     options.log.Write("finished after {0} ms with exit code {1}.\n", stopwatch.ElapsedMilliseconds, proc.ExitCode)
 
     if (not <| System.String.IsNullOrWhiteSpace stdout) then
