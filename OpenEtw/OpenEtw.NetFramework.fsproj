@@ -4,7 +4,6 @@
     <TargetFrameworks>net472</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <WarnOn>3390;$(WarnOn)</WarnOn>
-    <Version>0.1.1.2</Version>
   </PropertyGroup>
 
   <ItemGroup>

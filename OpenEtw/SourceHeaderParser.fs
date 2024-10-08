@@ -129,7 +129,7 @@ let pLineComment = skipString "//" >>. restOfLine true |>> fun s -> s + "\n"
 let pBlockComment = skipString "/*" >>. manyCharsTill anyChar (skipString "*/")
 
 //let pParens, pParensImpl = createParserForwardedToRef()
-//pParensImpl := 
+//pParensImpl.Value <-
 //    choice
 //     [
 //        pstring "(" >>. (many pParens) .>> pstring ")" |>> Node
@@ -169,7 +169,7 @@ type ParenToken =
         | Misc misc -> misc
 
 //let pParenToken, pParenTokenImpl = createParserForwardedToRef()
-//pParenTokenImpl :=
+//pParenTokenImpl.Value <-
 //    choice
 //     [
 //        pstring "(" >>. (many (pParenToken)) .>> pstring ")" |>> Parens
@@ -198,7 +198,7 @@ type DirectiveToken =
 
 let pDirectiveToken, pDirectiveTokenImpl = createParserForwardedToRef()
 let directiveKvpRegex = System.Text.RegularExpressions.Regex("^\s*([^= \t]*)\s*=\s*\"([^\"]*)\"\s*$") // e.g. opcode="Foo"
-pDirectiveTokenImpl :=
+pDirectiveTokenImpl.Value <-
     choice
      [
         pstring "\"" >>. (many (pstring "\\\"" <|> many1Chars (noneOf "\""))) .>> pstring "\"" |>> (String.concat "" >> Quoted)
@@ -425,7 +425,7 @@ module internal ParseEvent = // Put all the event and parameter subparsers and t
             | Identifier str     -> str
 
     let pParameterToken, pParameterTokenImpl = createParserForwardedToRef()
-    pParameterTokenImpl :=
+    pParameterTokenImpl.Value <-
         choice
          [
             pstring "(" >>. (many (pParameterToken)) .>> pstring ")" |>> Parens

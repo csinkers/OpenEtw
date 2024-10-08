@@ -1,2 +1,2 @@
 @echo off
-dotnet publish -c Release -r win-x86
+msbuild OpenEtw.sln /t:Build /p:Configuration=Release /p:Version=0.1.1.3
