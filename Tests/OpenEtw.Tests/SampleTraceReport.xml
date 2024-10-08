@@ -3474,4 +3474,26 @@
 		<EventGuid>{3d6fa8d1-fe05-11d0-9dda-00c04fd7ba7c}</EventGuid>
 	</ExtendedTracingInfo>
 </Event>
+<Event xmlns="http://schemas.microsoft.com/win/2004/08/events/event">
+  <System>
+    <Provider />
+    <EventID>0</EventID>
+    <Version>0</Version>
+    <Level>0</Level>
+    <Task>0</Task>
+    <Opcode>2</Opcode>
+    <Keywords>0x0</Keywords>
+    <TimeCreated SystemTime="2024-10-08T14:47:15.210681100+09:59" />
+    <Correlation ActivityID="{00000000-0000-0000-0000-000000000000}" />
+    <Execution ProcessID="4" ThreadID="4" ProcessorID="0" KernelTime="0" UserTime="0" />
+    <Channel />
+    <Computer />
+  </System>
+  <BinaryEventData></BinaryEventData>
+  <ExtendedTracingInfo xmlns="http://schemas.microsoft.com/win/2004/08/events/trace">
+    <EventGuid>{b28c3a67-64c9-4b69-812b-a38537ba6c21}</EventGuid>
+    <InstanceID>1</InstanceID>
+    <ParentInstanceID>0</ParentInstanceID>
+  </ExtendedTracingInfo>
+</Event>
 </Events>

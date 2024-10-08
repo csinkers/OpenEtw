@@ -72,7 +72,7 @@ type EtlSystemEvent() =
 
         let paddingBytes = Util.paddingBytes x.Size
         if (paddingBytes > 0) then
-            s.RepeatU8("padding", 0uy, paddingBytes)
+            s.Pad("padding", paddingBytes, 0uy)
 
     member x.Serialize (s:ISerializer) =
         s.Comment "System Event"

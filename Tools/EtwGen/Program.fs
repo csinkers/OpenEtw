@@ -142,7 +142,7 @@ let generateEtwProvider arguments =
     let headerContent = System.IO.File.ReadAllText(arguments.inputFile) 
 
     printf "EtwGen: Parsing provider information in %s\n" arguments.inputFile
-    match Public.parseHeader headerContent  with
+    match Public.parseHeader headerContent with
     | Failure err ->
         eprintf "%s" err
         1
@@ -165,8 +165,25 @@ let generateEtwProvider arguments =
             System.IO.File.WriteAllText(path, content, Encoding.UTF8))
         0
 
+let handleResolve () =
+    ()
+
 [<EntryPoint>]
 let main argv = 
+    let resolver = new System.ResolveEventHandler(fun (sender:obj) (args:System.ResolveEventArgs) ->
+        let name = 
+            let commaIndex = args.Name.IndexOf(',')
+            if (commaIndex > 0) then args.Name.Substring(0, commaIndex)
+            else args.Name
+
+        let fileName = name + ".dll"
+        if (System.IO.File.Exists(fileName)) then 
+            System.Reflection.Assembly.LoadFrom(fileName) 
+        else null
+    )
+
+    System.AppDomain.CurrentDomain.add_AssemblyResolve resolver
+
     try
         match parseCommandLine argv with
         | None ->

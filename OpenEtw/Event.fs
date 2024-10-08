@@ -67,7 +67,7 @@ type ExtendedData =
             | _ -> failwith "Unknown extended data type encountered"
 
         if(size % 8 <> 0) then
-            s.RepeatU8("", 0uy, (Util.paddingBytes size))
+            s.Pad("", (Util.paddingBytes size), 0uy)
 
         [value] // TODO: Multiple extended data items
 
@@ -121,7 +121,7 @@ type ExtendedData =
 
         let paddingBytes = Util.paddingBytes size
         if (paddingBytes > 0) then
-            s.RepeatU8("padding", 0uy, paddingBytes)
+            s.Pad("padding", paddingBytes, 0uy)
 
 [<Flags>]
 type EventFlag =
@@ -211,12 +211,8 @@ type EventLevelConverter() =
 module EventLevel =
     let converter = EventLevelConverter() :> IConverter<byte, EventLevel>
     let toInt v = converter.ToNumeric v |> int
-    let serdes name value (s : ISerializer) = 
-        s.Transform(
-            name,
-            value,
-            (fun n1 v1 (s1 : ISerializer) -> s1.UInt8(n1, v1)),
-            converter)
+    let innerSerdes (n:string) (v:byte) (s:ISerializer) = s.UInt8(n, v, 0uy)
+    let serdes (name : string) value (s : ISerializer) = s.Transform(name, value, innerSerdes, converter)
 
 [<Flags>]
 type EventProperty =
@@ -305,7 +301,7 @@ type EtlEvent() =
         x.userTime   <- s.Int32  ("uTime",      x.userTime)   // 3c
         x.activityId <- s.Guid   ("activityId", x.activityId) // 40
 
-        let extendedDataSerdes (_:int) (existing:ExtendedData list) (s1 : ISerializer) =
+        let extendedDataSerdes (_:string) (existing:ExtendedData list) (s1 : ISerializer) =
             let hasExtended = ((x.flags &&& EventFlag.ExtendedInfo) <> EventFlag.None)
             let result =
                 match (s1.IsReading(), hasExtended) with
@@ -326,7 +322,7 @@ type EtlEvent() =
 
         let paddingBytes = Util.paddingBytes x.Size
         if (paddingBytes > 0) then
-            s.RepeatU8("padding", 0uy, paddingBytes)
+            s.Pad("padding", paddingBytes, 0uy)
 
     member x.Serialize (s : ISerializer) =
         let headerType = if x.is64bit then EtlHeaderType.EventHeader64 else EtlHeaderType.EventHeader64

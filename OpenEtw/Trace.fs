@@ -239,12 +239,12 @@ type EtlTrace() =
         x.logFileNameId <- s.Int64("logFileNameId", x.logFileNameId) // a8
         x.unkb0i        <- s.Int32("unkb0i",        x.unkb0i)        // b0 (something timezone related, have seen value of -60 i.e. 0xffffffc4)
 
-        let serdesTime name (serializer:ISerializer) v = Util.fromEtlAbsoluteTicks <| serializer.Int64(name, (v |> Util.toEtlAbsoluteTicks))
+        let serdesTime (name:string) (serializer:ISerializer) v = Util.fromEtlAbsoluteTicks <| serializer.Int64(name, (v |> Util.toEtlAbsoluteTicks))
 
         // TIME_ZONE_INFORMATION
         x.timezone1 <- s.FixedLengthString("timezone1", x.timezone1, EtlTrace.timeZoneLength) // b4
         x.timezone2 <- s.FixedLengthString("timezone2", x.timezone2, EtlTrace.timeZoneLength) // 108
-        s.RepeatU8("padding", 0uy, 4) // 15c
+        s.Pad("padding", 4, 0uy) // 15c
         x.bootTime        <- serdesTime "bootTime" s x.bootTime                   // 160
         x.perfCounterFreq <- s.UInt64("perfCounterFreq", x.perfCounterFreq)       // 168
         x.startTime       <- serdesTime "startTime" s x.startTime                 // 170
@@ -262,45 +262,35 @@ type EtlTrace() =
         | x when x > 0 ->
             let alignmentBytes = x % 8
             if (alignmentBytes > 0) then
-                s.RepeatU8("alignment", 0uy, alignmentBytes)
+                s.Pad("alignment", alignmentBytes, 0uy)
 
-            s.RepeatU8("padding", 0xFFuy, ((x/8)*8))
+            s.Pad("padding", ((x/8)*8), 0xFFuy)
         | _ -> ()
 
-        let meta (s:ISerializer) name reader writer = 
-            s.Object(
-                name,
-                (fun s1 ->
-                    if s1.IsReading() 
-                    then reader s1 
-                    else writer s1
-                ))
-
-        meta s "buffers"
-            (fun s -> // Read
-                let startOffset = s.Offset
-                let buffers = seq {
-                    s.Seek startOffset
-                    for i in [1..totalBuffers-1] do
-                        yield EtlBuffer.Deserialize s
-                }
-                x.buffers <- buffers)
-
-            (fun s -> // Write
-                let mutable numBuffers = 0
-                x.buffers |> Seq.iteri (fun i b ->
-                    s.NewLine()
-                    s.Comment (sprintf "Buffer %d" i)
-                    b.Serialize s
-                    numBuffers <- numBuffers + 1
-                )
-
-                s.Seek eventBuffersOffset
-                s.Int32("eventBuffers", numBuffers) |> ignore
-
-                s.Seek totalBuffersOffset
-                s.Int32("totalBuffers", (numBuffers + 1)) |> ignore
+        s.Begin "buffers"
+        if (s.IsReading()) then
+            let startOffset = s.Offset
+            let buffers = seq {
+                s.Seek startOffset
+                for i in [1..totalBuffers-1] do
+                    yield EtlBuffer.Deserialize s
+            }
+            x.buffers <- buffers
+        else
+            let mutable numBuffers = 0
+            x.buffers |> Seq.iteri (fun i b ->
+                s.NewLine()
+                s.Comment (sprintf "Buffer %d" i)
+                b.Serialize s
+                numBuffers <- numBuffers + 1
             )
+
+            s.Seek eventBuffersOffset
+            s.Int32("eventBuffers", numBuffers) |> ignore
+
+            s.Seek totalBuffersOffset
+            s.Int32("totalBuffers", (numBuffers + 1)) |> ignore
+        s.End()
 
     member x.Serialize (s : ISerializer) = x.Common s
     static member Deserialize (s : ISerializer) =

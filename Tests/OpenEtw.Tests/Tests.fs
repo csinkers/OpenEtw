@@ -2,12 +2,12 @@
 
 open System.IO
 open System.Diagnostics
+open System.Xml.Linq
 open FSharp.Data
 open FsUnit
 open SerdesNet
 open Xunit
 open OpenEtw
-
 type TraceReportXml = XmlProvider<"SampleTraceReport.xml">
 let providerGuid = System.Guid.Parse("e6467579-e015-4d5a-be75-ddaac9c1a96e")
 
@@ -85,11 +85,11 @@ let generateTraceReport filename =
 
 let saveAndGenerateTraceReport trace =
     let etlFilename = Path.GetTempFileName()
-    let writeToFile() =
-        use stream = File.Open(etlFilename, FileMode.Create)
+    let writeToFile path =
+        use stream = File.Open(path, FileMode.Create)
         writeEtl trace stream
 
-    let writeNotes = writeToFile()
+    let writeNotes = writeToFile etlFilename
     let report = generateTraceReport etlFilename
     File.Delete etlFilename
     (report, writeNotes)
@@ -140,6 +140,14 @@ let buildTrace is64bit bootTime startTime events =
     trace.startTime <- startTime
     trace
 
+let getEvent (report:TraceReportXml.Events) predicate = report.Events |> Seq.where predicate |> Seq.exactlyOne
+let pNormal (provider:System.Guid) (eventId:int) = fun (e:TraceReportXml.Event) -> e.System.Provider.Guid = Some provider && e.System.EventId = eventId
+let traceNs = "http://schemas.microsoft.com/win/2004/08/events/trace"
+let pInstance (e:TraceReportXml.Event) =
+    let eti = e.XElement.Element(XName.Get("ExtendedTracingInfo", traceNs))
+    let iid = eti.Element(XName.Get("InstanceID", traceNs))
+    iid <> null
+
 type TraceReportTests() =
     [<Fact>]
     member x.``Generate single 32 bit normal event ETL``() = 
@@ -150,8 +158,9 @@ type TraceReportTests() =
         let (traceReport, writeNotes) = saveAndGenerateTraceReport trace
 
         traceReport.Events |> should haveLength 2
-        let s = traceReport.Events.[1].System
-        s.Provider.Guid.Value |> should equal providerGuid
+        let e = (getEvent traceReport (pNormal providerGuid 6))
+        let s =  e.System
+        s.Provider.Guid |> should equal (Some providerGuid)
         s.EventId |> should equal 6
         s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
         s.Task |> should equal 4
@@ -167,8 +176,9 @@ type TraceReportTests() =
         let (traceReport, writeNotes) = saveAndGenerateTraceReport trace
 
         traceReport.Events |> should haveLength 2
-        let s = traceReport.Events.[1].System
-        s.Provider.Guid.Value |> should equal providerGuid
+        let e = (getEvent traceReport (pNormal providerGuid 6))
+        let s =  e.System
+        s.Provider.Guid |> should equal (Some providerGuid)
         s.EventId |> should equal 6
         s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
         s.Task |> should equal 4
@@ -187,9 +197,11 @@ type TraceReportTests() =
         let (traceReport, writeNotes) = saveAndGenerateTraceReport trace
         printf "TraceReport: %A" traceReport
 
+        // TODO
         traceReport.Events |> should haveLength 2
-        let s = traceReport.Events.[1].System
-        s.Provider.Guid.Value |> should equal providerGuid
+        let e = (getEvent traceReport (pNormal providerGuid 6))
+        let s =  e.System
+        s.Provider.Guid |> should equal (Some providerGuid)
         s.EventId |> should equal 6
         s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
         s.Task |> should equal 4
@@ -208,9 +220,11 @@ type TraceReportTests() =
         let (traceReport, writeNotes) = saveAndGenerateTraceReport trace
         printf "TraceReport: %A" traceReport
 
+        // TODO
         traceReport.Events |> should haveLength 2
-        let s = traceReport.Events.[1].System
-        s.Provider.Guid.Value |> should equal providerGuid
+        let e = (getEvent traceReport (pNormal providerGuid 6))
+        let s =  e.System
+        s.Provider.Guid |> should equal (Some providerGuid)
         s.EventId |> should equal 6
         s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
         s.Task |> should equal 4
@@ -229,8 +243,10 @@ type TraceReportTests() =
         let (traceReport, writeNotes) = saveAndGenerateTraceReport trace
         printf "TraceReport: %A" traceReport
 
+        // TODO
         traceReport.Events |> should haveLength 2
-        let s = traceReport.Events.[1].System
+        let e = (getEvent traceReport (pNormal providerGuid 6))
+        let s =  e.System
         s.EventId |> should equal 6
         s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
         s.Task |> should equal 4
@@ -249,9 +265,11 @@ type TraceReportTests() =
         let (traceReport, writeNotes) = saveAndGenerateTraceReport trace
         printf "TraceReport: %A" traceReport
 
+        // TODO
         traceReport.Events |> should haveLength 2
-        let s = traceReport.Events.[1].System
-        s.Provider.Guid.Value |> should equal providerGuid
+        let e = (getEvent traceReport (pNormal providerGuid 6))
+        let s =  e.System
+        s.Provider.Guid |> should equal (Some providerGuid)
         s.EventId |> should equal 6
         s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
         s.Task |> should equal 4
@@ -270,9 +288,11 @@ type TraceReportTests() =
         let (traceReport, writeNotes) = saveAndGenerateTraceReport trace
         printf "TraceReport: %A" traceReport
 
+        // TODO
         traceReport.Events |> should haveLength 2
-        let s = traceReport.Events.[1].System
-        s.Provider.Guid.Value |> should equal providerGuid
+        let e = (getEvent traceReport (pNormal providerGuid 6))
+        let s =  e.System
+        s.Provider.Guid |> should equal (Some providerGuid)
         s.EventId |> should equal 6
         s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
         s.Task |> should equal 4
@@ -291,9 +311,11 @@ type TraceReportTests() =
         let (traceReport, writeNotes) = saveAndGenerateTraceReport trace
         printf "TraceReport: %A" traceReport
 
+        // TODO
         traceReport.Events |> should haveLength 2
-        let s = traceReport.Events.[1].System
-        s.Provider.Guid.Value |> should equal providerGuid
+        let e = (getEvent traceReport (pNormal providerGuid 6))
+        let s =  e.System
+        s.Provider.Guid |> should equal (Some providerGuid)
         s.EventId |> should equal 6
         s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
         s.Task |> should equal 4
@@ -316,13 +338,17 @@ type TraceReportTests() =
         printf "TraceReport: %A" traceReport
 
         traceReport.Events |> should haveLength 2
-        let s = traceReport.Events.[1].System
-        s.Provider.Guid.Value |> should equal providerGuid
-        s.EventId |> should equal 6
-        s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
-        s.Task |> should equal 4
-        s.Opcode |> should equal 19
-        s.Keywords |> should equal "0x8"
+        let e = (getEvent traceReport pInstance)
+        let s =  e.System
+        s.Provider.Guid |> should equal None
+        s.EventId |> should equal 0
+        s.Level |> should equal 0
+        s.Task |> should equal 0
+        s.Opcode |> should equal 2
+        s.Keywords |> should equal "0x0"
+        e.ExtendedTracingInfo.EventGuid |> should equal newGuid
+        e.ExtendedTracingInfo.InstanceId |> should equal (Some 1)
+        e.ExtendedTracingInfo.ParentInstanceId |> should equal (Some 0)
 
     [<Fact>]
     member x.``Generate single 64 bit instance event ETL``() =
@@ -340,13 +366,17 @@ type TraceReportTests() =
         printf "TraceReport: %A" traceReport
 
         traceReport.Events |> should haveLength 2
-        let s = traceReport.Events.[1].System
-        s.Provider.Guid.Value |> should equal providerGuid
-        s.EventId |> should equal 6
-        s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
-        s.Task |> should equal 4
-        s.Opcode |> should equal 19
-        s.Keywords |> should equal "0x8"
+        let e = (getEvent traceReport pInstance)
+        let s =  e.System
+        s.Provider.Guid |> should equal None
+        s.EventId |> should equal 0
+        s.Level |> should equal 0
+        s.Task |> should equal 0
+        s.Opcode |> should equal 2
+        s.Keywords |> should equal "0x0"
+        e.ExtendedTracingInfo.EventGuid |> should equal newGuid
+        e.ExtendedTracingInfo.InstanceId |> should equal (Some 1)
+        e.ExtendedTracingInfo.ParentInstanceId |> should equal (Some 0)
 
     [<Fact>]
     member x.``Generate ETL with two buffers``() =
@@ -369,8 +399,9 @@ type TraceReportTests() =
         printf "TraceReport: %A" traceReport
 
         traceReport.Events |> should haveLength 101
-        let s = traceReport.Events.[1].System
-        s.Provider.Guid.Value |> should equal providerGuid
+        let e = (getEvent traceReport (pNormal providerGuid 6))
+        let s =  e.System
+        s.Provider.Guid |> should equal (Some providerGuid)
         s.EventId |> should equal 6
         s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
         s.Task |> should equal 4
