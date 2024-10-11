@@ -89,7 +89,7 @@ let defaultTypes =
         ("LPWSTR",       (EtwType.UnicodeString NullTerminated, EtwOutType.String))
         ("LPCWSTR",      (EtwType.UnicodeString NullTerminated, EtwOutType.String))
         ("GUID *",       (EtwType.Guid, EtwOutType.Guid))
-        ("FILETIME *",   (EtwType.FileTime, EtwOutType.DateTime))
+        ("FILETIME",     (EtwType.FileTime, EtwOutType.DateTime))
         ("SYSTEMTIME *", (EtwType.SystemTime, EtwOutType.DateTime))
         ("SID *",        (EtwType.Sid, EtwOutType.String))
         ("ETW_ACTIVITYID", (EtwType.ActivityId, EtwOutType.ActivityId))

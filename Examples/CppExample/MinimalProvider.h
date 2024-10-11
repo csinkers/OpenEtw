@@ -1,7 +1,6 @@
 #pragma once
 #include "../../etw.h"
 ETW_HEADER(<cstdint>)
-ETW_HEADER(<windows.h>)
 
 //ETW_PROVIDER_BEGIN(MinimalProvider, prefix="Min")
 

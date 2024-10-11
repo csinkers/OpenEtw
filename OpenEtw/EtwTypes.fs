@@ -237,7 +237,7 @@ type EtwType =
         | Binary len        -> "win:Binary"       , "const BYTE *"      ,  "Binary"       , None
         | Guid              -> "win:GUID"         , "const GUID *"      ,  "Guid"         , None
         | Pointer           -> "win:Pointer"      , "const void *"      ,  "Pointer"      , None
-        | FileTime          -> "win:FILETIME"     , "const FILETIME *"  ,  "FileTime"     , None
+        | FileTime          -> "win:FILETIME"     , "FILETIME"          ,  "FileTime"     , None
         | SystemTime        -> "win:SYSTEMTIME"   , "const SYSTEMTIME *",  "SystemTime"   , None
         | Sid               -> "win:SID"          , "const SID *"       ,  "Sid"          , None
         | HexInt32          -> "win:HexInt32"     , "const int32_t"     ,  "HexInt32"     , None
