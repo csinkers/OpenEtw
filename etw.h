@@ -1,5 +1,5 @@
 #pragma once
-// == Version 0.1.1 == \\
+// == Version 0.1.4 == \\
 
 namespace EtwIn
 {
@@ -50,7 +50,8 @@ class className \
 {\
 public:\
 	static unsigned long Register();\
-	static unsigned long Unregister();
+	static unsigned long Unregister();\
+	static bool IsEnabled(unsigned char level, unsigned __int64 keyword);
 
 #define ETW_PROVIDER_END };
 

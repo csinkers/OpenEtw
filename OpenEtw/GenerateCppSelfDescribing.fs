@@ -74,7 +74,6 @@ let buildCpp (provider : EtwProvider) (options : CppSelfDescribingOptions) =
                 sprintf "    ETW_COUNTED_PTR_PARAM(%s, %d, %s, %s)" (p.inType.CanonicalType()) i p.name arg
 
             | EtwType.Guid
-            | EtwType.FileTime
             | EtwType.SystemTime -> sprintf "    ETW_PTR_PARAM(%s, %d, %s)" (p.inType.CanonicalType()) i p.name
             | EtwType.Unresolved s -> failwithf "Tried to emit unresolved type %s" s
             | _ -> sprintf "    ETW_LITERAL_PARAM(%s, %d, %s)" (p.inType.CanonicalType()) i p.name
@@ -118,7 +117,8 @@ let buildCpp (provider : EtwProvider) (options : CppSelfDescribingOptions) =
 #include <evntrace.h>
 #include <evntprov.h>
 #include <strsafe.h>
-#include "%s" """         options.headerName)
+#include "%s"
+""" options.headerName)
 
         (if options.insertDebugLogging then
             """#define ETW_DEBUG(x, ...) OutputDebugStringA(x);"""
@@ -167,6 +167,9 @@ let buildCpp (provider : EtwProvider) (options : CppSelfDescribingOptions) =
 
         (sprintf """
 static const int EnableBitsCount = %d;
+static UCHAR Level = 0;
+static ULONGLONG MatchAllKeyword = 0;
+static ULONGLONG MatchAnyKeyword = 0;
 static REGHANDLE                 ProviderHandle = (REGHANDLE)0;
 static DECLSPEC_CACHEALIGN ULONG ProviderEnableBits[%d];
 static const ULONGLONG           ProviderKeywords[EnableBitsCount] = {%s};
@@ -214,15 +217,14 @@ static void __stdcall ControlCallbackV2(LPCGUID, ULONG controlCode, UCHAR level,
     {
         case EVENT_CONTROL_CODE_ENABLE_PROVIDER:
             ETW_DEBUG("ETW_DEBUG: Provider enabled\n");
-            for (ULONG ix = 0; ix < EnableBitsCount; ++ix)
-            {
-                bool levelMatched = (ProviderLevels[ix] <= level) || (level == 0);
-                bool keywordMatched =
-                    ((ProviderKeywords[ix] == (ULONGLONG)0) ||
-                    ((ProviderKeywords[ix] & matchAnyKeyword) && ((ProviderKeywords[ix] & matchAllKeyword) == matchAllKeyword)));
+            Level = level;
+            MatchAnyKeyword = matchAnyKeyword;
+            MatchAllKeyword = matchAllKeyword;
 
-                if (levelMatched && keywordMatched)
-                {
+            for (ULONG ix = 0; ix < EnableBitsCount; ++ix)
+            {""" 
+        sprintf"                if (%s::IsEnabled(ProviderLevels[ix], ProviderKeywords[ix]))" provider.className
+        """                {
                     ProviderEnableBits[ix >> 5] |= (1 << (ix % 32));
                 }
                 else
@@ -230,11 +232,16 @@ static void __stdcall ControlCallbackV2(LPCGUID, ULONG controlCode, UCHAR level,
                     ProviderEnableBits[ix >> 5] &= ~(1 << (ix % 32));
                 }
             }
+
             EmitManifest();
             break;
 
         case EVENT_CONTROL_CODE_DISABLE_PROVIDER:
             ETW_DEBUG("ETW_DEBUG: Provider disabled\n");
+            Level = 0;
+            MatchAnyKeyword = 0;
+            MatchAllKeyword = 0;
+
             EmitManifest();
             if (EnableBitsCount > 0)
             {
@@ -273,7 +280,17 @@ ULONG %s::Unregister() // Unregister the provider
 
     return error;
 }
-""" provider.className provider.className)
+
+bool %s::IsEnabled(UCHAR level, ULONGLONG keyword)
+{
+    bool levelMatched = (level <= Level) || (Level == 0);
+    bool keywordMatched =
+        ((keyword == (ULONGLONG)0) ||
+        ((keyword & MatchAnyKeyword) && ((keyword & MatchAllKeyword) == MatchAllKeyword)));
+
+    return levelMatched && keywordMatched;
+}
+""" provider.className provider.className provider.className)
 
         "// Events"
 

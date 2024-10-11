@@ -5,7 +5,6 @@
 // TODO: Add checks to ensure various ids are unique, including the default tasks, opcodes, keywords and levels.
 // TODO: Improve error messages and context reporting, stop spewing stack traces.
 ETW_HEADER(<cstdint>)
-ETW_HEADER(<windows.h>)
 
 ETW_PROVIDER_BEGIN(DemoProvider)
 	// TODO: Generate per-event task names? Allow overloading so we can handle start/stop pairs
