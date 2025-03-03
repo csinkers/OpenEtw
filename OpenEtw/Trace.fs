@@ -244,7 +244,7 @@ type EtlTrace() =
         // TIME_ZONE_INFORMATION
         x.timezone1 <- s.FixedLengthString("timezone1", x.timezone1, EtlTrace.timeZoneLength) // b4
         x.timezone2 <- s.FixedLengthString("timezone2", x.timezone2, EtlTrace.timeZoneLength) // 108
-        s.Pad("padding", 4, 0uy) // 15c
+        s.Pad(4) // 15c
         x.bootTime        <- serdesTime "bootTime" s x.bootTime                   // 160
         x.perfCounterFreq <- s.UInt64("perfCounterFreq", x.perfCounterFreq)       // 168
         x.startTime       <- serdesTime "startTime" s x.startTime                 // 170
@@ -262,35 +262,43 @@ type EtlTrace() =
         | x when x > 0 ->
             let alignmentBytes = x % 8
             if (alignmentBytes > 0) then
-                s.Pad("alignment", alignmentBytes, 0uy)
+                s.Pad(alignmentBytes)
 
-            s.Pad("padding", ((x/8)*8), 0xFFuy)
+            s.Pad(((x/8)*8), 0xFFuy)
         | _ -> ()
 
-        s.Begin "buffers"
-        if (s.IsReading()) then
-            let startOffset = s.Offset
-            let buffers = seq {
-                s.Seek startOffset
-                for i in [1..totalBuffers-1] do
-                    yield EtlBuffer.Deserialize s
-            }
-            x.buffers <- buffers
-        else
-            let mutable numBuffers = 0
-            x.buffers |> Seq.iteri (fun i b ->
-                s.NewLine()
-                s.Comment (sprintf "Buffer %d" i)
-                b.Serialize s
-                numBuffers <- numBuffers + 1
+        let meta (s:ISerializer) (name:string) reader writer =
+            s.Begin(name)
+            if s.IsReading()
+            then reader s
+            else writer s
+            s.End()
+
+        meta s "buffers"
+            (fun s -> // Read
+                let startOffset = s.Offset
+                let buffers = seq {
+                    s.Seek startOffset
+                    for i in [1..totalBuffers-1] do
+                        yield EtlBuffer.Deserialize s
+                }
+                x.buffers <- buffers)
+
+            (fun s -> // Write
+                let mutable numBuffers = 0
+                x.buffers |> Seq.iteri (fun i b ->
+                    s.NewLine()
+                    s.Comment (sprintf "Buffer %d" i)
+                    b.Serialize s
+                    numBuffers <- numBuffers + 1
+                )
+
+                s.Seek eventBuffersOffset
+                s.Int32("eventBuffers", numBuffers) |> ignore
+
+                s.Seek totalBuffersOffset
+                s.Int32("totalBuffers", (numBuffers + 1)) |> ignore
             )
-
-            s.Seek eventBuffersOffset
-            s.Int32("eventBuffers", numBuffers) |> ignore
-
-            s.Seek totalBuffersOffset
-            s.Int32("totalBuffers", (numBuffers + 1)) |> ignore
-        s.End()
 
     member x.Serialize (s : ISerializer) = x.Common s
     static member Deserialize (s : ISerializer) =

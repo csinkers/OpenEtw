@@ -34,12 +34,12 @@ type EtlInstanceGuidEvent() =
 
         let payloadSize = (int size) - x.HeaderSize
         if(payloadSize < 0) then failwith "Negative payload size"
-        if (payloadSize > 0) then 
+        if (payloadSize > 0) then
             x.payload <- s.Bytes("payload", x.payload, payloadSize) // 48
 
         let paddingBytes = Util.paddingBytes x.Size
         if (paddingBytes > 0) then
-            s.Pad("padding", paddingBytes, 0uy)
+            s.Pad(paddingBytes)
 
     member x.Serialize (s : ISerializer) =
         let headerType = if x.is64bit then EtlHeaderType.Instance64 else EtlHeaderType.Instance32
@@ -60,4 +60,4 @@ type EtlInstanceGuidEvent() =
 
         x.Common s size
         x
-        
+
