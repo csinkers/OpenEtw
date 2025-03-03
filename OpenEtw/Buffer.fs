@@ -139,7 +139,7 @@ type EtlBuffer() =
 
         let paddingBytes = x.bufferSize - x.savedOffset
         if (paddingBytes > 0) then
-            s.Pad("padding", paddingBytes, 0xFFuy)
+            s.Pad(paddingBytes, 0xFFuy)
 
     static member Deserialize (s : ISerializer) =
         let x = EtlBuffer()
@@ -152,7 +152,7 @@ type EtlBuffer() =
 
         let paddingBytes = x.bufferSize - x.savedOffset
         if (paddingBytes > 0) then
-            s.Pad("padding", paddingBytes, 0xFFuy)
+            s.Pad(paddingBytes, 0xFFuy)
         x
 
     static member BuildBuffers bufferSize events = seq {

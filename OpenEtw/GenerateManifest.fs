@@ -4,7 +4,7 @@ open OpenEtw.Util
 let forProvider (provider : EtwProvider) =
     let newline = System.Environment.NewLine
     let mandatoryParam name value = sprintf "%s=\"%s\"" name value
-    let optionalParam name value = 
+    let optionalParam name value =
         match value with
         | Some str -> sprintf "%s=\"%s\"" name str
         | None -> ""
@@ -21,7 +21,7 @@ let forProvider (provider : EtwProvider) =
             ] |> String.concat " ")
 
     let buildEvents =
-        let buildEvent (e : EtwEvent) = 
+        let buildEvent (e : EtwEvent) =
             let getLevelId levelName = provider.levels |> List.pick (fun l -> if l.name = levelName then Some l.id else None)
             sprintf """          <event %s>
           </event>"""
@@ -34,7 +34,7 @@ let forProvider (provider : EtwProvider) =
                     optionalParam "task" e.task
                     optionalParam "opcode" <| e.opcode
                     optionalParam "template" (if (e.parameters.IsEmpty) then None else Some e.name)
-                    optionalParam "keywords" 
+                    optionalParam "keywords"
                         <|  match e.keywords with
                             | [] -> None
                             | _ -> e.keywords |> String.concat " " |> (fun s -> s + " ") |> Some
@@ -50,7 +50,7 @@ let forProvider (provider : EtwProvider) =
         </events>""" (String.concat newline (events |> Seq.map buildEvent))
 
     let buildOpcodes =
-        let buildOpcode (opcode : EtwOpcode) = 
+        let buildOpcode (opcode : EtwOpcode) =
             sprintf """          <opcode %s>
           </opcode>"""
                 ([
@@ -65,7 +65,7 @@ let forProvider (provider : EtwProvider) =
         | opcodes ->
             let innerText =
                 opcodes
-                |> Seq.map buildOpcode 
+                |> Seq.map buildOpcode
                 |> String.concat newline
             sprintf """
         <opcodes>
@@ -73,7 +73,7 @@ let forProvider (provider : EtwProvider) =
         </opcodes>"""         innerText
 
     let buildTasks =
-        let buildTask (task : EtwTask) = 
+        let buildTask (task : EtwTask) =
             sprintf """          <task %s>
           </task>"""
                 ([
@@ -101,9 +101,9 @@ let forProvider (provider : EtwProvider) =
                     mandatoryParam "name" k.name
                     mandatoryParam "symbol" k.symbol
                     mandatoryParam "mask" (sprintf "0x%x" k.id)
-                    optionalParam "message" (k.message |> Option.map (fun _ -> 
-                                                 sprintf "$(string.%s.Keyword.%s.message)" 
-                                                     provider.name 
+                    optionalParam "message" (k.message |> Option.map (fun _ ->
+                                                 sprintf "$(string.%s.Keyword.%s.message)"
+                                                     provider.name
                                                      k.symbol))
                 ] |> String.concat " ")
         function
@@ -120,23 +120,23 @@ let forProvider (provider : EtwProvider) =
         """         innerText
 
     let buildMaps =
-        let buildMap map = 
+        let buildMap map =
             let buildMapElement (name, num) =
                 match map.mapType with
-                | BitMap -> 
+                | BitMap ->
                     sprintf """
             <map value="0x%x" message="$(string.%s.map.%s.%d.message)" />"""     num provider.name map.name num
 //                    sprintf """
 //            <map value="0x%x" message="$(string.%s.map.%s.%d.message)">
 //            </map>"""     num provider.name map.name num
-                | ValueMap -> 
+                | ValueMap ->
                     sprintf """
             <map value="%d" message="$(string.%s.map.%s.%d.message)" />"""     num provider.name map.name num
 //                    sprintf """
 //            <map value="%d" message="$(string.%s.map.%s.%d.message)">
 //            </map>"""     num provider.name map.name num
-            
-            let mapTypeName = 
+
+            let mapTypeName =
                 match map.mapType with
                 | BitMap -> "bitMap"
                 | ValueMap -> "valueMap"
@@ -157,7 +157,7 @@ let forProvider (provider : EtwProvider) =
         """     (String.concat "" (maps |> Seq.map buildMap))
 
     let buildTemplates =
-        let buildTemplate (e : EtwEvent) = 
+        let buildTemplate (e : EtwEvent) =
             let buildField (field : EtwEventParam) =
                 let paramName, outType = field.outType.MetaTypeName(), field.outType.ToString()
                 sprintf """
@@ -168,13 +168,13 @@ let forProvider (provider : EtwProvider) =
                         mandatoryParam "inType" (field.inType.ToString())
                         mandatoryParam paramName outType
 
-                        optionalParam "count" 
+                        optionalParam "count"
                             (match field.count with
                             | EtwCount.Single -> None
                             | EtwCount.Fixed num -> Some (string num)
                             | EtwCount.Counted paramName -> Some paramName)
 
-                        optionalParam "length" 
+                        optionalParam "length"
                             (match field.inType with
                             | UnicodeString l
                             | AnsiString l
@@ -199,7 +199,7 @@ let forProvider (provider : EtwProvider) =
         </templates>"""     (String.concat "" (events |> Seq.where (fun e -> not e.parameters.IsEmpty) |> Seq.map buildTemplate))
 
     let buildChannels =
-        let buildChannel (c : EtwChannel) = 
+        let buildChannel (c : EtwChannel) =
             match c.implicit with
             | false ->
                 sprintf """          <channel %s>
@@ -213,7 +213,7 @@ let forProvider (provider : EtwProvider) =
                             optionalParam "message" (c.message |> Option.map (fun _ -> sprintf "$(string.%s.channel.%s.message)" provider.name c.symbol))
                         ] |> String.concat " ")
             | true ->
-                sprintf 
+                sprintf
                     "          <importChannel %s/>"
                     ([
                         mandatoryParam "name" c.name
@@ -231,7 +231,7 @@ let forProvider (provider : EtwProvider) =
         let buildLevel (l : EtwLevel) =
             sprintf """<level %s>
           </level>
-          """ 
+          """
                   ([
                     mandatoryParam "name" l.name
                     mandatoryParam "symbol" l.symbol
@@ -246,7 +246,7 @@ let forProvider (provider : EtwProvider) =
           %s</levels>
         """         (String.concat "" (levels |> Seq.map buildLevel))
 
-    let buildStringTable () = 
+    let buildStringTable () =
         let buildString entityName identifier =
             function
             | None -> ""
@@ -262,11 +262,11 @@ let forProvider (provider : EtwProvider) =
         let buildOpcodeString  (o : EtwOpcode)  = buildString "opcode"  o.symbol          o.message
         let buildKeywordString (k : EtwKeyword) = buildString "Keyword" k.symbol          k.message
 
-        let buildMapString (map:EtwMap) = 
+        let buildMapString (map:EtwMap) =
             let inner (name : string, num) =
                 let message =
                     match map.prefix with
-                    | Some p -> 
+                    | Some p ->
                         match map.name.IndexOf(p) with
                         | -1 -> name
                         | x -> name.Substring(x)
@@ -275,7 +275,7 @@ let forProvider (provider : EtwProvider) =
         <string id="%s.map.%s.%d.message" value="%s">
         </string>"""    provider.name map.name num message
 
-            map.elements 
+            map.elements
             |> Seq.map inner
             |> String.concat ""
 
@@ -301,7 +301,7 @@ let forProvider (provider : EtwProvider) =
       </stringTable>
     </resources>
   </localization>
-</instrumentationManifest>""" 
+</instrumentationManifest>"""
         (buildProvider ())
         (buildEvents provider.events)
         (buildLevels (provider.levels |> List.where (fun l -> not l.implicit)))

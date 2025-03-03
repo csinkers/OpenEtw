@@ -26,7 +26,7 @@ type ExtendedData =
         let reserved2 = s.UInt16("reserved2", 0us) // Does this indicate if there's another extended data item following this one?
         let size = int (s.UInt16("size",      0us))
 
-        if (int fullSize <> size + 8) then 
+        if (int fullSize <> size + 8) then
             failwith "Reserved1 was expected to be size + 8 when decoding extended event data"
 
         let arrayField (typeConstructor : byte array -> 'a) =
@@ -39,20 +39,20 @@ type ExtendedData =
             | 0x2us -> arrayField Sid
             | 0x3us -> arrayField TsId
             | 0x4us -> arrayField InstanceInfo
-            | 0x5us -> 
+            | 0x5us ->
                 let matchId = s.UInt64("matchId", 0UL)
-                let addresses = 
-                    List.ofSeq <| seq { 
-                        for _ in [8..4..size-1] do 
+                let addresses =
+                    List.ofSeq <| seq {
+                        for _ in [8..4..size-1] do
                             yield (s.UInt32("address", 0u))
                     }
                 StackTrace32 (matchId, addresses)
 
-            | 0x6us -> 
+            | 0x6us ->
                 let matchId = s.UInt64("matchId", 0UL)
-                let addresses = 
-                    List.ofSeq <| seq { 
-                        for _ in [8..8..size-1] do 
+                let addresses =
+                    List.ofSeq <| seq {
+                        for _ in [8..8..size-1] do
                             yield (s.UInt64("address", 0UL))
                     }
                 StackTrace64 (matchId, addresses)
@@ -67,7 +67,7 @@ type ExtendedData =
             | _ -> failwith "Unknown extended data type encountered"
 
         if(size % 8 <> 0) then
-            s.Pad("", (Util.paddingBytes size), 0uy)
+            s.Pad(Util.paddingBytes size)
 
         [value] // TODO: Multiple extended data items
 
@@ -121,7 +121,7 @@ type ExtendedData =
 
         let paddingBytes = Util.paddingBytes size
         if (paddingBytes > 0) then
-            s.Pad("padding", paddingBytes, 0uy)
+            s.Pad(paddingBytes)
 
 [<Flags>]
 type EventFlag =
@@ -159,7 +159,7 @@ module EventFlag =
 
     let fromUInt16 = LanguagePrimitives.EnumOfValue
     let info (x : EventFlag) =
-            let str = 
+            let str =
                 if x = EventFlag.None then "None" else
                 valueLookup
                 |> Seq.choose (fun (v, name) -> if (x &&& v <> EventFlag.None) then Some name else None)
@@ -179,11 +179,11 @@ type EventLevelConverter() =
     interface IConverter<byte, EventLevel> with
         member x.FromNumeric v =
             match v with
-            | 1uy -> Critical      
-            | 2uy -> Error         
-            | 3uy -> Warning       
-            | 4uy -> Informational 
-            | 5uy -> Verbose       
+            | 1uy -> Critical
+            | 2uy -> Error
+            | 3uy -> Warning
+            | 4uy -> Informational
+            | 5uy -> Verbose
             | n   -> Custom (n, "Unknown")
 
         member x.ToNumeric v =
@@ -196,8 +196,8 @@ type EventLevelConverter() =
             | Verbose       -> 5uy
             | Custom (n, _) -> n
 
-        member x.FromSymbolic name = Custom (0xffuy, name)  
-        member x.ToSymbolic v = 
+        member x.FromSymbolic name = Custom (0xffuy, name)
+        member x.ToSymbolic v =
             match v with
             | Always        -> "Always"
             | Critical      -> "Critical"
@@ -211,8 +211,12 @@ type EventLevelConverter() =
 module EventLevel =
     let converter = EventLevelConverter() :> IConverter<byte, EventLevel>
     let toInt v = converter.ToNumeric v |> int
-    let innerSerdes (n:string) (v:byte) (s:ISerializer) = s.UInt8(n, v, 0uy)
-    let serdes (name : string) value (s : ISerializer) = s.Transform(name, value, innerSerdes, converter)
+    let serdes (name : string) value (s : ISerializer) =
+        s.Transform(
+            name,
+            value,
+            (fun n1 v1 (s1 : ISerializer) -> s1.UInt8(n1, v1)),
+            converter)
 
 [<Flags>]
 type EventProperty =
@@ -247,8 +251,8 @@ module EventProperty =
 
     let fromUInt16 = LanguagePrimitives.EnumOfValue
     let info (x : EventProperty) =
-        let str = 
-            if x = EventProperty.None then "None" 
+        let str =
+            if x = EventProperty.None then "None"
             else
                 valueLookup
                 |> Seq.choose (fun (v, name) -> if (x &&& v <> EventProperty.None) then Some name else None)
@@ -317,12 +321,12 @@ type EtlEvent() =
 
         let payloadSize = int <| (endOffset - s.Offset)
         if (payloadSize < 0) then failwith "Negative event payload size"
-        if (payloadSize > 0) then 
+        if (payloadSize > 0) then
             x.payload <- s.Bytes("payload", x.payload, payloadSize) // 50
 
         let paddingBytes = Util.paddingBytes x.Size
         if (paddingBytes > 0) then
-            s.Pad("padding", paddingBytes, 0uy)
+            s.RepeatU8("padding", 0uy, paddingBytes)
 
     member x.Serialize (s : ISerializer) =
         let headerType = if x.is64bit then EtlHeaderType.EventHeader64 else EtlHeaderType.EventHeader64
@@ -338,8 +342,8 @@ type EtlEvent() =
     static member Deserialize (s : ISerializer) size headerType =
         let x = EtlEvent()
 
-        x.is64bit <- 
-            match headerType with 
+        x.is64bit <-
+            match headerType with
             | EtlHeaderType.EventHeader32 -> false
             | EtlHeaderType.EventHeader64 -> true
             | headerType -> failwithf "Unexpected header type parsing event: %s" (string headerType)
