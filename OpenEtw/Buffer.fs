@@ -109,7 +109,7 @@ type EtlBuffer() =
     member val lowPointer     = 0UL with get, set
     member val events         = new System.Collections.Generic.List<BufferEvent>() with get
 
-    member private x.Common (s : ISerializer) =
+    member private x.Common (s : ISerdes) =
         x.bufferSize     <- s.Int32("bufferSize",     x.bufferSize)     // 0
         x.savedOffset    <- s.Int32("savedOffset",    x.savedOffset)    // 4
         x.currentOffset  <- s.Int32("currentOffset",  x.currentOffset)  // 8
@@ -128,7 +128,7 @@ type EtlBuffer() =
         x.lowPointer     <- s.UInt64("lowPtr",  x.lowPointer)           // 40
 
     member x.Clone() = x.MemberwiseClone() :?> EtlBuffer
-    member x.Serialize (s : ISerializer) =
+    member x.Serialize (s : ISerdes) =
         x.Common s
         s.Begin()
         x.events |> Seq.iteri (fun i e -> // 48
@@ -141,7 +141,7 @@ type EtlBuffer() =
         if (paddingBytes > 0) then
             s.Pad(paddingBytes, 0xFFuy)
 
-    static member Deserialize (s : ISerializer) =
+    static member Deserialize (s : ISerdes) =
         let x = EtlBuffer()
         let startOffset = s.Offset
         x.Common s

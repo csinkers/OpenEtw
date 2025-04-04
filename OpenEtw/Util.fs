@@ -36,8 +36,8 @@ let (|Prefix|_|) (p:string) (s:string) =
     if (s.StartsWith p) then Some (s.Substring <| p.Length)
     else None
 
-let buildReader br = new GenericBinaryReader(br, br.BaseStream.Length, fun b -> System.Text.Encoding.UTF8.GetString(b))
-let buildWriter bw = new GenericBinaryWriter(bw, fun s -> System.Text.Encoding.UTF8.GetBytes(s))
+let buildReader (br : System.IO.BinaryReader) = new ReaderSerdes(br, br.BaseStream.Length, fun b -> System.Text.Encoding.UTF8.GetString(b))
+let buildWriter (bw : System.IO.BinaryWriter) = new WriterSerdes(bw, fun s -> System.Text.Encoding.UTF8.GetBytes(s))
 
 (*
 module Seq =

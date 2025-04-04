@@ -17,7 +17,7 @@ type EtlTraceEvent() =
     member x.Size with get() = x.HeaderSize + x.payload.Length
     member x.Clone() = x.MemberwiseClone() :?> EtlTraceEvent
 
-    member private x.Common (s : ISerializer) size =
+    member private x.Common (s : ISerdes) size =
         x.hookId     <- s.UInt32("hookId",     x.hookId)     // 4
         x.threadId   <- s.UInt32("threadId",   x.threadId)   // 8
         x.processId  <- s.UInt32("processId",  x.processId)  // C
@@ -35,7 +35,7 @@ type EtlTraceEvent() =
         if (paddingBytes > 0) then
             s.Pad(paddingBytes)
 
-    member x.Serialize (s : ISerializer) =
+    member x.Serialize (s : ISerdes) =
         let headerType = if x.is64bit then EtlHeaderType.FullHeader64 else EtlHeaderType.FullHeader32
         if (x.Size > int UInt16.MaxValue) then failwith "Payload too large"
 
@@ -44,7 +44,7 @@ type EtlTraceEvent() =
         s.EnumU16("headerType", headerType) |> ignore // 2
         x.Common s x.Size
 
-    static member Deserialize (s : ISerializer) (size : uint16) headerType =
+    static member Deserialize (s : ISerdes) (size : uint16) headerType =
         let x = EtlTraceEvent()
 
         match headerType with

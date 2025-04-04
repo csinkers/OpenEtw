@@ -20,7 +20,7 @@ type EtlInstanceGuidEvent() =
     member x.Size with get() = x.HeaderSize + x.payload.Length
     member x.Clone() = x.MemberwiseClone() :?> EtlInstanceGuidEvent
 
-    member private x.Common (s : ISerializer) size =
+    member private x.Common (s : ISerdes) size =
         x.version          <- s.UInt32("version",          x.version)          // 4
         x.threadId         <- s.UInt32("threadId",         x.threadId)         // 8
         x.processId        <- s.UInt32("processId",        x.processId)        // C
@@ -41,7 +41,7 @@ type EtlInstanceGuidEvent() =
         if (paddingBytes > 0) then
             s.Pad(paddingBytes)
 
-    member x.Serialize (s : ISerializer) =
+    member x.Serialize (s : ISerdes) =
         let headerType = if x.is64bit then EtlHeaderType.Instance64 else EtlHeaderType.Instance32
         if (x.Size > int UInt16.MaxValue) then failwith "Payload too large"
 
@@ -50,7 +50,7 @@ type EtlInstanceGuidEvent() =
         s.EnumU16("headerType", headerType) |> ignore  // 2
         x.Common s (uint16 x.Size)
 
-    static member Deserialize (s : ISerializer) size headerType =
+    static member Deserialize (s : ISerdes) size headerType =
         let x = EtlInstanceGuidEvent()
 
         match headerType with

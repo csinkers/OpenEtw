@@ -26,7 +26,7 @@
 
   <ItemGroup>
     <PackageReference Include="FParsec" Version="1.1.1" />
-    <PackageReference Include="SerdesNet" Version="2.0.1" />
+    <PackageReference Include="SerdesNet" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>

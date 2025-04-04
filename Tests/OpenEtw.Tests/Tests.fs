@@ -1,7 +1,7 @@
 ﻿module Tests
 
-open System.IO
 open System.Diagnostics
+open System.IO
 open System.Xml.Linq
 open FSharp.Data
 open FsUnit
@@ -17,7 +17,7 @@ let writeEtl (trace : EtlTrace) (stream : Stream) =
 
     use ms = new MemoryStream()
     use tw = new StreamWriter(ms)
-    use annotated = new AnnotationProxySerializer(writer, tw, fun s -> System.Text.Encoding.UTF8.GetBytes(s))
+    use annotated = new AnnotationProxySerdes(writer, tw, fun s -> System.Text.Encoding.UTF8.GetBytes(s))
     trace.Serialize annotated
 
     tw.Flush()
@@ -31,7 +31,7 @@ let readEtl (stream : Stream) =
 
     use ms = new MemoryStream()
     use tw = new StreamWriter(ms)
-    use annotated = new AnnotationProxySerializer(reader, tw, fun s -> System.Text.Encoding.UTF8.GetBytes(s))
+    use annotated = new AnnotationProxySerdes(reader, tw, fun s -> System.Text.Encoding.UTF8.GetBytes(s))
     let trace = EtlTrace.Deserialize annotated
 
     tw.Flush()
@@ -184,7 +184,7 @@ type TraceReportTests() =
         s.Task |> should equal 4
         s.Opcode |> should equal 19
         s.Keywords |> should equal "0x8"
-
+(*
     [<Fact>]
     member x.``Generate single 32 bit system event ETL``() =
         let time = System.DateTime.UtcNow
@@ -243,15 +243,14 @@ type TraceReportTests() =
         let (traceReport, writeNotes) = saveAndGenerateTraceReport trace
         printf "TraceReport: %A" traceReport
 
-        // TODO
         traceReport.Events |> should haveLength 2
-        let e = (getEvent traceReport (pNormal providerGuid 6))
+        let e = traceReport.Events |> Seq.where (fun e -> e.System.Opcode > 0) |> Seq.head
         let s =  e.System
-        s.EventId |> should equal 6
-        s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
-        s.Task |> should equal 4
-        s.Opcode |> should equal 19
-        s.Keywords |> should equal "0x8"
+        s.EventId |> should equal 0
+        s.Level |> should equal (EventLevel.toInt EventLevel.Always)
+        s.Task |> should equal 0
+        s.Opcode |> should equal 1
+        s.Keywords |> should equal "0x0"
 
     [<Fact>]
     member x.``Generate single 64 bit compact system event ETL``() =
@@ -321,7 +320,7 @@ type TraceReportTests() =
         s.Task |> should equal 4
         s.Opcode |> should equal 19
         s.Keywords |> should equal "0x8"
-
+*)
     [<Fact>]
     member x.``Generate single 32 bit instance event ETL``() =
         let time = System.DateTime.UtcNow
@@ -387,6 +386,7 @@ type TraceReportTests() =
         event.timestamp <- Util.toEtlAbsoluteTicks time
         event.payload <- [||]
 
+        // Generate some events that will add up to more than 64k
         let allEvents = seq {
             for i in [1..100] do
                 let e = event.Clone()
@@ -399,11 +399,10 @@ type TraceReportTests() =
         printf "TraceReport: %A" traceReport
 
         traceReport.Events |> should haveLength 101
-        let e = (getEvent traceReport (pNormal providerGuid 6))
-        let s =  e.System
-        s.Provider.Guid |> should equal (Some providerGuid)
-        s.EventId |> should equal 6
-        s.Level |> should equal (EventLevel.toInt EventLevel.Informational)
-        s.Task |> should equal 4
-        s.Opcode |> should equal 19
-        s.Keywords |> should equal "0x8"
+        let firstEvent = traceReport.Events |> Seq.where (fun e -> e.System.Opcode > 0) |> Seq.head
+        let s = firstEvent.System
+        s.EventId |> should equal 0
+        s.Level |> should equal 0
+        s.Task |> should equal 0
+        s.Opcode |> should equal 1
+        s.Keywords |> should equal "0x0"

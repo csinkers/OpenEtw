@@ -46,7 +46,7 @@ type EtlSystemEvent() =
     member x.Size with get() = EtlHeaderType.size x.headerType + x.payload.Length
     member x.Clone() = x.MemberwiseClone() :?> EtlSystemEvent
 
-    member private x.Serdes (s:ISerializer) size =
+    member private x.Serdes (s:ISerdes) size =
         let hasContext, hasTiming =
             match x.headerType with
             | EtlHeaderType.System32   | EtlHeaderType.System64   -> true, true
@@ -74,7 +74,7 @@ type EtlSystemEvent() =
         if (paddingBytes > 0) then
             s.Pad(paddingBytes)
 
-    member x.Serialize (s:ISerializer) =
+    member x.Serialize (s:ISerdes) =
         s.Comment "System Event"
 
         match x.headerType with // Sanity checks
@@ -93,7 +93,7 @@ type EtlSystemEvent() =
         s.UInt16("size", (uint16 x.Size)) |> ignore // 4
         x.Serdes s x.Size
 
-    static member Deserialize (s : ISerializer) version headerType =
+    static member Deserialize (s : ISerdes) version headerType =
         let x = EtlSystemEvent()
 
         x.version <- version

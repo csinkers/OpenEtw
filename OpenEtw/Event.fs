@@ -20,7 +20,7 @@ type ExtendedData =
     | ProvTraits        of byte array
     | ProcessStartKey   of byte array
 
-    static member Deserialize (s : ISerializer) =
+    static member Deserialize (s : SerdesNet.ISerdes) =
         let fullSize  = s.UInt16("fullSize",  0us)
         let dataType  = s.UInt16("dataType",  0us)
         let reserved2 = s.UInt16("reserved2", 0us) // Does this indicate if there's another extended data item following this one?
@@ -71,7 +71,7 @@ type ExtendedData =
 
         [value] // TODO: Multiple extended data items
 
-    member x.Serialize (s : ISerializer) =
+    member x.Serialize (s : ISerdes) =
         let constant x = (fun () -> x)
 
         let enumValue, name, size =
@@ -175,48 +175,42 @@ type EventLevel =
     | Verbose
     | Custom of byte * string
 
-type EventLevelConverter() =
-    interface IConverter<byte, EventLevel> with
-        member x.FromNumeric v =
-            match v with
-            | 1uy -> Critical
-            | 2uy -> Error
-            | 3uy -> Warning
-            | 4uy -> Informational
-            | 5uy -> Verbose
-            | n   -> Custom (n, "Unknown")
+    static member FromNumeric v =
+        match v with
+        | 1uy -> Critical
+        | 2uy -> Error
+        | 3uy -> Warning
+        | 4uy -> Informational
+        | 5uy -> Verbose
+        | n   -> Custom (n, "Unknown")
 
-        member x.ToNumeric v =
-            match v with
-            | Always        -> 0uy
-            | Critical      -> 1uy
-            | Error         -> 2uy
-            | Warning       -> 3uy
-            | Informational -> 4uy
-            | Verbose       -> 5uy
-            | Custom (n, _) -> n
+    static member ToNumeric v =
+        match v with
+        | Always        -> 0uy
+        | Critical      -> 1uy
+        | Error         -> 2uy
+        | Warning       -> 3uy
+        | Informational -> 4uy
+        | Verbose       -> 5uy
+        | Custom (n, _) -> n
 
-        member x.FromSymbolic name = Custom (0xffuy, name)
-        member x.ToSymbolic v =
-            match v with
-            | Always        -> "Always"
-            | Critical      -> "Critical"
-            | Error         -> "Error"
-            | Warning       -> "Warning"
-            | Informational -> "Informational"
-            | Verbose       -> "Verbose"
-            | Custom (_, s) -> s
+    static member FromSymbolic name = Custom (0xffuy, name)
+    static member ToSymbolic v =
+        match v with
+        | Always        -> "Always"
+        | Critical      -> "Critical"
+        | Error         -> "Error"
+        | Warning       -> "Warning"
+        | Informational -> "Informational"
+        | Verbose       -> "Verbose"
+        | Custom (_, s) -> s
 
 [<CompilationRepresentation(CompilationRepresentationFlags.ModuleSuffix)>]
 module EventLevel =
-    let converter = EventLevelConverter() :> IConverter<byte, EventLevel>
-    let toInt v = converter.ToNumeric v |> int
-    let serdes (name : string) value (s : ISerializer) =
-        s.Transform(
-            name,
-            value,
-            (fun n1 v1 (s1 : ISerializer) -> s1.UInt8(n1, v1)),
-            converter)
+    let toInt v = EventLevel.ToNumeric v |> int
+    let serdes (name : string) value (s : ISerdes) =
+        let result = s.UInt8(name, EventLevel.ToNumeric value)
+        (EventLevel.FromNumeric result)
 
 [<Flags>]
 type EventProperty =
@@ -284,7 +278,7 @@ type EtlEvent() =
     member x.Size with get() = x.HeaderSize + x.payload.Length // TODO: Add in extended data size
     member x.Clone() = x.MemberwiseClone() :?> EtlEvent
 
-    member private x.Common (s : ISerializer) size =
+    member private x.Common (s : ISerdes) size =
         let startOffset = s.Offset - 4L
         let endOffset = startOffset + (int64 size)
 
@@ -305,7 +299,7 @@ type EtlEvent() =
         x.userTime   <- s.Int32  ("uTime",      x.userTime)   // 3c
         x.activityId <- s.Guid   ("activityId", x.activityId) // 40
 
-        let extendedDataSerdes (_:string) (existing:ExtendedData list) (s1 : ISerializer) =
+        let extendedDataSerdes (_:string) (existing:ExtendedData list) (s1 : ISerdes) =
             let hasExtended = ((x.flags &&& EventFlag.ExtendedInfo) <> EventFlag.None)
             let result =
                 match (s1.IsReading(), hasExtended) with
@@ -326,9 +320,9 @@ type EtlEvent() =
 
         let paddingBytes = Util.paddingBytes x.Size
         if (paddingBytes > 0) then
-            s.RepeatU8("padding", 0uy, paddingBytes)
+            s.Pad("padding", paddingBytes)
 
-    member x.Serialize (s : ISerializer) =
+    member x.Serialize (s : ISerdes) =
         let headerType = if x.is64bit then EtlHeaderType.EventHeader64 else EtlHeaderType.EventHeader64
         if (x.Size > int UInt16.MaxValue) then failwith "Payload too large"
         if (((x.flags &&& EventFlag.ExtendedInfo) = EventFlag.None) <> (x.extendedData.Length = 0)) then
@@ -339,7 +333,7 @@ type EtlEvent() =
         s.EnumU16("headerType", headerType) |> ignore // 2
         x.Common s x.Size
 
-    static member Deserialize (s : ISerializer) size headerType =
+    static member Deserialize (s : ISerdes) size headerType =
         let x = EtlEvent()
 
         x.is64bit <-
@@ -376,7 +370,7 @@ type BufferEvent =
             | InstanceGuid y -> y.timestamp
             | Error          -> failwith "Error"
 
-    member x.Serialize (s : ISerializer) =
+    member x.Serialize (s : ISerdes) =
         match x with
         | System y       -> y.Serialize s
         | Event y        -> y.Serialize s
@@ -384,7 +378,7 @@ type BufferEvent =
         | InstanceGuid y -> y.Serialize s
         | Error          -> failwith "Error"
 
-    static member Deserialize (s : ISerializer) =
+    static member Deserialize (s : ISerdes) =
         let firstWord = s.UInt16("size", 0us)
         let headerType = s.EnumU16("headerType", EtlHeaderType.Error)
 

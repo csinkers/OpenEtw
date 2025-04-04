@@ -170,7 +170,7 @@ type EtlTrace() =
 
     member x.Clone() = x.MemberwiseClone() :?> EtlTrace
 
-    member private x.Common (s : ISerializer) =
+    member private x.Common (s : ISerdes) =
         let systemHeaderSize = 0x4c
         let startOffset = s.Offset
 
@@ -239,7 +239,7 @@ type EtlTrace() =
         x.logFileNameId <- s.Int64("logFileNameId", x.logFileNameId) // a8
         x.unkb0i        <- s.Int32("unkb0i",        x.unkb0i)        // b0 (something timezone related, have seen value of -60 i.e. 0xffffffc4)
 
-        let serdesTime (name:string) (serializer:ISerializer) v = Util.fromEtlAbsoluteTicks <| serializer.Int64(name, (v |> Util.toEtlAbsoluteTicks))
+        let serdesTime (name:string) (serializer:ISerdes) v = Util.fromEtlAbsoluteTicks <| serializer.Int64(name, (v |> Util.toEtlAbsoluteTicks))
 
         // TIME_ZONE_INFORMATION
         x.timezone1 <- s.FixedLengthString("timezone1", x.timezone1, EtlTrace.timeZoneLength) // b4
@@ -267,7 +267,7 @@ type EtlTrace() =
             s.Pad(((x/8)*8), 0xFFuy)
         | _ -> ()
 
-        let meta (s:ISerializer) (name:string) reader writer =
+        let meta (s:ISerdes) (name:string) reader writer =
             s.Begin(name)
             if s.IsReading()
             then reader s
@@ -300,8 +300,8 @@ type EtlTrace() =
                 s.Int32("totalBuffers", (numBuffers + 1)) |> ignore
             )
 
-    member x.Serialize (s : ISerializer) = x.Common s
-    static member Deserialize (s : ISerializer) =
+    member x.Serialize (s : ISerdes) = x.Common s
+    static member Deserialize (s : ISerdes) =
         let x = EtlTrace()
         x.Common s
         x

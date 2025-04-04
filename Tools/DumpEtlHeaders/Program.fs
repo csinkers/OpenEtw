@@ -14,7 +14,7 @@ let main argv =
         use ms = new MemoryStream()
         use bw = new BinaryWriter(ms)
         use innerWriter = Util.buildWriter(bw)
-        use writer = new AnnotationProxySerializer(innerWriter, System.Console.Out, fun s -> System.Text.Encoding.UTF8.GetBytes(s))
+        use writer = new AnnotationProxySerdes(innerWriter, System.Console.Out, fun s -> System.Text.Encoding.UTF8.GetBytes(s))
 
         try
             trace.Serialize writer

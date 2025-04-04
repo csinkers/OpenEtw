@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\OpenEtw\OpenEtw.fsproj" />
+    <ProjectReference Include="..\..\OpenEtw\OpenEtw.NetFramework.fsproj" />
   </ItemGroup>
 
   <ItemGroup>
