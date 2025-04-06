@@ -39,7 +39,7 @@ let forProvider (provider : EtwProvider) =
                             | [] -> None
                             | _ -> e.keywords |> String.concat " " |> (fun s -> s + " ") |> Some
                     optionalParam "message" <| (e.message |> Option.map (fun _ -> sprintf "$(string.%s.event.%d.message)" provider.name e.id.Value))
-                ] |> List.where (fun x -> x <> "") |> String.concat " ")
+                ] |> List.where ((<>) "") |> String.concat " ")
 
         function
         | [] -> ""
@@ -58,7 +58,7 @@ let forProvider (provider : EtwProvider) =
                     mandatoryParam "symbol" opcode.symbol
                     mandatoryParam "value" (string opcode.id)
                     optionalParam "message" (opcode.message |> Option.map (fun _ -> $"$(string.{provider.name}.opcode.{opcode.symbol}.message)"))
-                ] |> String.concat " ")
+                ] |> List.where ((<>) "") |> String.concat " ")
 
         function
         | [] -> ""
@@ -78,7 +78,7 @@ let forProvider (provider : EtwProvider) =
                     optionalParam "symbol" task.symbol
                     optionalParam "eventGUID" (task.guid |> Option.map (fun g -> g.ToString("B").ToUpper()))
                     optionalParam "message" (task.message |> Option.map (fun _ -> sprintf "$(string.%s.task.%s.message)" provider.name (task.symbol |?? task.name)))
-                ] |> String.concat " ")
+                ] |> List.where ((<>) "") |> String.concat " ")
 
         function
         | [] -> ""
@@ -101,7 +101,7 @@ let forProvider (provider : EtwProvider) =
                                                  sprintf "$(string.%s.Keyword.%s.message)"
                                                      provider.name
                                                      k.symbol))
-                ] |> String.concat " ")
+                ] |> List.where ((<>) "") |> String.concat " ")
         function
         | [] -> ""
         | keywords ->
@@ -181,7 +181,7 @@ let forProvider (provider : EtwProvider) =
                                 | EtwLength.Counted paramName -> Some paramName
                             | _ -> None)
 
-                    ] |> String.concat " ")
+                    ] |> List.where ((<>) "") |> String.concat " ")
 
             sprintf """
           <template tid="%s">%s
@@ -208,14 +208,14 @@ let forProvider (provider : EtwProvider) =
                             mandatoryParam "enabled" (if c.enabled then "true" else "false")
                             optionalParam "isolation" (c.isolation |> Option.map (fun i -> i.ToString()))
                             optionalParam "message" (c.message |> Option.map (fun _ -> sprintf "$(string.%s.channel.%s.message)" provider.name c.symbol))
-                        ] |> String.concat " ")
+                        ] |> List.where ((<>) "") |> String.concat " ")
             | true ->
                 sprintf
                     "          <importChannel %s/>"
                     ([
                         mandatoryParam "name" c.name
                         mandatoryParam "chid" c.chid
-                    ] |> String.concat " ")
+                    ] |> List.where ((<>) "") |> String.concat " ")
         function
         | [] -> ""
         | channels ->
@@ -234,7 +234,7 @@ let forProvider (provider : EtwProvider) =
                     mandatoryParam "symbol" l.symbol
                     mandatoryParam "value" (string l.id)
                     optionalParam "message" (l.message |> Option.map (fun _ -> sprintf "$(string.%s.level.%s.message)" provider.name l.symbol))
-                  ] |> String.concat " ")
+                  ] |> List.where ((<>) "") |> String.concat " ")
 
         function
         | [] -> ""
