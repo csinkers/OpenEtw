@@ -233,7 +233,8 @@ type EtwType =
         | UInt64            -> "win:UInt64"       , "const unsigned __int64",  "UInt64"       , None
         | Float             -> "win:Float"        , "const float"           ,  "Float"        , None
         | Double            -> "win:Double"       , "const double"          ,  "Double"       , None
-        | Bool              -> "win:Boolean"      , "const bool"            ,  "Bool"         , None
+        // Note: depending on the compiles, bool can be 1 byte, 4 bytes etc. ETW expects 32-bit bools, so we need to force it to use the specific size.
+        | Bool              -> "win:Boolean"      , "const __int32"         ,  "Bool"         , None
         | Binary len        -> "win:Binary"       , "const BYTE *"          ,  "Binary"       , None
         | Guid              -> "win:GUID"         , "const GUID *"          ,  "Guid"         , None
         | Pointer           -> "win:Pointer"      , "const void *"          ,  "Pointer"      , None

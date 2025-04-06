@@ -54,6 +54,39 @@ type BasicTests() =
         TraceRunner.runTest (nameof this.TestSingleEvent) provider events
 
     [<Fact>]
+    member this.TestBoolEvent() =
+        let events =
+            [{ EtwEvent.empty with
+                id = Some 0us
+                name = "Test"
+                cppName = "Test"
+                symbol = "Test"
+                parameters =
+                     [
+                        {name = "bTest"
+                         cppType = "bool"
+                         inType = EtwType.Bool
+                         outType = EtwOutType.Bool
+                         count = EtwCount.Single
+                        }
+                     ] },
+                [ // Test cases
+                    [ ("bTest", true  :> obj) ] |> Map.ofList
+                    [ ("bTest", false :> obj) ] |> Map.ofList
+                ]
+            ]
+
+        let name = "Provider"
+        let provider =
+            {EtwProvider.empty with
+                className = name; name = name; symbol = name
+                guid      = Util.providerToGuid "Provider"
+                events    = events |> List.map fst
+            }
+
+        TraceRunner.runTest (nameof this.TestBoolEvent) provider events
+
+    [<Fact>]
     member this.TestComplex() =
         let named n i = {EtwEvent.empty with id = Some i; name = n; cppName = n; symbol = n}
         let events =
