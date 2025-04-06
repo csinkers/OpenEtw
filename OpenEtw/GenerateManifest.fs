@@ -191,7 +191,8 @@ let forProvider (provider : EtwProvider) =
         function
         | [] -> ""
         | events ->
-            sprintf """<templates>%s
+            sprintf """
+        <templates>%s
         </templates>"""     (String.concat "" (events |> Seq.where (fun e -> not e.parameters.IsEmpty) |> Seq.map buildTemplate))
 
     let buildChannels =
