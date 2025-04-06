@@ -19,7 +19,7 @@ let environmentSetupBatchFiles = [
         @"C:\Program Files (x86)\Microsoft Visual Studio 9.0\VC\vcvars32.bat"
     ]
 
-let environmentSetupBatchFile = 
+let environmentSetupBatchFile =
     match List.tryFind System.IO.File.Exists environmentSetupBatchFiles with
     | Some file -> file
     | None -> failwithf "Could not find VS install"
@@ -41,12 +41,12 @@ let indentMultilineString str indent =
     ) str
 
 let runExe options =
-    let startInfo = 
+    let startInfo =
         ProcessStartInfo(
-            options.name, 
-            options.arguments, 
-            WorkingDirectory = options.workingDirectory, 
-            RedirectStandardOutput = true, 
+            options.name,
+            options.arguments,
+            WorkingDirectory = options.workingDirectory,
+            RedirectStandardOutput = true,
             RedirectStandardError = true,
             UseShellExecute = false,
             CreateNoWindow = true
@@ -63,12 +63,12 @@ let runExe options =
             return raw.Trim()
         }
 
-    let (stdout, stderr) = 
+    let (stdout, stderr) =
         [
             readAsync proc.StandardOutput
             readAsync proc.StandardError
-        ] 
-        |> Async.Parallel 
+        ]
+        |> Async.Parallel
         |> Async.RunSynchronously
         |> (fun x -> match x with | [|a; b|] -> (a,b) | _ -> failwith "Unexpected array result when reading output")
 
@@ -83,19 +83,28 @@ let runExe options =
 
     proc.ExitCode, stdout, stderr
 
-let runTest testName provider events =
+/// <summary>
+/// Generates a C++ implementation for the given provider definition as well as a
+/// test harness. The test harness will emit the events defined in events.
+/// </summary>
+let runTest
+        (testName : string)
+        (provider : EtwProvider)
+        (events : (EtwEvent * (CppTestHarness.EventTestCase list)) list) =
+
     let stopwatch = Stopwatch.StartNew()
     let testPath = Path.Combine(baseTestPath, testName)
-    let originalManifest = Path.Combine(testPath, "Test.man")
+
+    let originalManifest   = Path.Combine(testPath, "Test.man")
     let parsedManifestPath = Path.Combine(testPath, "Parsed.man")
-    let headerPath = Path.Combine(testPath, "Provider.h")
-    let testHarnessPath = Path.Combine(testPath, "Main.cpp")
-    let makefilePath = Path.Combine(testPath, "Makefile")
-    let etwHeaderPath = Path.Combine(testPath, "etw.h")
-    let etlPath = Path.Combine(testPath, "Test.etl")
+    let headerPath         = Path.Combine(testPath, "Provider.h")
+    let testHarnessPath    = Path.Combine(testPath, "Main.cpp")
+    let makefilePath       = Path.Combine(testPath, "Makefile")
+    let etwHeaderPath      = Path.Combine(testPath, "etw.h")
+    let etlPath            = Path.Combine(testPath, "Test.etl")
     let buildBatchFilePath = Path.Combine(testPath, "build.bat")
-    let logPath = Path.Combine(testPath, "Log.txt")
-    let exePath = Path.Combine(testPath, "Test.exe")
+    let logPath            = Path.Combine(testPath, "Log.txt")
+    let exePath            = Path.Combine(testPath, "Test.exe")
 
     ensureDir baseTestPath
     ensureDir testPath
@@ -103,7 +112,7 @@ let runTest testName provider events =
     let manifest = Public.generateManifest provider
     File.WriteAllText(originalManifest, manifest)
 
-    let headerOptions = 
+    let headerOptions =
         {
             implicitEventNumbering = true
             elideHashedProviderGuid = false
@@ -125,11 +134,11 @@ let runTest testName provider events =
             printfn "Provider parsed from header does not match test provider." // Warn
 
         let cppFilename = System.IO.Path.ChangeExtension(headerName, "cpp")
-        let implementationOptions = 
+        let implementationOptions =
             {
                 insertDebugLogging = true
                 cppFilename = cppFilename
-                headerName = headerName 
+                headerName = headerName
                 etwGenComment = Util.buildEtwGenComment headerPath
             }
 
@@ -147,7 +156,7 @@ let runTest testName provider events =
         let etwHeader = reader.ReadToEnd()
         File.WriteAllText(etwHeaderPath, etwHeader)
 
-        let makefile = 
+        let makefile =
             $"""
 CPPFLAGS=$(CPPFLAGS)
 all: Test.exe
@@ -161,7 +170,7 @@ Test.exe: Main.obj Provider.obj
 @echo off
 call "{environmentSetupBatchFile}"
 nmake
-"""                 
+"""
         File.WriteAllText(buildBatchFilePath, buildBatchFileContent)
 
         use fs = File.Open(logPath, FileMode.Create)

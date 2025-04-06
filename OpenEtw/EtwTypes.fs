@@ -221,28 +221,28 @@ type EtwType =
     | Unresolved of string
     member this.info =
         match this with        // XML type          Canonical type         Header type      Length
-        | UnicodeString len -> "win:UnicodeString", "const wchar_t *"   ,  "UnicodeString", Some len
-        | AnsiString len    -> "win:AnsiString"   , "const char *"      ,  "AnsiString"   , Some len
-        | Int8              -> "win:Int8"         , "const int8_t"      ,  "Int8"         , None
-        | UInt8             -> "win:UInt8"        , "const uint8_t"     ,  "Int16"        , None
-        | Int16             -> "win:Int16"        , "const int16_t"     ,  "Int32"        , None
-        | UInt16            -> "win:UInt16"       , "const uint16_t"    ,  "Int64"        , None
-        | Int32             -> "win:Int32"        , "const int32_t"     ,  "UInt8"        , None
-        | UInt32            -> "win:UInt32"       , "const uint32_t"    ,  "UInt16"       , None
-        | Int64             -> "win:Int64"        , "const int64_t"     ,  "UInt32"       , None
-        | UInt64            -> "win:UInt64"       , "const uint64_t"    ,  "UInt64"       , None
-        | Float             -> "win:Float"        , "const float"       ,  "Float"        , None
-        | Double            -> "win:Double"       , "const double"      ,  "Double"       , None
-        | Bool              -> "win:Boolean"      , "const bool"        ,  "Bool"         , None
-        | Binary len        -> "win:Binary"       , "const BYTE *"      ,  "Binary"       , None
-        | Guid              -> "win:GUID"         , "const GUID *"      ,  "Guid"         , None
-        | Pointer           -> "win:Pointer"      , "const void *"      ,  "Pointer"      , None
-        | FileTime          -> "win:FILETIME"     , "FILETIME"          ,  "FileTime"     , None
-        | SystemTime        -> "win:SYSTEMTIME"   , "const SYSTEMTIME *",  "SystemTime"   , None
-        | Sid               -> "win:SID"          , "const SID *"       ,  "Sid"          , None
-        | HexInt32          -> "win:HexInt32"     , "const int32_t"     ,  "HexInt32"     , None
-        | HexInt64          -> "win:HexInt64"     , "const int64_t"     ,  "HexInt64"     , None
-        | ActivityId        -> "ActivityId"       , "ETW_ACTIVITYID"    ,  "ActivityId"   , None
+        | UnicodeString len -> "win:UnicodeString", "const wchar_t *"       ,  "UnicodeString", Some len
+        | AnsiString len    -> "win:AnsiString"   , "const char *"          ,  "AnsiString"   , Some len
+        | Int8              -> "win:Int8"         , "const __int8"          ,  "Int8"         , None
+        | UInt8             -> "win:UInt8"        , "const unsigned __int8" ,  "Int16"        , None
+        | Int16             -> "win:Int16"        , "const __int16"         ,  "Int32"        , None
+        | UInt16            -> "win:UInt16"       , "const unsigned __int16",  "Int64"        , None
+        | Int32             -> "win:Int32"        , "const __int32"         ,  "UInt8"        , None
+        | UInt32            -> "win:UInt32"       , "const unsigned __int32",  "UInt16"       , None
+        | Int64             -> "win:Int64"        , "const __int64"         ,  "UInt32"       , None
+        | UInt64            -> "win:UInt64"       , "const unsigned __int64",  "UInt64"       , None
+        | Float             -> "win:Float"        , "const float"           ,  "Float"        , None
+        | Double            -> "win:Double"       , "const double"          ,  "Double"       , None
+        | Bool              -> "win:Boolean"      , "const bool"            ,  "Bool"         , None
+        | Binary len        -> "win:Binary"       , "const BYTE *"          ,  "Binary"       , None
+        | Guid              -> "win:GUID"         , "const GUID *"          ,  "Guid"         , None
+        | Pointer           -> "win:Pointer"      , "const void *"          ,  "Pointer"      , None
+        | FileTime          -> "win:FILETIME"     , "FILETIME"              ,  "FileTime"     , None
+        | SystemTime        -> "win:SYSTEMTIME"   , "const SYSTEMTIME *"    ,  "SystemTime"   , None
+        | Sid               -> "win:SID"          , "const SID *"           ,  "Sid"          , None
+        | HexInt32          -> "win:HexInt32"     , "const __int32"         ,  "HexInt32"     , None
+        | HexInt64          -> "win:HexInt64"     , "const __int64"         ,  "HexInt64"     , None
+        | ActivityId        -> "ActivityId"       , "ETW_ACTIVITYID"        ,  "ActivityId"   , None
         | RelatedActivityId -> "RelatedActivityId", "ETW_RELATED_ACTIVITYID", "RelatedActivityId", None
         | Unresolved typeName ->
             failwithf "%s \"%s\""

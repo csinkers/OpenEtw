@@ -37,15 +37,20 @@ open OpenEtw
 type BasicTests() =
     [<Fact>]
     member this.TestSingleEvent() =
-        let event = { EtwEvent.empty with id = Some 0us; name = "Test"; cppName = "Test"; symbol = "Test" }
+        let events =
+            [
+                { EtwEvent.empty with id = Some 0us; name = "Test"; cppName = "Test"; symbol = "Test" },
+                [Map.empty] // Test cases
+            ]
+
         let name = "Provider"
         let provider =
             {EtwProvider.empty with
-                className  = name; name = name; symbol = name
-                guid       = Util.providerToGuid "Provider"
-                events     = [ event ]
+                className = name; name = name; symbol = name
+                guid      = Util.providerToGuid "Provider"
+                events    = events |> List.map fst
             }
-        let events = [ event, Map.empty ]
+
         TraceRunner.runTest (nameof this.TestSingleEvent) provider events
 
     [<Fact>]
@@ -64,23 +69,25 @@ type BasicTests() =
                          outType = EtwOutType.String
                          count = EtwCount.Single}
                      ] },
-                [
-                    "p1", "Foo" :> obj
-                ] |> Map.ofList
+                [ // Test cases
+                    [ "p1", "Foo" :> obj ] |> Map.ofList
+                    [ "p1", ""    :> obj ] |> Map.ofList
+                ]
             ]
 
         let name = "Provider"
         let provider =
             {EtwProvider.empty with
-                className  = name; name = name; symbol = name
-                guid       = Util.providerToGuid "Provider"
-                events     = events |> List.map fst
+                className = name; name = name; symbol = name
+                guid      = Util.providerToGuid "Provider"
+                events    = events |> List.map fst
                 tasks =
                     [
                         {EtwTask.empty with name = "T1"; id = 1us}
                     ]
             }
         TraceRunner.runTest "TestComplex" provider events
+
     // Task, level, channel, opcode, keyword not found
     // Too many bla
     // Bla id out of range
