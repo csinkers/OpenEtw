@@ -56,10 +56,10 @@ public:\
 #define ETW_PROVIDER_END };
 
 // Declarations
-#define ETW_KEYWORD(id, name, ...) // ETW_KEYWORD(id, name, [symbol=]) - Declare a custom keyword. Custom keywords should begin at 256 / 0x100.
+#define ETW_KEYWORD(id, name, ...) static const unsigned __int64 Keyword_##name = id; // ETW_KEYWORD(id, name, [symbol=]) - Declare a custom keyword. Custom keywords should begin at 256 / 0x100.
 #define ETW_OPCODE(id, name, ...) // ETW_OPCODE(id, name, [symbol=], [message=]) - Declare a custom opcode. Custom opcodes should begin at 11 / 0xB.
 #define ETW_CHANNEL(name, type, ...) // ETW_CHANNEL(name, type, [enabled="true|false"], [symbol=], [chid=], [isolation=]) - Declare a custom channel. Custom channels should begin at 12 / 0xC.
-#define ETW_LEVEL(id, name, ...) // ETW_LEVEL(id, name, [symbol=], [message=]) - Declare a custom level. Custom levels should begin at 7.
+#define ETW_LEVEL(id, name, ...) static const unsigned char Level_##name = id; // ETW_LEVEL(id, name, [symbol=], [message=]) - Declare a custom level. Custom levels should begin at 7.
 
 // Default opcodes: win:DcStart win:DcStop win:Extension win:Info win:Receive win:Reply win:Resume win:Send win:Start win:Stop win:Suspend
 // Default keywords: CorrelationHint, AuditSuccess, AuditFailure, SQM, WDIDiag, WDIContext, ResponseTime
