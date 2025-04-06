@@ -6,7 +6,7 @@ type EventPayload = Map<string, obj>
 type CppBuffer = byte array
 
 let coerce<'a> (x:obj) = match x with | :? 'a as t -> t | _ -> failwithf "Could not cast %A to %s" x (typeof<'a>.Name)
-let build (provider:EtwProvider) (events : (EtwEvent * EventPayload) list) bitness =
+let build (provider:EtwProvider) (events : (EtwEvent * EventPayload) list) bitness (* TODO: Handle 32/64 bit *) =
     let perEvent f = events |> List.map f |> String.concat System.Environment.NewLine
     let never _ = None
     let hexVal =
@@ -140,12 +140,14 @@ void main()
         """ provider.className)
 
         (perEvent (fun (e, payload) ->
-            let param name = Map.find name payload
+            let param name = Map.tryFind name payload
             let preamble, parameters =
                 let paramFunc p = 
                     let preambleFormatter, valueFormatter = valueFormatters |> Map.find p.cppType
-                    let value = param p.name
-                    (preambleFormatter (p.name, value), valueFormatter (p.name, value))
+                    let maybeValue = param p.name
+                    match maybeValue with
+                    | Some value -> (preambleFormatter (p.name, value), valueFormatter (p.name, value))
+                    | None -> failwithf "Could not find parameter %s in payload" p.name
 
                 let formatted = e.parameters |> List.map paramFunc
 

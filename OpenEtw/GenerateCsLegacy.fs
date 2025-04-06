@@ -1,7 +1,7 @@
 ﻿module internal OpenEtw.GenerateCsLegacy
 open OpenEtw.Util
 
-let getId typeName collection selector key = 
+let getId typeName collection selector key =
     let pickFunction x =
         let entityId, entityName = selector x
         if (entityName = key) then Some entityId else None
@@ -29,10 +29,10 @@ let csType =
     | EtwType.HexInt64 -> "Int64"
     | x -> failwithf "%A parameters are not currently supported in C# providers" x
 
-let paramDef useMaps (p : EtwEventParam) = 
+let paramDef useMaps (p : EtwEventParam) =
     match useMaps, p.outType with
-    | true, EtwOutType.Map name -> sprintf "%s %s" name p.name
-    | _                         -> sprintf "%s %s" (csType p.inType) p.name
+    | true, EtwOutType.Map name -> $"{name} {p.name}"
+    | _                         -> $"{csType p.inType} {p.name}"
 
 let buildCs (provider : EtwProvider) options =
     let perEvent f = provider.events |> List.map f |> String.concat System.Environment.NewLine
@@ -49,19 +49,19 @@ let buildCs (provider : EtwProvider) options =
             List.fold (|||) 0UL (keywords |> List.map (fun k -> k.id))
 
     [
-        (sprintf """using System;
+        $$"""using System;
 using System.Diagnostics;
 using System.Diagnostics.Eventing;
 using System.Text;
 
-namespace %s
+namespace {{options.csNamespace }}
 {
-    internal class %s : EventProvider
+    internal class {{provider.className }} : EventProvider
     {
         private static object _sync = new object();
-        private static %s _instance;
+        private static {{provider.className }} _instance;
 
-        internal static %s GetInstance()
+        internal static {{provider.className }} GetInstance()
         {
             // https://en.wikipedia.org/wiki/Double-checked_locking#Usage_in_Microsoft_.NET_.28Visual_Basic.2C_C.23.29
             if (_instance == null)
@@ -70,7 +70,7 @@ namespace %s
                 {
                     if (_instance == null)
                     {
-                        _instance = new %s();
+                        _instance = new {{provider.className }}();
                     }
                 }
             }
@@ -78,18 +78,12 @@ namespace %s
             return _instance;
         }
 
-        %s() : base(new Guid("%s"))
+        {{provider.className }}() : base(new Guid("{{provider.guid}}"))
         {
-        }""" options.csNamespace 
-             provider.className 
-             provider.className 
-             provider.className 
-             provider.className 
-             provider.className 
-             (provider.guid.ToString()))
+        }"""
 
         (perEvent (fun e ->
-            let paramValue (p:EtwEventParam) = sprintf ", %s" p.name
+            let paramValue (p:EtwEventParam) = $", {p.name}"
 
             sprintf """
         static EventDescriptor _ed%s = new EventDescriptor(%d, %d, %d, %d, %d, %d, %d);
@@ -117,26 +111,26 @@ namespace %s
         """
     ] |> String.concat System.Environment.NewLine
 
-let buildDecorator (provider : EtwProvider) (options : CsLegacyOptions) = 
+let buildDecorator (provider : EtwProvider) (options : CsLegacyOptions) =
     let perEvent f = provider.events |> List.map f |> String.concat System.Environment.NewLine
     let perTask f = provider.tasks |> List.map f |> String.concat System.Environment.NewLine
     let perMap f = provider.maps |> List.map f |> String.concat System.Environment.NewLine
-    let perTaskEvent (t:EtwTask) f = 
-        provider.events 
+    let perTaskEvent (t:EtwTask) f =
+        provider.events
         |> List.where (
             function
             | { task = Some task } when task = t.name -> true
             | _ -> false)
         |> List.map f
         |> String.concat System.Environment.NewLine
-        
-    let interfaceName taskName = sprintf "I%sLog" taskName
+
+    let interfaceName taskName = $"I{taskName}Log"
 
     [
-        (sprintf """using System;
+        $$"""using System;
 
-namespace %s
-{"""        options.csNamespace)
+namespace {{options.csNamespace}}
+{"""
 
         // Interfaces for each task
         (perTask (fun t ->
@@ -145,9 +139,9 @@ namespace %s
 %s
     }
 """             (interfaceName t.name)
-                (perTaskEvent t (fun e -> 
-                    sprintf "        void %s(%s);" 
-                        e.cppName 
+                (perTaskEvent t (fun e ->
+                    sprintf "        void %s(%s);"
+                        e.cppName
                         (e.parameters |> Seq.map (paramDef true) |> String.concat ", ")
                 ))
         ))
@@ -159,7 +153,7 @@ namespace %s
     {
 %s
     }
-""" 
+"""
                 (if map.mapType = BitMap then """    [Flags]
 """              else "")
                 map.name
@@ -169,7 +163,7 @@ namespace %s
         // The decorator
         (sprintf """    public partial class %sDecorator : %s
     {"""
-            provider.className 
+            provider.className
             (provider.tasks |> List.map (fun t -> interfaceName t.name) |> String.concat ", "))
 
         (perEvent (fun e ->
@@ -184,7 +178,7 @@ namespace %s
                 (e.parameters |> Seq.map (paramDef true) |> String.concat ", ")
                 provider.className
                 (e.cppName)
-                (e.parameters |> Seq.map (fun p -> 
+                (e.parameters |> Seq.map (fun p ->
                     match p.outType with
                     | Map _ -> sprintf "(UInt32)%s" p.name
                     | _ -> p.name

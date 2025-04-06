@@ -25,7 +25,7 @@ let buildCpp (provider : EtwProvider) (options : CppSelfDescribingOptions) =
                 sb.ToString())
 
             lines
-            |> Seq.mapi (fun i l -> sprintf "    \"%s\"" l)
+            |> Seq.mapi (fun i l -> $"    \"{l}\"")
             |> String.concat System.Environment.NewLine
         ))
 
@@ -59,33 +59,33 @@ let buildCpp (provider : EtwProvider) (options : CppSelfDescribingOptions) =
         match p.count with
         | EtwCount.Single ->
             match p.inType with
-            | UnicodeString  NullTerminated -> sprintf "    ETW_UNICODE_PARAM(%d, %s)" i p.name
-            | AnsiString     NullTerminated -> sprintf "    ETW_ANSI_PARAM(%d, %s)" i p.name
+            | UnicodeString  NullTerminated -> $"    ETW_UNICODE_PARAM({i}, {p.name})"
+            | AnsiString     NullTerminated -> $"    ETW_ANSI_PARAM({i}, {p.name})"
             | EtwType.Binary NullTerminated -> failwith "Binary parameters must have a length supplied"
 
             | EtwType.UnicodeString (EtwLength.Fixed n)
             | EtwType.AnsiString (EtwLength.Fixed n)
             | EtwType.Binary (EtwLength.Fixed n) ->
-                sprintf "    ETW_COUNTED_PTR_PARAM(%s, %d, %s, %d)" (p.inType.CanonicalType()) i p.name n
+                $"    ETW_COUNTED_PTR_PARAM({p.inType.CanonicalType()}, {i}, {p.name}, {n})"
 
             | EtwType.UnicodeString (EtwLength.Counted arg)
             | EtwType.AnsiString (EtwLength.Counted arg)
             | EtwType.Binary (EtwLength.Counted arg) ->
-                sprintf "    ETW_COUNTED_PTR_PARAM(%s, %d, %s, %s)" (p.inType.CanonicalType()) i p.name arg
+                $"    ETW_COUNTED_PTR_PARAM({p.inType.CanonicalType()}, {i}, {p.name}, {arg})"
 
             | EtwType.Guid
-            | EtwType.SystemTime -> sprintf "    ETW_PTR_PARAM(%s, %d, %s)" (p.inType.CanonicalType()) i p.name
+            | EtwType.SystemTime -> $"    ETW_PTR_PARAM({p.inType.CanonicalType()}, {i}, {p.name})"
             | EtwType.Unresolved s -> failwithf "Tried to emit unresolved type %s" s
-            | _ -> sprintf "    ETW_LITERAL_PARAM(%s, %d, %s)" (p.inType.CanonicalType()) i p.name
+            | _ -> $"    ETW_LITERAL_PARAM({p.inType.CanonicalType()}, {i}, {p.name})"
 
         | EtwCount.Fixed count        ->
-            failwith "TODO" // sprintf "    ETW_COUNTED_PTR_PARAM(%s, %d, %s, %d)" (p.inType.CanonicalType()) i ex count
+            failwith "TODO" // $"    ETW_COUNTED_PTR_PARAM({p.inType.CanonicalType()}, {i}, {ex}, {count})"
         | EtwCount.Counted countParam ->
-            failwith "TODO" // sprintf "    ETW_COUNTED_PTR_PARAM(%s, %d, %s, %s)" (p.inType.CanonicalType()) i ex countParam
+            failwith "TODO" // $"    ETW_COUNTED_PTR_PARAM({p.inType.CanonicalType()}, {i}, {ex}, {countParam})"
 
     let perHeader f = provider.headers |> List.map f |> String.concat System.Environment.NewLine
-    let perEvent f = provider.events |> List.map f |> String.concat System.Environment.NewLine
-    let perTask f = provider.tasks |> List.map f |> String.concat System.Environment.NewLine
+    let perEvent f  = provider.events  |> List.map f |> String.concat System.Environment.NewLine
+    let perTask f   = provider.tasks   |> List.map f |> String.concat System.Environment.NewLine
     let lookupTask name = provider.tasks |> List.find (fun t -> t.name = name)
     let groupedContexts = // ((contextId, keywordMask, level), eventId list) list
         provider.events
@@ -103,13 +103,12 @@ let buildCpp (provider : EtwProvider) (options : CppSelfDescribingOptions) =
     let requiredBitMasks = (distinctContextCount + 31) / 32 // 32 bits in a ULONG
 
     [
-        (perHeader (fun h -> if h.StartsWith "<" then sprintf "#include %s" h else sprintf "#include \"%s\"" h))
-        (sprintf """// -----------------------------------------------------
-//  %s
+        (perHeader (fun h -> if h.StartsWith "<" then $"#include {h}" else $"#include \"{h}\""))
+        $$"""// -----------------------------------------------------
+//  {{options.etwGenComment}}
 //  DO NOT EDIT BY HAND
-// -----------------------------------------------------""" options.etwGenComment)
+// -----------------------------------------------------
 
-        (sprintf """
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <stdlib.h> // for _countof
@@ -117,8 +116,8 @@ let buildCpp (provider : EtwProvider) (options : CppSelfDescribingOptions) =
 #include <evntrace.h>
 #include <evntprov.h>
 #include <strsafe.h>
-#include "%s"
-""" options.headerName)
+#include "{{options.headerName}}"
+"""
 
         (if options.insertDebugLogging then
             """#define ETW_DEBUG(x, ...) OutputDebugStringA(x);"""
@@ -157,27 +156,32 @@ let buildCpp (provider : EtwProvider) (options : CppSelfDescribingOptions) =
 #endif
 """
 
-        (sprintf """static const char *etwManifest[] = {
-%s
+        (
+            let escapedManifest = escapeForCpp (snd manifest) |> String.concat ("," + System.Environment.NewLine)
+            $$"""static const char *etwManifest[] = {
+{{escapedManifest}}
 };
-"""         (escapeForCpp (snd manifest) |> String.concat ("," + System.Environment.NewLine)))
+"""     )
 
-        (sprintf "// %s = %s%s" (provider.guid.ToString()) (if Util.providerToGuid provider.symbol = provider.guid then "*" else "") provider.symbol)
-        (sprintf "const GUID ProviderGuid = %s;" (provider.guid.ToString("X")))
+        (
+            let prefix = if Util.providerToGuid provider.symbol = provider.guid then "*" else ""
+            $"// {provider.guid} = {prefix}{provider.symbol}"
+        )
+        ($"const GUID ProviderGuid = {provider.guid:X};")
 
-        (sprintf """
-static const int EnableBitsCount = %d;
+        (
+            let keywordMasks = distinctContexts |> List.map (fun (_, k, _) -> $"0x{k:x}") |> String.concat ", "
+            let levelMasks   = distinctContexts |> List.map (fun (_, _, l) -> $"0x{l:x}") |> String.concat ", "
+        $"""
+static const int EnableBitsCount = {distinctContextCount};
 static UCHAR Level = 0;
 static ULONGLONG MatchAllKeyword = 0;
 static ULONGLONG MatchAnyKeyword = 0;
 static REGHANDLE                 ProviderHandle = (REGHANDLE)0;
-static DECLSPEC_CACHEALIGN ULONG ProviderEnableBits[%d];
-static const ULONGLONG           ProviderKeywords[EnableBitsCount] = {%s};
-static const UCHAR               ProviderLevels[EnableBitsCount] = {%s};"""
-            distinctContextCount
-            requiredBitMasks
-            (distinctContexts |> List.map (fun (_, k, _) -> sprintf "0x%x" k) |> String.concat ", ")
-            (distinctContexts |> List.map (fun (_, _, l) -> sprintf "0x%x" l) |> String.concat ", "))
+static DECLSPEC_CACHEALIGN ULONG ProviderEnableBits[{requiredBitMasks}];
+static const ULONGLONG           ProviderKeywords[EnableBitsCount] = {{{keywordMasks}}};
+static const UCHAR               ProviderLevels[EnableBitsCount] = {{{levelMasks}}};"""
+            )
 
         """
                                                 //  Id      Vers Chan Lvl  Opcode Task   Keyword
@@ -206,7 +210,7 @@ static void EmitManifest()
         EventDataDescCreate(&eventData[4], &totalChunks,   sizeof(totalChunks));
         EventDataDescCreate(&eventData[5], &i,             sizeof(i));
         EventDataDescCreate(&eventData[6], etwManifest[i], (ULONG)strlen(etwManifest[i]));"""
-        sprintf """        ETW_DEBUG("ETW_DEBUG: Emitting manifest chunk %%d of %%d for %s\n", i+1, totalChunks);""" provider.symbol
+        $"""        ETW_DEBUG("ETW_DEBUG: Emitting manifest chunk %%d of %%d for {provider.symbol}\n", i+1, totalChunks);"""
         """        EventWrite(ProviderHandle, &Event_EmitManifest, _countof(eventData), eventData);
     }
 }
@@ -223,7 +227,7 @@ static void __stdcall ControlCallbackV2(LPCGUID, ULONG controlCode, UCHAR level,
 
             for (ULONG ix = 0; ix < EnableBitsCount; ++ix)
             {""" 
-        sprintf"                if (%s::IsEnabled(ProviderLevels[ix], ProviderKeywords[ix]))" provider.className
+        $"                if ({provider.className}::IsEnabled(ProviderLevels[ix], ProviderKeywords[ix]))"
         """                {
                     ProviderEnableBits[ix >> 5] |= (1 << (ix % 32));
                 }
@@ -254,8 +258,8 @@ static void __stdcall ControlCallbackV2(LPCGUID, ULONG controlCode, UCHAR level,
     }
 }"""
 
-        (sprintf """
-ULONG %s::Register() // This function registers the provider with ETW.
+        $$"""
+ULONG {{provider.className}}::Register() // This function registers the provider with ETW.
 {
     if (ProviderHandle) // already registered
         return ERROR_SUCCESS;
@@ -268,7 +272,7 @@ ULONG %s::Register() // This function registers the provider with ETW.
     return result;
 }
 
-ULONG %s::Unregister() // Unregister the provider
+ULONG {{provider.className}}::Unregister() // Unregister the provider
 {
     if (!ProviderHandle) // Provider has not been registered
         return ERROR_SUCCESS;
@@ -281,7 +285,7 @@ ULONG %s::Unregister() // Unregister the provider
     return error;
 }
 
-bool %s::IsEnabled(UCHAR level, ULONGLONG keyword)
+bool {{provider.className}}::IsEnabled(UCHAR level, ULONGLONG keyword)
 {
     bool levelMatched = (level <= Level) || (Level == 0);
     bool keywordMatched =
@@ -290,12 +294,12 @@ bool %s::IsEnabled(UCHAR level, ULONGLONG keyword)
 
     return levelMatched && keywordMatched;
 }
-""" provider.className provider.className provider.className)
+"""
 
         "// Events"
 
         (perEvent (fun e ->
-            let interfaceParam p = sprintf "%s %s" p.cppType p.name
+            let interfaceParam p = $"{p.cppType} {p.name}"
 
             [
                 (sprintf "const EVENT_DESCRIPTOR Event_%s = {0x%x, 0x%x, 0x%x, 0x%x, 0x%x, 0x%x, 0x%x}; // IVCLOTK"
@@ -310,93 +314,70 @@ bool %s::IsEnabled(UCHAR level, ULONGLONG keyword)
 
                 (
                 let templateParameters = e.parameters |> List.where EtwEventParam.isTemplateParameter
-                let activityId = e.parameters |> List.tryFind (fun p -> match p.inType with |EtwType.ActivityId -> true |_ -> false)
-                let relatedActivityId = e.parameters |> List.tryFind (fun p -> match p.inType with |EtwType.RelatedActivityId -> true |_ -> false)
+                let activityId         = e.parameters |> List.tryFind (fun p -> match p.inType with |EtwType.ActivityId -> true |_ -> false)
+                let relatedActivityId  = e.parameters |> List.tryFind (fun p -> match p.inType with |EtwType.RelatedActivityId -> true |_ -> false)
 
                 match e.parameters, activityId, relatedActivityId with
                 | [], None, None ->
-                    sprintf """void %s::%s()
+                    $$"""void {{provider.className}}::{{e.cppName}}()
 {
-    ETW_ENABLED_CHECK(%d)
-    ETW_DEBUG("ETW_DEBUG: Emitting event '%s'\n");
-    EventWrite(ProviderHandle, &Event_%s, 0, NULL);
+    ETW_ENABLED_CHECK({{eventContextIdLookup |> Map.find e.id}})
+    ETW_DEBUG("ETW_DEBUG: Emitting event '{{e.cppName}}'\n");
+    EventWrite(ProviderHandle, &Event_{{e.symbol}}, 0, NULL);
 }
-"""                     provider.className
-//                        provider.prefix
-                        e.cppName
-                        (eventContextIdLookup |> Map.find e.id)
-//                        (match e.supplementaryCode with |Some x -> x.Replace("\n", System.Environment.NewLine) |None -> "")
-                        e.cppName
-                        e.symbol
+"""                     
+
                 | [], _, _ ->
-                    sprintf """void %s::%s()
+                    let activityName = activityId |> Option.map (fun p -> p.name) |?? "NULL"
+                    let relatedActivityName = relatedActivityId |> Option.map (fun p -> p.name) |?? "NULL"
+                    $$"""void {{provider.className}}::{{e.cppName}}()
 {
-    ETW_ENABLED_CHECK(%d)
-    ETW_DEBUG("ETW_DEBUG: Emitting event '%s'\n");
-    EventWriteEx(ProviderHandle, &Event_%s, 0, 0, %s, %s, 0, NULL);
+    ETW_ENABLED_CHECK({{eventContextIdLookup |> Map.find e.id}})
+    ETW_DEBUG("ETW_DEBUG: Emitting event '{{e.cppName}}'\n");
+    EventWriteEx(ProviderHandle, &Event_{{e.symbol}}, 0, 0, {{activityName}}, {{relatedActivityName}}, 0, NULL);
 }
-"""                     provider.className
-//                        provider.prefix
-                        e.cppName
-                        (eventContextIdLookup |> Map.find e.id)
-//                        (match e.supplementaryCode with |Some x -> x.Replace("\n", System.Environment.NewLine) |None -> "")
-                        e.cppName
-                        e.symbol
-                        (activityId |> Option.map (fun p -> p.name) |?? "NULL")
-                        (relatedActivityId |> Option.map (fun p -> p.name) |?? "NULL")
+"""                     
 
                 | _, None, None ->
-                    sprintf """void %s::%s(%s)
+                    let paramDefs = (e.parameters |> Seq.map interfaceParam |> String.concat ", ")
+                    let paramPopulation = templateParameters |> Seq.mapi populateArgument |> String.concat System.Environment.NewLine
+                    $$"""void {{provider.className}}::{{e.cppName}}({{paramDefs}})
 {
-    ETW_ENABLED_CHECK(%d)
-    ETW_DEBUG("ETW_DEBUG: Emitting event '%s'\n");
-    EVENT_DATA_DESCRIPTOR eventData[%d];
-%s
-    EventWrite(ProviderHandle, &Event_%s, _countof(eventData), eventData);
+    ETW_ENABLED_CHECK({{eventContextIdLookup |> Map.find e.id}})
+    ETW_DEBUG("ETW_DEBUG: Emitting event '{{e.cppName}}'\n");
+    EVENT_DATA_DESCRIPTOR eventData[{{templateParameters.Length}}];
+{{paramPopulation}}
+    EventWrite(ProviderHandle, &Event_{{e.symbol}}, _countof(eventData), eventData);
 }
-"""                     provider.className
-//                        provider.prefix
-                        e.cppName
-                        (e.parameters |> Seq.map interfaceParam |> String.concat ", ")
-                        (eventContextIdLookup |> Map.find e.id)
-//                        (match e.supplementaryCode with |Some x -> x.Replace("\n", System.Environment.NewLine) |None -> "")
-                        e.cppName
-                        templateParameters.Length
-                        (templateParameters |> Seq.mapi populateArgument |> String.concat System.Environment.NewLine)
-                        e.symbol
+"""                     
+
                 | _ ->
-                    sprintf """void %s::%s(%s)
+                    let paramDefs = e.parameters |> Seq.map interfaceParam |> String.concat ", "
+                    let paramPopulation = templateParameters |> Seq.mapi populateArgument |> String.concat System.Environment.NewLine
+                    let activityName = activityId |> Option.map (fun p -> p.name) |?? "NULL"
+                    let relatedActivityName = relatedActivityId |> Option.map (fun p -> p.name) |?? "NULL"
+
+                    $$"""void {{provider.className}}::{{e.cppName}}({{paramDefs}})
 {
-    ETW_ENABLED_CHECK(%d)
-    ETW_DEBUG("ETW_DEBUG: Emitting event '%s'\n");
-    EVENT_DATA_DESCRIPTOR eventData[%d];
-%s
-    EventWriteEx(ProviderHandle, &Event_%s, 0, 0, %s, %s, _countof(eventData), eventData);
+    ETW_ENABLED_CHECK({{eventContextIdLookup |> Map.find e.id}})
+    ETW_DEBUG("ETW_DEBUG: Emitting event '{{e.cppName}}'\n");
+    EVENT_DATA_DESCRIPTOR eventData[{{templateParameters.Length}}];
+{{paramPopulation}}
+    EventWriteEx(ProviderHandle, &Event_{{e.symbol}}, 0, 0, {{activityName}}, {{relatedActivityName}}, _countof(eventData), eventData);
 }
-"""                     provider.className
-//                        provider.prefix
-                        e.cppName
-                        (e.parameters |> Seq.map interfaceParam |> String.concat ", ")
-                        (eventContextIdLookup |> Map.find e.id)
-//                        (match e.supplementaryCode with |Some x -> x.Replace("\n", System.Environment.NewLine) |None -> "")
-                        e.cppName
-                        templateParameters.Length
-                        (templateParameters |> Seq.mapi populateArgument |> String.concat System.Environment.NewLine)
-                        e.symbol
-                        (activityId |> Option.map (fun p -> p.name) |?? "NULL")
-                        (relatedActivityId |> Option.map (fun p -> p.name) |?? "NULL"))
-
+"""
+                )
             ] |> String.concat System.Environment.NewLine
-        ))
+        )) // end per-event
 
-        (sprintf """class ProviderCleanup
+        $$"""class ProviderCleanup
 {
 public:
-    ~ProviderCleanup() { %s::Unregister(); }
+    ~ProviderCleanup() { {{provider.className}}::Unregister(); }
 };
 
 static ProviderCleanup g_providerCleanup;
-"""           provider.className)
+"""
     ] |> String.concat System.Environment.NewLine
 
 let forProvider (provider : EtwProvider) (options : CppSelfDescribingOptions) =

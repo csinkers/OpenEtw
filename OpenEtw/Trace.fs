@@ -288,7 +288,7 @@ type EtlTrace() =
                 let mutable numBuffers = 0
                 x.buffers |> Seq.iteri (fun i b ->
                     s.NewLine()
-                    s.Comment (sprintf "Buffer %d" i)
+                    s.Comment $"Buffer {i}"
                     b.Serialize s
                     numBuffers <- numBuffers + 1
                 )

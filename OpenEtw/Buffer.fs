@@ -63,7 +63,7 @@ module BufferType =
             | BufferType.EmptyMarker -> "EmptyMarker"
             | BufferType.DbgInfo     -> "DbgInfo"
             | BufferType.Maximum     -> "Maximum"
-            | x -> sprintf "Unknown (%d)" (uint16 x)
+            | x -> $"Unknown ({uint16 x})"
         (uint16 x, str)
 
 type BufferState =
@@ -84,7 +84,7 @@ module BufferState =
             | BufferState.CSwitch        -> "CSwitch"
             | BufferState.Flush          -> "Flush"
             | BufferState.Maximum        -> "Maximum"
-            | x -> sprintf "Unknown (%d)" (uint32 x)
+            | x -> $"Unknown ({uint32 x})"
         (uint32 x, str)
 
 (* https://www.geoffchappell.com/studies/windows/km/ntoskrnl/api/etw/tracelog/wmi_buffer_header.htm *)

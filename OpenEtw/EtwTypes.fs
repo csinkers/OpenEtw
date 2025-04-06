@@ -181,8 +181,8 @@ type EtwCount =
     override this.ToString() =
         match this with
         | Single -> "Single"
-        | Fixed n -> sprintf "Fixed(%d)" n
-        | Counted arg -> sprintf "Counted(%s)" arg
+        | Fixed n -> $"Fixed({n})"
+        | Counted arg -> $"Counted({arg})"
 
 type EtwLength =
     | NullTerminated
@@ -191,8 +191,8 @@ type EtwLength =
     override this.ToString() =
         match this with
         | NullTerminated -> "NullTerminated"
-        | Fixed n -> sprintf "Fixed(%d)" n
-        | Counted arg -> sprintf "Counted(%s)" arg
+        | Fixed n -> $"Fixed({n})"
+        | Counted arg -> $"Counted({arg})"
 
 type EtwType =
     | UnicodeString of EtwLength

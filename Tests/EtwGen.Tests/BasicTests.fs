@@ -8,55 +8,55 @@ open OpenEtw
 
 //open EtwProviderGenerator.Core.SourceHeaderParser
 //
-//let run p str = 
+//let run p str =
 //    match runParserOnString p () "" str with
 //    | Success (results, _, _) -> results
 //    | Failure (err, _, _) -> failwith err
 //
 //[<TestFixture>]
 //type ParserTests() =
-//    [<Fact>] member x.BaseProviderTest() 
+//    [<Fact>] member x.BaseProviderTest()
 //        = (run pSourceFile """
 //#pragma once
 //#include <windows.h>
 //// Give the dll name
 //// EtwPragma(dll, CsEtw)
 //// EtwPragma(provider, CsNamedPipe, CsNamedPipe, 7B587546-851A-4E4C-844D-58F4A4DAD066)
-//namespace CsEtw 
+//namespace CsEtw
 //{
 //	extern "C" // Disable C++ name mangling
 //	{
 //	}
-//}""") 
-//         |> should equal 
+//}""")
+//         |> should equal
 //         ({
-//             
+//
 //         })
-//            
+//
 
 type BasicTests() =
     [<Fact>]
     member this.TestSingleEvent() =
         let event = { EtwEvent.empty with id = Some 0us; name = "Test"; cppName = "Test"; symbol = "Test" }
         let name = "Provider"
-        let provider = 
+        let provider =
             {EtwProvider.empty with
                 className  = name; name = name; symbol = name
                 guid       = Util.providerToGuid "Provider"
-                events     = [ event ] 
+                events     = [ event ]
             }
         let events = [ event, Map.empty ]
-        TraceRunner.runTest "TestSingleEvent" provider events
+        TraceRunner.runTest (nameof this.TestSingleEvent) provider events
 
     [<Fact>]
     member this.TestComplex() =
         let named n i = {EtwEvent.empty with id = Some i; name = n; cppName = n; symbol = n}
         let events =
             [
-                {(named "E0" 0us) with 
+                {(named "E0" 0us) with
                     task = Some "T1"
                     level = EtwLevel.warning.name
-                    parameters = 
+                    parameters =
                      [
                         {name = "p1"
                          cppType = "char *"
@@ -70,7 +70,7 @@ type BasicTests() =
             ]
 
         let name = "Provider"
-        let provider = 
+        let provider =
             {EtwProvider.empty with
                 className  = name; name = name; symbol = name
                 guid       = Util.providerToGuid "Provider"

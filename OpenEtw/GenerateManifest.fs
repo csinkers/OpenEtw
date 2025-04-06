@@ -3,10 +3,10 @@ open OpenEtw.Util
 
 let forProvider (provider : EtwProvider) =
     let newline = System.Environment.NewLine
-    let mandatoryParam name value = sprintf "%s=\"%s\"" name value
+    let mandatoryParam name value = $"{name}=\"{value}\""
     let optionalParam name value =
         match value with
-        | Some str -> sprintf "%s=\"%s\"" name str
+        | Some str -> $"{name}=\"{str}\""
         | None -> ""
 
     let buildProvider () =
@@ -57,20 +57,16 @@ let forProvider (provider : EtwProvider) =
                     mandatoryParam "name" opcode.name
                     mandatoryParam "symbol" opcode.symbol
                     mandatoryParam "value" (string opcode.id)
-                    optionalParam "message" (opcode.message |> Option.map (fun _ -> sprintf "$(string.%s.opcode.%s.message)" provider.name opcode.symbol))
+                    optionalParam "message" (opcode.message |> Option.map (fun _ -> $"$(string.{provider.name}.opcode.{opcode.symbol}.message)"))
                 ] |> String.concat " ")
 
         function
         | [] -> ""
         | opcodes ->
-            let innerText =
-                opcodes
-                |> Seq.map buildOpcode
-                |> String.concat newline
-            sprintf """
+            $"""
         <opcodes>
-%s
-        </opcodes>"""         innerText
+{opcodes |> Seq.map buildOpcode |> String.concat newline}
+        </opcodes>"""
 
     let buildTasks =
         let buildTask (task : EtwTask) =
@@ -87,10 +83,10 @@ let forProvider (provider : EtwProvider) =
         function
         | [] -> ""
         | tasks ->
-            sprintf """
+            $"""
         <tasks>
-%s
-        </tasks>""" (String.concat newline (tasks |> Seq.map buildTask))
+{String.concat newline (tasks |> Seq.map buildTask)}
+        </tasks>"""
 
     let buildKeywords =
         let buildKeyword (k:EtwKeyword) =
@@ -114,18 +110,18 @@ let forProvider (provider : EtwProvider) =
                 |> Seq.sortBy (fun (k:EtwKeyword) -> k.id)
                 |> Seq.map buildKeyword
                 |> String.concat ""
-            sprintf """
-        <keywords>%s
+            $"""
+        <keywords>{innerText}
         </keywords>
-        """         innerText
+        """
 
     let buildMaps =
         let buildMap map =
             let buildMapElement (name, num) =
                 match map.mapType with
                 | BitMap ->
-                    sprintf """
-            <map value="0x%x" message="$(string.%s.map.%s.%d.message)" />"""     num provider.name map.name num
+                    $"""
+            <map value="0x{num:x}" message="$(string.{provider.name}.map.{map.name}.{num}.message)" />"""
 //                    sprintf """
 //            <map value="0x%x" message="$(string.%s.map.%s.%d.message)">
 //            </map>"""     num provider.name map.name num
@@ -251,9 +247,9 @@ let forProvider (provider : EtwProvider) =
             function
             | None -> ""
             | Some message ->
-                sprintf """
-        <string id="%s.%s.%s.message" value="%s">
-        </string>"""    provider.name entityName identifier message
+                $"""
+        <string id="{provider.name}.{entityName}.{identifier}.message" value="{message}">
+        </string>"""
 
         let buildEventString   (e : EtwEvent)   = buildString "event"   (string e.id.Value) e.message
         let buildTaskString    (t : EtwTask)    = buildString "task"    (t.symbol |?? t.name) t.message
@@ -271,9 +267,9 @@ let forProvider (provider : EtwProvider) =
                         | -1 -> name
                         | x -> name.Substring(x)
                     | None -> name
-                sprintf """
-        <string id="%s.map.%s.%d.message" value="%s">
-        </string>"""    provider.name map.name num message
+                $"""
+        <string id="{provider.name}.map.{map.name}.{num}.message" value="{message}">
+        </string>"""
 
             map.elements
             |> Seq.map inner
