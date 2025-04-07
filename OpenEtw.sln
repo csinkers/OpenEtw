@@ -33,7 +33,15 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "EtlFuzzer", "Tests\EtlFuzze
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "EtwGen.Tests", "Tests\EtwGen.Tests\EtwGen.Tests.fsproj", "{4DEE9B69-8D18-47FF-88BE-58C31BDFF14B}"
 EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "OpenEtw.NetFramework", "OpenEtw\OpenEtw.fsproj", "{30E1A447-33C8-47B8-98C8-3CBB2EDF62A9}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "OpenEtw", "OpenEtw\OpenEtw.fsproj", "{30E1A447-33C8-47B8-98C8-3CBB2EDF62A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		.github\workflows\ci.yml = .github\workflows\ci.yml
+		Directory.Build.props = Directory.Build.props
+		.github\workflows\release.yml = .github\workflows\release.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
