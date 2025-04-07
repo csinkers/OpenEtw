@@ -1,0 +1,31 @@
+name: CI Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4.2.2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4.3.0
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Build
+      run: dotnet build -c Release OpenEtw.CI.sln
+      env:
+        MINVER_VERSION: ${{ vars.MINVER_VERSION }}
+
+    - name: Test
+      run: dotnet test --no-build -c Release --verbosity normal OpenEtw.CI.sln
+

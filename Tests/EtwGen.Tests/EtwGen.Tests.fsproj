@@ -17,9 +17,8 @@
     <Compile Include="Program.fs" />
   </ItemGroup>
 
-  <ItemGroup />
-
   <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="8.0.300" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
     <PackageReference Include="xunit" Version="2.8.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.1">
@@ -33,11 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\OpenEtw\OpenEtw.NetFramework.fsproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="8.0.300" />
+    <ProjectReference Include="..\..\OpenEtw\OpenEtw.fsproj" />
   </ItemGroup>
 
 </Project>

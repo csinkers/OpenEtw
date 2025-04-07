@@ -1,7 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project>
   <PropertyGroup>
-    <BaseOutputPath>$(MSBuildThisFileDirectory)\build\$(MSBuildProjectName)\bin</BaseOutputPath>
-    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)\build\$(MSBuildProjectName)\obj</BaseIntermediateOutputPath>
+    <RepositoryRootDirectory>$(MSBuildThisFileDirectory)</RepositoryRootDirectory>
+    <BuildDir>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)build\$(MSBuildProjectName)'))\</BuildDir>
+    <OutputPath>$(BuildDir)bin\$(Configuration)\</OutputPath>
+    <BaseIntermediateOutputPath>$(BuildDir)obj\$(Configuration)'))\</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>$(BaseIntermediateOutputPath)$(Configuration)</IntermediateOutputPath>
+
+    <Copyright>Copyright 2022 (c) Cam Sinclair.</Copyright>
+    <Authors>Cam Sinclair</Authors>
+    <RepositoryUrl>https://github.com/csinkers/OpenEtw</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedAllSources>true</EmbedAllSources>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+
+    <MinVerTagPrefix>v</MinVerTagPrefix>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+
+    <PackageReference Include="MinVer" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 </Project>

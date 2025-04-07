@@ -5,6 +5,7 @@
     <TargetFramework>net472</TargetFramework>
     <WarnOn>3390;$(WarnOn)</WarnOn>
     <RunPostBuildEvent>1</RunPostBuildEvent>
+    <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,18 +17,11 @@
 
   <ItemGroup>
     <PackageReference Include="FParsec" Version="1.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\OpenEtw\OpenEtw.NetFramework.fsproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Update="FSharp.Core" Version="8.0.400" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="8.0.300" />
+    <ProjectReference Include="..\..\OpenEtw\OpenEtw.fsproj" />
   </ItemGroup>
 
 </Project>

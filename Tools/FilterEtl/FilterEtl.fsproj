@@ -11,15 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\OpenEtw\OpenEtw.NetFramework.fsproj" />
+    <ProjectReference Include="..\..\OpenEtw\OpenEtw.fsproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Update="FSharp.Core" Version="8.0.400" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="8.0.300" />
   </ItemGroup>
 
 </Project>
